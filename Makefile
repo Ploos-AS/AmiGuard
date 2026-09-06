@@ -4,7 +4,7 @@ CFLAGS ?= -O2 -Wall -Wextra -Werror -m68000
 CPPFLAGS ?= -Isrc
 
 TARGET := AmiGuard
-SRC := src/main.c src/scanner.c src/signatures.c
+SRC := src/main.c src/scanner.c src/signatures.c src/trackdisk.c
 OBJ := $(SRC:.c=.o)
 
 .PHONY: all clean check host-test
