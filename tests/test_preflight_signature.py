@@ -18,14 +18,14 @@ class PreflightSignatureTests(unittest.TestCase):
             json.dump(data, handle)
         return path
 
-    def valid_verified(self):
+    def valid_qualified(self):
         return {
             "schema": 1,
-            "id": "synthetic-preflight-verified",
-            "name": "Synthetic Preflight Verified",
+            "id": "synthetic-preflight-qualified",
+            "name": "Synthetic Preflight Qualified",
             "family": "Synthetic",
             "kind": "bootblock",
-            "status": "verified",
+            "status": "qualified",
             "synthetic": False,
             "source": {"reference": "unit test"},
             "provenance": {"method": "unit test"},
@@ -35,29 +35,40 @@ class PreflightSignatureTests(unittest.TestCase):
             "cleaner": "none",
         }
 
-    def test_valid_verified_draft_passes_without_writes(self):
+    def test_valid_qualified_draft_passes_without_writes(self):
         with tempfile.TemporaryDirectory() as directory:
-            path = self.write_json(directory, "draft.json", self.valid_verified())
+            path = self.write_json(directory, "draft.json", self.valid_qualified())
             before = set(os.listdir(directory))
             report = preflight_signature.preflight(path)
             after = set(os.listdir(directory))
             self.assertTrue(report["preflight_pass"])
-            self.assertEqual(report["id"], "synthetic-preflight-verified")
+            self.assertEqual(report["id"], "synthetic-preflight-qualified")
+            self.assertFalse(report["qualified_compiled"])
+            self.assertGreater(report["native_table_bytes_if_verified"],
+                               report["native_table_bytes_without_qualified"])
             self.assertEqual(before, after)
 
     def test_research_draft_is_rejected(self):
         with tempfile.TemporaryDirectory() as directory:
-            item = self.valid_verified()
+            item = self.valid_qualified()
             item["status"] = "research"
             item["sample_sha256"] = None
             item["signature"] = None
             path = self.write_json(directory, "draft.json", item)
-            with self.assertRaisesRegex(ValueError, "status=verified"):
+            with self.assertRaisesRegex(ValueError, "status=qualified"):
                 preflight_signature.preflight(path)
 
-    def test_invalid_verified_schema_is_rejected(self):
+    def test_verified_draft_is_rejected(self):
         with tempfile.TemporaryDirectory() as directory:
-            item = self.valid_verified()
+            item = self.valid_qualified()
+            item["status"] = "verified"
+            path = self.write_json(directory, "draft.json", item)
+            with self.assertRaisesRegex(ValueError, "status=qualified"):
+                preflight_signature.preflight(path)
+
+    def test_invalid_qualified_schema_is_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            item = self.valid_qualified()
             item["sample_sha256"] = "bad"
             path = self.write_json(directory, "draft.json", item)
             with self.assertRaisesRegex(ValueError, "sample_sha256"):
@@ -65,7 +76,7 @@ class PreflightSignatureTests(unittest.TestCase):
 
     def test_duplicate_repository_id_is_rejected(self):
         with tempfile.TemporaryDirectory() as directory:
-            item = self.valid_verified()
+            item = self.valid_qualified()
             item["id"] = "amiguard.test.marker"
             path = self.write_json(directory, "draft.json", item)
             with self.assertRaisesRegex(ValueError, "already exists"):
