@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Create a provenance-rich known-clean bootblock entry from a local image.
+"""Create a provenance-rich known-clean candidate from a local image.
 
 This tool is read-only with respect to the input media. It emits JSON to stdout
-and never edits the repository database automatically.
+and never edits the repository database automatically. It deliberately emits
+only candidate-clean entries; promotion to verified-clean must go through the
+independent review/preflight gate.
 """
 
 import argparse
@@ -48,8 +50,6 @@ def build_entry(args, bootblock, input_size, input_sha256):
         raise ValueError("source is required")
     if not args.provenance.strip():
         raise ValueError("provenance is required")
-    if args.status == "verified-clean" and not args.verifier.strip():
-        raise ValueError("verified-clean requires --verifier")
 
     return {
         "id": args.entry_id,
@@ -57,10 +57,10 @@ def build_entry(args, bootblock, input_size, input_sha256):
         "bootblock_sha256": sha256(bootblock),
         "dos_type": dos_type(bootblock),
         "checksum_valid": checksum_valid(bootblock),
-        "status": args.status,
+        "status": "candidate-clean",
         "source": args.source,
         "provenance": args.provenance,
-        "verification": args.verifier or None,
+        "verification": None,
         "input": {
             "basename": os.path.basename(args.input),
             "size": input_size,
@@ -71,18 +71,14 @@ def build_entry(args, bootblock, input_size, input_sha256):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(
-        description="Emit a provenance-rich AmiGuard known-clean bootblock entry")
+        description="Emit a provenance-rich AmiGuard known-clean candidate")
     parser.add_argument("input", help="raw bootblock or disk image")
     parser.add_argument("--id", dest="entry_id", required=True)
     parser.add_argument("--name", required=True)
-    parser.add_argument("--status", choices=("candidate-clean", "verified-clean"),
-                        default="candidate-clean")
     parser.add_argument("--source", required=True,
                         help="human-readable source reference")
     parser.add_argument("--provenance", required=True,
                         help="how this exact media/image was obtained and preserved")
-    parser.add_argument("--verifier", default="",
-                        help="independent clean verification evidence; required for verified-clean")
     args = parser.parse_args(argv)
 
     try:
