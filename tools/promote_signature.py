@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Generate a verified AmiGuard metadata draft after qualification passes.
+"""Generate a qualified AmiGuard metadata draft after host qualification passes.
 
 This tool is intentionally local-only. It reads an isolated sample and a clean
 manifest through qualify_signature, but it does not edit repository files and
 never copies sample bytes into output beyond the explicitly supplied signature
-pattern/mask.
+pattern/mask. Qualified records are not compiled into the native signature table;
+visible native runtime evidence is required before finalization to verified.
 """
 
 import argparse
@@ -14,8 +15,8 @@ import sys
 import qualify_signature
 
 
-def build_verified(report, signature_id, name, family, source_reference,
-                   provenance_note, verifier, cleaner):
+def build_qualified(report, signature_id, name, family, source_reference,
+                    provenance_note, verifier, cleaner):
     if not report.get("qualified"):
         raise ValueError("qualification gate did not pass")
     return {
@@ -24,7 +25,7 @@ def build_verified(report, signature_id, name, family, source_reference,
         "name": name,
         "family": family,
         "kind": "bootblock",
-        "status": "verified",
+        "status": "qualified",
         "synthetic": False,
         "source": {
             "reference": source_reference,
@@ -48,7 +49,7 @@ def build_verified(report, signature_id, name, family, source_reference,
 
 def main(argv=None):
     parser = argparse.ArgumentParser(
-        description="Generate an AmiGuard verified-signature metadata draft")
+        description="Generate an AmiGuard qualified-signature metadata draft")
     parser.add_argument("sample", help="isolated local malware sample or disk image")
     parser.add_argument("--clean-manifest", required=True)
     parser.add_argument("--offset", required=True, type=int)
@@ -67,7 +68,7 @@ def main(argv=None):
     try:
         report = qualify_signature.qualify(
             args.sample, args.clean_manifest, args.offset, args.pattern, args.mask)
-        metadata = build_verified(
+        metadata = build_qualified(
             report, args.signature_id, args.name, args.family, args.source,
             args.provenance_note, args.verifier, args.cleaner)
     except (OSError, ValueError, json.JSONDecodeError) as exc:
@@ -82,7 +83,7 @@ def main(argv=None):
         except OSError as exc:
             print("signature promotion: %s" % exc, file=sys.stderr)
             return 1
-        print("Wrote verified metadata draft to %s" % args.output)
+        print("Wrote qualified metadata draft to %s" % args.output)
     else:
         sys.stdout.write(rendered)
     return 0
