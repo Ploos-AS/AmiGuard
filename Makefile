@@ -1,0 +1,28 @@
+CC ?= m68k-amigaos-gcc
+HOSTCC ?= cc
+CFLAGS ?= -O2 -Wall -Wextra -Werror -m68000
+CPPFLAGS ?= -Isrc
+
+TARGET := AmiGuard
+SRC := src/main.c src/scanner.c src/signatures.c
+OBJ := $(SRC:.c=.o)
+
+.PHONY: all clean check host-test
+all: $(TARGET)
+
+$(TARGET): $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $(OBJ)
+
+src/%.o: src/%.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+
+host-test:
+	mkdir -p build
+	$(HOSTCC) -std=c89 -pedantic -Wall -Wextra -Werror -Isrc tests/test_scanner.c src/scanner.c src/signatures.c -o build/test_scanner
+	./build/test_scanner
+
+check: host-test
+
+clean:
+	rm -f $(OBJ) $(TARGET)
+	rm -rf build
