@@ -56,7 +56,7 @@ int main(void)
 
     memset(buf, 0, sizeof(buf));
     size = make_valid_code(buf);
-    buf[0] = 0;
+    buf[3] = 0;
     expect_result("not-hunk", amiguard_parse_hunk(buf, size), AMIGUARD_HUNK_NOT_HUNK);
 
     memset(buf, 0, sizeof(buf));
