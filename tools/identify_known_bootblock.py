@@ -53,10 +53,15 @@ def load_database(path):
             raise ValueError("duplicate known-clean SHA-256: %s" % digest)
         seen_hashes.add(digest)
         entry["bootblock_sha256"] = digest
-        if status not in ("test-only", "verified-clean"):
-            raise ValueError("known-clean status must be test-only or verified-clean")
-        if status == "verified-clean" and not entry.get("provenance"):
-            raise ValueError("verified-clean entry requires provenance")
+        if status not in ("test-only", "candidate-clean", "verified-clean"):
+            raise ValueError("known-clean status must be test-only, candidate-clean or verified-clean")
+        if status in ("candidate-clean", "verified-clean"):
+            if not entry.get("source"):
+                raise ValueError("%s entry requires source" % status)
+            if not entry.get("provenance"):
+                raise ValueError("%s entry requires provenance" % status)
+        if status == "verified-clean" and not entry.get("verification"):
+            raise ValueError("verified-clean entry requires verification")
     return db
 
 
@@ -88,13 +93,15 @@ def main(argv=None):
 
     result = {
         "bootblock_sha256": digest,
-        "known_clean": entry is not None,
+        "known_clean": entry is not None and entry.get("status") in ("test-only", "verified-clean"),
         "match": entry,
     }
     if args.json:
         print(json.dumps(result, indent=2, sort_keys=True))
     elif entry is None:
         print("UNLISTED: %s" % digest)
+    elif entry.get("status") == "candidate-clean":
+        print("CANDIDATE-CLEAN: %s (%s)" % (entry["name"], entry["id"]))
     else:
         print("KNOWN-CLEAN: %s (%s)" % (entry["name"], entry["id"]))
     return 0 if entry is not None else 1
