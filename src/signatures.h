@@ -6,6 +6,7 @@ struct amiguard_signature {
     unsigned short offset;
     unsigned char length;
     const unsigned char *pattern;
+    const unsigned char *mask;
 };
 
 const struct amiguard_signature *amiguard_signatures(unsigned long *count);
