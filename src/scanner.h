@@ -15,6 +15,7 @@ struct amiguard_detection {
     const char *name;
 };
 
+int amiguard_bootblock_checksum_valid(const unsigned char *data, unsigned long size);
 struct amiguard_detection amiguard_scan_bootblock(const unsigned char *data, unsigned long size);
 
 #endif
