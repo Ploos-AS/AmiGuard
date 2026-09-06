@@ -43,7 +43,24 @@ int main(void)
     memset(block, 0, sizeof(block));
     memcpy(block + 64, "AMIGUARD", 8);
     d = amiguard_scan_bootblock(block, sizeof(block));
-    expect(d.result == AMIGUARD_RESULT_INFECTED, "synthetic signature");
+    expect(d.result == AMIGUARD_RESULT_INFECTED, "synthetic exact signature");
+    expect(strcmp(d.name, "AmiGuard.Test.Marker") == 0,
+           "synthetic exact signature name");
+
+    memset(block, 0, sizeof(block));
+    block[80] = 0xa1;
+    block[81] = 0xbf; /* low nibble is masked out */
+    block[82] = 0xc3;
+    block[83] = 0xd4;
+    d = amiguard_scan_bootblock(block, sizeof(block));
+    expect(d.result == AMIGUARD_RESULT_INFECTED, "synthetic masked signature");
+    expect(strcmp(d.name, "AmiGuard.Test.Masked") == 0,
+           "synthetic masked signature name");
+
+    block[82] = 0xc2; /* significant masked byte differs */
+    d = amiguard_scan_bootblock(block, sizeof(block));
+    expect(d.result == AMIGUARD_RESULT_UNKNOWN,
+           "masked signature rejects significant mismatch");
 
     memset(block, 0x5a, sizeof(block));
     d = amiguard_scan_bootblock(block, sizeof(block));

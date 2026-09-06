@@ -1,10 +1,15 @@
 #include "scanner.h"
 #include "signatures.h"
 
-static int bytes_equal(const unsigned char *a, const unsigned char *b, unsigned long n)
+static int bytes_match_masked(const unsigned char *data,
+                              const unsigned char *pattern,
+                              const unsigned char *mask,
+                              unsigned long n)
 {
     unsigned long i;
-    for (i = 0; i < n; ++i) if (a[i] != b[i]) return 0;
+    for (i = 0; i < n; ++i) {
+        if ((data[i] & mask[i]) != (pattern[i] & mask[i])) return 0;
+    }
     return 1;
 }
 
@@ -46,7 +51,10 @@ struct amiguard_detection amiguard_scan_bootblock(const unsigned char *data, uns
     items = amiguard_signatures(&count);
     for (i = 0; i < count; ++i) {
         unsigned long end = (unsigned long)items[i].offset + (unsigned long)items[i].length;
-        if (end <= size && bytes_equal(data + items[i].offset, items[i].pattern, items[i].length)) {
+        if (end <= size && bytes_match_masked(data + items[i].offset,
+                                              items[i].pattern,
+                                              items[i].mask,
+                                              items[i].length)) {
             out.result = AMIGUARD_RESULT_INFECTED;
             out.name = items[i].name;
             return out;

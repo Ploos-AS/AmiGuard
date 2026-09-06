@@ -1,13 +1,11 @@
 #include "signatures.h"
 
-/* M0 contains no copied third-party or real malware signatures. */
-static const unsigned char test_marker[] = {
-    0x41, 0x4d, 0x49, 0x47, 0x55, 0x41, 0x52, 0x44
-};
-
-static const struct amiguard_signature signatures[] = {
-    { "AmiGuard.Test.Marker", 64U, 8U, test_marker }
-};
+/*
+ * Native tables are generated from provenance-bearing host metadata under
+ * signatures/bootblocks/. The generated include contains only compact data
+ * needed by the Kickstart 1.2 scanner.
+ */
+#include "signatures_generated.inc"
 
 const struct amiguard_signature *amiguard_signatures(unsigned long *count)
 {

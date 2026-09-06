@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "id": "amiguard.test.marker",
+  "name": "AmiGuard.Test.Marker",
+  "family": "synthetic-test",
+  "kind": "bootblock",
+  "status": "test-only",
+  "synthetic": true,
+  "source": {
+    "type": "project-fixture",
+    "reference": "AmiGuard M0 synthetic regression marker"
+  },
+  "provenance": {
+    "author": "Ploos AS",
+    "license": "MIT",
+    "notes": "Synthetic bytes created for scanner regression testing; not derived from malware."
+  },
+  "sample_sha256": null,
+  "signature": {
+    "offset": 64,
+    "bytes": "414d494755415244",
+    "mask": "ffffffffffffffff"
+  },
+  "verifier": "none",
+  "cleaner": "none"
+}
