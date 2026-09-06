@@ -1,0 +1,14 @@
+2026-09-06, interrupted recheck /tmp/amiguard-m03-committed
+AmiGuard commit: a9f615e97fa09598e660f4aef96f105595eb9b99
+Initial git status: clean.
+Driver then in use: XTest global desktop keyboard events.
+Observed: user received partial command text in chat; repeat stage did not run.
+Existing completion markers: setup.done, invalid.done, empty.done, clean.done.
+No repeat-01.log or repeat.done existed. The driver was waiting for repeat.done.
+Action: SIGINT sent to the identified Python test driver; exit status 130.
+Last stack: execute -> stage('repeat') -> wait_stage(name) -> time.sleep(0.5)
+Exception: KeyboardInterrupt.
+observations.json reported completed_log_checks=false.
+This run is excluded from PASS evidence. It was followed by a new full run
+using window-addressed XSendEvent keyboard input. The native binary/source did
+not change. Raw interrupted-run logs are retained in its /tmp evidence folder.

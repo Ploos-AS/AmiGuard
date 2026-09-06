@@ -1,5 +1,5 @@
 
-/tmp/amiguard-m03-auto-02/work/AmiGuard:     file format amiga
+/tmp/amiguard-m03-targeted/work/AmiGuard:     file format amiga
 
 
 Disassembly of section .text:

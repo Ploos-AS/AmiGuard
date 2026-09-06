@@ -1,7 +1,7 @@
 {
-  "date_utc": "2026-09-06T13:05:45Z",
-  "head": "a9d5756f17199141b24f6fab9970175ef766c2c5",
-  "status": " M Makefile\n M docs/M0_3_RUNTIME_QUALIFICATION.md\n M src/main.c\n M src/trackdisk.c\n?? .gitignore\n?? docs/evidence/\n?? scripts/\n?? tests/amiga_stubs/\n?? tests/test_trackdisk.c\n",
+  "date_utc": "2026-09-06T13:12:46Z",
+  "head": "a9f615e97fa09598e660f4aef96f105595eb9b99",
+  "status": " M scripts/m03_gui.py\n",
   "inputs": {
     "reference": "/home/pgo/Projects/Amiga/FS-UAE_Config/fs-uae-amiga-reference-configs/a500/stock/a500-stock-accurate.fs-uae",
     "rom": "/home/pgo/Documents/FS-UAE/Kickstarts/amiga-os-120.rom",

@@ -21,32 +21,32 @@ libfsemu init
 ----------------------------------------------------------------------------
 
 [FSE] Init (early)
-current time() is: 1788699945
-localtime+timegm:  1788703545
-localtime+mktime:  1788699945
-time of day:       1788699945 + (64671 / 1000000)
+current time() is: 1788700366
+localtime+timegm:  1788703966
+localtime+mktime:  1788700366
+time of day:       1788700366 + (903070 / 1000000)
 localtime offset:  7200
 [FSE] Calling fs_ml_init
 fs_ml_init (operating system: linux)
 load config file
-loading config from /tmp/amiguard-m03-auto-02/runtime.fs-uae
+loading config from /tmp/amiguard-m03-targeted/runtime.fs-uae
 
 ----------------------------------------------------------------------------
-config (/tmp/amiguard-m03-auto-02/runtime.fs-uae)
+config (/tmp/amiguard-m03-targeted/runtime.fs-uae)
 ----------------------------------------------------------------------------
 
 accuracy = 1
 amiga_model = A500
-base_dir = /tmp/amiguard-m03-auto-02/fsuae
+base_dir = /tmp/amiguard-m03-targeted/fsuae
 chip_memory = 512
 cpu = 68000
 fast_memory = 0
-floppy_drive_0 = /tmp/amiguard-m03-auto-02/workbench12.adf
+floppy_drive_0 = /tmp/amiguard-m03-targeted/workbench12.adf
 floppy_drive_count = 1
-floppy_image_0 = /tmp/amiguard-m03-auto-02/workbench12.adf
-floppy_image_1 = /tmp/amiguard-m03-auto-02/unknown.adf
+floppy_image_0 = /tmp/amiguard-m03-targeted/workbench12.adf
+floppy_image_1 = /tmp/amiguard-m03-targeted/unknown.adf
 fullscreen = 0
-hard_drive_0 = /tmp/amiguard-m03-auto-02/work
+hard_drive_0 = /tmp/amiguard-m03-targeted/work
 hard_drive_0_label = AGTest
 hard_drive_0_priority = 0
 jit_compiler = 0
@@ -55,7 +55,7 @@ keyboard_key_f7 = action_drive_0_insert_floppy_0
 keyboard_key_f8 = action_drive_0_insert_floppy_1
 kickstart_file = /home/pgo/Documents/FS-UAE/Kickstarts/amiga-os-120.rom
 motherboard_ram = 0
-screenshots_output_dir = /tmp/amiguard-m03-auto-02/screenshots
+screenshots_output_dir = /tmp/amiguard-m03-targeted/screenshots
 slow_memory = 0
 title = Amiga 500 / stock / accurate
 uae_cpu_multiplier = 2
@@ -68,13 +68,13 @@ window_width = 960
 writable_floppy_images = 0
 - checking /home/pgo/.config/fs-uae/configurations-dir
 base specified via base_dir option
-- using base ($BASE / $FSUAE) directory "/tmp/amiguard-m03-auto-02/fsuae"
-resolve_path /tmp/amiguard-m03-auto-02/fsuae/Configurations (absolute)
-- using "Configurations" directory "/tmp/amiguard-m03-auto-02/fsuae/Configurations"
-checking config file /tmp/amiguard-m03-auto-02/fsuae/Configurations/Host.fs-uae
+- using base ($BASE / $FSUAE) directory "/tmp/amiguard-m03-targeted/fsuae"
+resolve_path /tmp/amiguard-m03-targeted/fsuae/Configurations (absolute)
+- using "Configurations" directory "/tmp/amiguard-m03-targeted/fsuae/Configurations"
+checking config file /tmp/amiguard-m03-targeted/fsuae/Configurations/Host.fs-uae
 - checking /home/pgo/.config/fs-uae/data-dir
-resolve_path /tmp/amiguard-m03-auto-02/fsuae/Data (absolute)
-- using "Data" directory "/tmp/amiguard-m03-auto-02/fsuae/Data"
+resolve_path /tmp/amiguard-m03-targeted/fsuae/Data (absolute)
+- using "Data" directory "/tmp/amiguard-m03-targeted/fsuae/Data"
 [I18N] Locale is set to C.UTF-8
 [I18N] Checking locale dir "/usr/bin/../../Locale"
 [I18N] Using data dir "/usr/bin/../share/fs-uae/share-dir"
@@ -89,28 +89,28 @@ fs-uae init
 configure logging: none
 [GLIB] Version 2.88.0 (Compiled against 2.86.1)
 - checking /home/pgo/.config/fs-uae/kickstarts-dir
-resolve_path /tmp/amiguard-m03-auto-02/fsuae/Kickstarts (absolute)
-- using "Kickstarts" directory "/tmp/amiguard-m03-auto-02/fsuae/Kickstarts"
+resolve_path /tmp/amiguard-m03-targeted/fsuae/Kickstarts (absolute)
+- using "Kickstarts" directory "/tmp/amiguard-m03-targeted/fsuae/Kickstarts"
 - checking /home/pgo/.config/fs-uae/floppies-dir
-resolve_path /tmp/amiguard-m03-auto-02/fsuae/Floppies (absolute)
-- using "Floppies" directory "/tmp/amiguard-m03-auto-02/fsuae/Floppies"
+resolve_path /tmp/amiguard-m03-targeted/fsuae/Floppies (absolute)
+- using "Floppies" directory "/tmp/amiguard-m03-targeted/fsuae/Floppies"
 - checking /home/pgo/.config/fs-uae/cdroms-dir
-resolve_path /tmp/amiguard-m03-auto-02/fsuae/CD-ROMs (absolute)
-- using "CD-ROMs" directory "/tmp/amiguard-m03-auto-02/fsuae/CD-ROMs"
+resolve_path /tmp/amiguard-m03-targeted/fsuae/CD-ROMs (absolute)
+- using "CD-ROMs" directory "/tmp/amiguard-m03-targeted/fsuae/CD-ROMs"
 - checking /home/pgo/.config/fs-uae/hard-drives-dir
-resolve_path /tmp/amiguard-m03-auto-02/fsuae/Hard Drives (absolute)
-- using "Hard Drives" directory "/tmp/amiguard-m03-auto-02/fsuae/Hard Drives"
+resolve_path /tmp/amiguard-m03-targeted/fsuae/Hard Drives (absolute)
+- using "Hard Drives" directory "/tmp/amiguard-m03-targeted/fsuae/Hard Drives"
 [PLUGINS] Initializing
 - checking /home/pgo/.config/fs-uae/system-dir
-resolve_path /tmp/amiguard-m03-auto-02/fsuae/System (absolute)
-- using "System" directory "/tmp/amiguard-m03-auto-02/fsuae/System"
-[PLUGINS] Loading plugins from /tmp/amiguard-m03-auto-02/fsuae/System
-[PLUGINS] Could not open plugins dir /tmp/amiguard-m03-auto-02/fsuae/System
+resolve_path /tmp/amiguard-m03-targeted/fsuae/System (absolute)
+- using "System" directory "/tmp/amiguard-m03-targeted/fsuae/System"
+[PLUGINS] Loading plugins from /tmp/amiguard-m03-targeted/fsuae/System
+[PLUGINS] Could not open plugins dir /tmp/amiguard-m03-targeted/fsuae/System
 - checking /home/pgo/.config/fs-uae/plugins-dir
-resolve_path /tmp/amiguard-m03-auto-02/fsuae/Plugins (absolute)
-- using "Plugins" directory "/tmp/amiguard-m03-auto-02/fsuae/Plugins"
-[PLUGINS] Loading plugins from /tmp/amiguard-m03-auto-02/fsuae/Plugins
-[PLUGINS] Could not open plugins dir /tmp/amiguard-m03-auto-02/fsuae/Plugins
+resolve_path /tmp/amiguard-m03-targeted/fsuae/Plugins (absolute)
+- using "Plugins" directory "/tmp/amiguard-m03-targeted/fsuae/Plugins"
+[PLUGINS] Loading plugins from /tmp/amiguard-m03-targeted/fsuae/Plugins
+[PLUGINS] Could not open plugins dir /tmp/amiguard-m03-targeted/fsuae/Plugins
 [PLUGINS] Test /usr/bin/../../Plugin.ini
 [PLUGINS] Is plugin: 0
 fs_uae_configure_amiga_model
@@ -120,26 +120,26 @@ using PAL mode (50Hz)
 config match for "A500"
 fs_uae_state_dir:
 - checking /home/pgo/.config/fs-uae/save-states-dir
-resolve_path /tmp/amiguard-m03-auto-02/fsuae/Save States (absolute)
-- using "Save States" directory "/tmp/amiguard-m03-auto-02/fsuae/Save States"
-save_states_dir: /tmp/amiguard-m03-auto-02/fsuae/Save States
+resolve_path /tmp/amiguard-m03-targeted/fsuae/Save States (absolute)
+- using "Save States" directory "/tmp/amiguard-m03-targeted/fsuae/Save States"
+save_states_dir: /tmp/amiguard-m03-targeted/fsuae/Save States
 save_dir_name not set, using runtime
-- using state dir /tmp/amiguard-m03-auto-02/fsuae/Save States/runtime
-final state dir path: /tmp/amiguard-m03-auto-02/fsuae/Save States/runtime
+- using state dir /tmp/amiguard-m03-targeted/fsuae/Save States/runtime
+final state dir path: /tmp/amiguard-m03-targeted/fsuae/Save States/runtime
 - checking /home/pgo/.config/fs-uae/controllers-dir
-resolve_path /tmp/amiguard-m03-auto-02/fsuae/Controllers (absolute)
-- using "Controllers" directory "/tmp/amiguard-m03-auto-02/fsuae/Controllers"
+resolve_path /tmp/amiguard-m03-targeted/fsuae/Controllers (absolute)
+- using "Controllers" directory "/tmp/amiguard-m03-targeted/fsuae/Controllers"
 - checking /home/pgo/.config/fs-uae/logs-dir
 - checking /home/pgo/.config/fs-uae/cache-dir
-resolve_path /tmp/amiguard-m03-auto-02/fsuae/Cache (absolute)
-- using "Cache" directory "/tmp/amiguard-m03-auto-02/fsuae/Cache"
-resolve_path /tmp/amiguard-m03-auto-02/fsuae/Cache/Logs (absolute)
-- using "Logs" directory "/tmp/amiguard-m03-auto-02/fsuae/Cache/Logs"
-switch to log file /tmp/amiguard-m03-auto-02/fsuae/Cache/Logs/fs-uae.log.txt
+resolve_path /tmp/amiguard-m03-targeted/fsuae/Cache (absolute)
+- using "Cache" directory "/tmp/amiguard-m03-targeted/fsuae/Cache"
+resolve_path /tmp/amiguard-m03-targeted/fsuae/Cache/Logs (absolute)
+- using "Logs" directory "/tmp/amiguard-m03-targeted/fsuae/Cache/Logs"
+switch to log file /tmp/amiguard-m03-targeted/fsuae/Cache/Logs/fs-uae.log.txt
 - checking /home/pgo/.config/fs-uae/themes-dir
-resolve_path /tmp/amiguard-m03-auto-02/fsuae/Themes (absolute)
-- using "Themes" directory "/tmp/amiguard-m03-auto-02/fsuae/Themes"
-themes_dir = /tmp/amiguard-m03-auto-02/fsuae/Themes
+resolve_path /tmp/amiguard-m03-targeted/fsuae/Themes (absolute)
+- using "Themes" directory "/tmp/amiguard-m03-targeted/fsuae/Themes"
+themes_dir = /tmp/amiguard-m03-targeted/fsuae/Themes
 [FSE] Init
 [FSE] Read config
 THEME: Init
@@ -240,10 +240,10 @@ fs_image_destroy
 loaded sub-texture "bezel/right-overlay.png"
 fs_image_destroy
 initializing menu
-load font from data 0x1b36ec60 size 26822
+load font from data 0x169689a0 size 26822
 font height: 32 pixels
 512 characters
-load font from data 0x1b385590 size 26832
+load font from data 0x1697f2d0 size 26832
 font height: 32 pixels
 512 characters
 [SHADERS] Initialize
@@ -262,10 +262,10 @@ MANYMOUSE: no mice found
 fs_emu_input_sdl_init
 [INPUT] fs_emu_input_init
 init_input_configs
-reading input device configs from /tmp/amiguard-m03-auto-02/fsuae/Controllers
-reading input device configs from /tmp/amiguard-m03-auto-02/fsuae/Data/Devs/Keyboards
-could not read directory /tmp/amiguard-m03-auto-02/fsuae/Data/Devs/Keyboards
-reading input device configs from /tmp/amiguard-m03-auto-02/fsuae/Controllers
+reading input device configs from /tmp/amiguard-m03-targeted/fsuae/Controllers
+reading input device configs from /tmp/amiguard-m03-targeted/fsuae/Data/Devs/Keyboards
+could not read directory /tmp/amiguard-m03-targeted/fsuae/Data/Devs/Keyboards
+reading input device configs from /tmp/amiguard-m03-targeted/fsuae/Controllers
 [INPUT] Using default modifier key LALT
 [INPUT] Initializing devices for "menu"
 0 Keyboard
@@ -334,17 +334,17 @@ fs_uae_init_video
 fs_uae_configure_menu
 [FSE] fs_emu_run, main_function at 0x419cc0
 checking OpenGL capabilities
-[FSE] Emulation thread started
-[FSE] Run main function at 0x419cc0
-amiga_main
-KB: keyboard_settrans
 GL_ARB_sync extension found
 [OPENGL] Deciding video sync method
 [OPENGL] Using default sync method
 - SYNC_FINISH_SWAP_FINISH
+[FSE] Emulation thread started
+[FSE] Run main function at 0x419cc0
+amiga_main
+KB: keyboard_settrans
 target_default_options p=0x11f2440 type=0
 target_default_options: enabling floppy sounds
- -- stub -- target_save_options zfile=0x7fa5a4000c10 p=0x11f2440
+ -- stub -- target_save_options zfile=0x71a670000c10 p=0x11f2440
 built_in_chipset_prefs, ignore = 0
 fixup_cpu
 built_in_chipset_prefs, ignore = 0
@@ -355,8 +355,8 @@ NATMEM: Total physical RAM 12505 MB, all RAM 12505 MB
 NATMEM: Attempting to reserve: 2048 MB
 NATMEM: jit compiler 0
 VM: Reserve  0x80000000 bytes
-VM: Reserve  0x80000000 bytes, got address 0x7fa524000000
-NATMEM: Reserved 0x7fa524000000-0x7fa5a4000000 (0x80000000 2048M)
+VM: Reserve  0x80000000 bytes, got address 0x71a5f0000000
+NATMEM: Reserved 0x71a5f0000000-0x71a670000000 (0x80000000 2048M)
  -- stub -- target_cfgfile_load
 built_in_chipset_prefs, ignore = 0
 fixup_cpu
@@ -373,7 +373,7 @@ uae configuration
 ----------------------------------------------------------------------------
 
 fs_uae_configure_amiga_hardware
-fs_uae_load_rom_files /tmp/amiguard-m03-auto-02/fsuae/Kickstarts
+fs_uae_load_rom_files /tmp/amiguard-m03-targeted/fsuae/Kickstarts
 configuring "Amiga 500", accuracy=1
 amiga_quickstart model=0 config=0 compa=0 (accuracy 1)
 set_device_rom path=(null) romtype=262144 devnum=0
@@ -400,9 +400,9 @@ set option "fastmem_size" to "0" (result: 1)
 set option "a3000mem_size" to "0" (result: 1)
 set option "sound_stereo_separation" to "7" (result: 1)
 configure_floppies
-value for option floppy_drive_0: /tmp/amiguard-m03-auto-02/workbench12.adf
-resolve_path /tmp/amiguard-m03-auto-02/workbench12.adf (absolute)
-set option "floppy0" to "/tmp/amiguard-m03-auto-02/workbench12.adf" (result: 1)
+value for option floppy_drive_0: /tmp/amiguard-m03-targeted/workbench12.adf
+resolve_path /tmp/amiguard-m03-targeted/workbench12.adf (absolute)
+set option "floppy0" to "/tmp/amiguard-m03-targeted/workbench12.adf" (result: 1)
 set option "floppy0type" to "0" (result: 1)
 value for option floppy_drive_1: (null)
 set option "floppy1" to "" (result: 1)
@@ -421,10 +421,10 @@ set option "floppy2type" to "-1" (result: 1)
 set option "floppy3" to "" (result: 1)
 set option "floppy3type" to "-1" (result: 1)
 set option "floppy_volume" to "80" (result: 1)
-resolve_path /tmp/amiguard-m03-auto-02/workbench12.adf (absolute)
-set option "diskimage0" to "/tmp/amiguard-m03-auto-02/workbench12.adf" (result: 1)
-resolve_path /tmp/amiguard-m03-auto-02/unknown.adf (absolute)
-set option "diskimage1" to "/tmp/amiguard-m03-auto-02/unknown.adf" (result: 1)
+resolve_path /tmp/amiguard-m03-targeted/workbench12.adf (absolute)
+set option "diskimage0" to "/tmp/amiguard-m03-targeted/workbench12.adf" (result: 1)
+resolve_path /tmp/amiguard-m03-targeted/unknown.adf (absolute)
+set option "diskimage1" to "/tmp/amiguard-m03-targeted/unknown.adf" (result: 1)
 set option "diskimage2" to "" (result: 1)
 set option "diskimage3" to "" (result: 1)
 set option "diskimage4" to "" (result: 1)
@@ -444,14 +444,14 @@ set option "diskimage17" to "" (result: 1)
 set option "diskimage18" to "" (result: 1)
 set option "diskimage19" to "" (result: 1)
 fs_uae_configure_hard_drives
-resolve_path /tmp/amiguard-m03-auto-02/work (absolute)
-hard drive mount: /tmp/amiguard-m03-auto-02/work
+resolve_path /tmp/amiguard-m03-targeted/work (absolute)
+hard drive mount: /tmp/amiguard-m03-targeted/work
 device: DH0
 mount name: AGTest
 read only: 0
 boot priority: 0
-set option "filesystem2" to "rw,DH0:AGTest:/tmp/amiguard-m03-auto-02/work,0" (result: 1)
-set option "uaehf0" to "dir,rw,DH0:AGTest:/tmp/amiguard-m03-auto-02/work,0" (result: 1)
+set option "filesystem2" to "rw,DH0:AGTest:/tmp/amiguard-m03-targeted/work,0" (result: 1)
+set option "uaehf0" to "dir,rw,DH0:AGTest:/tmp/amiguard-m03-targeted/work,0" (result: 1)
 configure_cdrom
 configuring joystick ports:
 set option "joyport0" to "none" (result: 1)
@@ -487,12 +487,12 @@ configuring joystick port 6 (nothing)
 nothing connected to port
 configuring joystick port 7 (nothing)
 nothing connected to port
-set option "statefile" to "/tmp/amiguard-m03-auto-02/fsuae/Save States/runtime/Saved State.uss" (result: 1)
-amiga_set_save_image_dir /tmp/amiguard-m03-auto-02/fsuae/Save States/runtime
+set option "statefile" to "/tmp/amiguard-m03-targeted/fsuae/Save States/runtime/Saved State.uss" (result: 1)
+amiga_set_save_image_dir /tmp/amiguard-m03-targeted/fsuae/Save States/runtime
 - checking /home/pgo/.config/fs-uae/module-ripper-dir
-resolve_path /tmp/amiguard-m03-auto-02/fsuae/Cache/Modules (absolute)
-- using "Modules" directory "/tmp/amiguard-m03-auto-02/fsuae/Cache/Modules"
-amiga_set_module_ripper_dir /tmp/amiguard-m03-auto-02/fsuae/Cache/Modules
+resolve_path /tmp/amiguard-m03-targeted/fsuae/Cache/Modules (absolute)
+- using "Modules" directory "/tmp/amiguard-m03-targeted/fsuae/Cache/Modules"
+amiga_set_module_ripper_dir /tmp/amiguard-m03-targeted/fsuae/Cache/Modules
 set option "sound_frequency" to "48000" (result: 1)
 amiga_set_audio_frequency: 48000
 fs_uae_set_uae_paths
@@ -503,8 +503,8 @@ WARNING: custom uae_* options used! Your warranty is now void! ;)
 set option "cpu_speed" to "real" (result: 1)
 set option "cpu_multiplier" to "2" (result: 1)
 set option "floppy_write_protect" to "true" (result: 1)
-writing uae config to /tmp/amiguard-m03-auto-02/fsuae/Cache/Logs/debug.uae
- -- stub -- target_save_options zfile=0x7fa5a4000f40 p=0x11f2440
+writing uae config to /tmp/amiguard-m03-targeted/fsuae/Cache/Logs/debug.uae
+ -- stub -- target_save_options zfile=0x71a670000f40 p=0x11f2440
 WARNING: notify_user msg #2
 
 ----------------------------------------------------------------------------
@@ -524,7 +524,7 @@ NATMEM: othersize     + 0x00000000
 NATMEM: totalsize     = 0x01000000
 Z3 REAL mapping. Not JIT direct compatible.
 NATMEM: JIT direct compatible: 0
-NATMEM: Our special area: 0x7fa524000000-0x7fa525000000 (0x01000000 16M)
+NATMEM: Our special area: 0x71a5f0000000-0x71a5f1000000 (0x01000000 16M)
 built_in_chipset_prefs, ignore = 0
 fixup_cpu
 built_in_chipset_prefs, ignore = 0
@@ -598,14 +598,14 @@ drive_insert drv=0x1059680 dnum=1 fname= fake=1
 gui_disk_image_change drive 1 <no disk>
 driveclick_insert drive=1 eject=1 click_initialized=0 wave_initialized=0 currprefs.floppyslots[drive].dfxclick=1
 gui_disk_image_change drive 1 <no disk>
-drive_insert drv=0x1037060 dnum=0 fname=/tmp/amiguard-m03-auto-02/workbench12.adf fake=0
-drive_insert drv=0x1037060 dnum=0 fname=/tmp/amiguard-m03-auto-02/workbench12.adf fake=1
-DISK_get_saveimagepath returning /tmp/amiguard-m03-auto-02/fsuae/Save States/runtime/workbench12.sdf
-DISK_get_saveimagepath returning /tmp/amiguard-m03-auto-02/fsuae/Save States/runtime/workbench12.sdf
+drive_insert drv=0x1037060 dnum=0 fname=/tmp/amiguard-m03-targeted/workbench12.adf fake=0
+drive_insert drv=0x1037060 dnum=0 fname=/tmp/amiguard-m03-targeted/workbench12.adf fake=1
+DISK_get_saveimagepath returning /tmp/amiguard-m03-targeted/fsuae/Save States/runtime/workbench12.sdf
+DISK_get_saveimagepath returning /tmp/amiguard-m03-targeted/fsuae/Save States/runtime/workbench12.sdf
 drive_insert returning, drv->wrprot=0
-gui_disk_image_change drive 0 name /tmp/amiguard-m03-auto-02/workbench12.adf write protected 1
-DISK_get_saveimagepath returning /tmp/amiguard-m03-auto-02/fsuae/Save States/runtime/workbench12.sdf
-DISK_get_saveimagepath returning /tmp/amiguard-m03-auto-02/fsuae/Save States/runtime/workbench12.sdf
+gui_disk_image_change drive 0 name /tmp/amiguard-m03-targeted/workbench12.adf write protected 1
+DISK_get_saveimagepath returning /tmp/amiguard-m03-targeted/fsuae/Save States/runtime/workbench12.sdf
+DISK_get_saveimagepath returning /tmp/amiguard-m03-targeted/fsuae/Save States/runtime/workbench12.sdf
 driveclick_insert drive=0 eject=0 click_initialized=0 wave_initialized=0 currprefs.floppyslots[drive].dfxclick=1
 drive_insert returning, drv->wrprot=0
 fixup_cpu
@@ -643,7 +643,7 @@ init_sound
 CPU cycleunit: 256 (0.500)
  -- stub -- target_reset
  -- stub -- my_resolvesoftlink
-my_getvolumeinfo /tmp/amiguard-m03-auto-02/work
+my_getvolumeinfo /tmp/amiguard-m03-targeted/work
  -- stub -- filesys_addexternals
 init_shm
 cpuboard_map currprefs.cpuboard_type = 0
@@ -684,14 +684,14 @@ drive_insert drv=0x1059680 dnum=1 fname= fake=1
 gui_disk_image_change drive 1 <no disk>
 driveclick_insert drive=1 eject=1 click_initialized=0 wave_initialized=0 currprefs.floppyslots[drive].dfxclick=1
 gui_disk_image_change drive 1 <no disk>
-drive_insert drv=0x1037060 dnum=0 fname=/tmp/amiguard-m03-auto-02/workbench12.adf fake=0
-drive_insert drv=0x1037060 dnum=0 fname=/tmp/amiguard-m03-auto-02/workbench12.adf fake=1
-DISK_get_saveimagepath returning /tmp/amiguard-m03-auto-02/fsuae/Save States/runtime/workbench12.sdf
-DISK_get_saveimagepath returning /tmp/amiguard-m03-auto-02/fsuae/Save States/runtime/workbench12.sdf
+drive_insert drv=0x1037060 dnum=0 fname=/tmp/amiguard-m03-targeted/workbench12.adf fake=0
+drive_insert drv=0x1037060 dnum=0 fname=/tmp/amiguard-m03-targeted/workbench12.adf fake=1
+DISK_get_saveimagepath returning /tmp/amiguard-m03-targeted/fsuae/Save States/runtime/workbench12.sdf
+DISK_get_saveimagepath returning /tmp/amiguard-m03-targeted/fsuae/Save States/runtime/workbench12.sdf
 drive_insert returning, drv->wrprot=0
-gui_disk_image_change drive 0 name /tmp/amiguard-m03-auto-02/workbench12.adf write protected 1
-DISK_get_saveimagepath returning /tmp/amiguard-m03-auto-02/fsuae/Save States/runtime/workbench12.sdf
-DISK_get_saveimagepath returning /tmp/amiguard-m03-auto-02/fsuae/Save States/runtime/workbench12.sdf
+gui_disk_image_change drive 0 name /tmp/amiguard-m03-targeted/workbench12.adf write protected 1
+DISK_get_saveimagepath returning /tmp/amiguard-m03-targeted/fsuae/Save States/runtime/workbench12.sdf
+DISK_get_saveimagepath returning /tmp/amiguard-m03-targeted/fsuae/Save States/runtime/workbench12.sdf
 driveclick_insert drive=0 eject=0 click_initialized=0 wave_initialized=0 currprefs.floppyslots[drive].dfxclick=1
 drive_insert returning, drv->wrprot=0
 mousehack_reset
@@ -922,6 +922,7 @@ First: 26 Last: 0 MinV: 0 MaxV: 0 Min: 26
 [VIDEO] fs_emu_set_video_frame_rate: 50.00 (50)
 [DISPLAY] Sync: g_fs_emu_video_sync_to_vblank = 0
 [AUDIO] Buffer underrun in stream 0
+[AUDIO] Buffer underrun in stream 0
 Illegal instruction: 4e7b at 00FC0564 -> 00FC0582
 SERIAL: period=372, baud=9600, hsyncs=14, bits=8, PC=fc21f8
 Card 1: Z2 0x00e90000   64K IO  Filesystem autoconfig
@@ -951,8 +952,8 @@ filesystem: diagentry 00005b60 configdev 00000000
 Pre-KS 1.3 automount hack: DF0: boot block faked.
 Pre-KS 1.3 automount hack: init drives.
 Mounting uaehf.device 0 (0):
-FS: mounted virtual unit DH0 (/tmp/amiguard-m03-auto-02/work)
-FS: AGTest (flags=00000002,E=0,ED=1,EF=0,native='/tmp/amiguard-m03-auto-02/work') starting..
+FS: mounted virtual unit DH0 (/tmp/amiguard-m03-targeted/work)
+FS: AGTest (flags=00000002,E=0,ED=1,EF=0,native='/tmp/amiguard-m03-targeted/work') starting..
 Pre-KS 1.3 automount hack: patch boot handler process. DP=0000af10 Proc 0000abf0 pr_FileSystemTask=0000deb4.
 Display Size: 640x548 Offset: 74x0
 First: 26 Last: 320 MinV: 26 MaxV: 300 Min: 26
@@ -970,11 +971,11 @@ need_metadata_file 2 WF_ALWAYS
 - writing mode ----rwed
 need_metadata_file 6 WF_ALWAYS WF_EXISTS
 - writing mode ----rwed
-writing screenshot to /tmp/amiguard-m03-auto-02/screenshots/fs-uae-full-2609061506-01.png
+writing screenshot to /tmp/amiguard-m03-targeted/screenshots/fs-uae-full-2609061513-01.png
 saved screenshot
-writing screenshot to /tmp/amiguard-m03-auto-02/screenshots/fs-uae-crop-2609061506-01.png
+writing screenshot to /tmp/amiguard-m03-targeted/screenshots/fs-uae-crop-2609061513-01.png
 saved screenshot
-writing screenshot to /tmp/amiguard-m03-auto-02/screenshots/fs-uae-real-2609061506-01.png
+writing screenshot to /tmp/amiguard-m03-targeted/screenshots/fs-uae-real-2609061513-01.png
 reading opengl frame buffer (960 x 720)
 saved screenshot
 Saved screenshot 1
@@ -1007,11 +1008,11 @@ need_metadata_file 2 WF_ALWAYS
 - writing mode ----rwed
 need_metadata_file 6 WF_ALWAYS WF_EXISTS
 - writing mode ----rwed
-writing screenshot to /tmp/amiguard-m03-auto-02/screenshots/fs-uae-full-2609061506-02.png
+writing screenshot to /tmp/amiguard-m03-targeted/screenshots/fs-uae-full-2609061513-02.png
 saved screenshot
-writing screenshot to /tmp/amiguard-m03-auto-02/screenshots/fs-uae-crop-2609061506-02.png
+writing screenshot to /tmp/amiguard-m03-targeted/screenshots/fs-uae-crop-2609061513-02.png
 saved screenshot
-writing screenshot to /tmp/amiguard-m03-auto-02/screenshots/fs-uae-real-2609061506-02.png
+writing screenshot to /tmp/amiguard-m03-targeted/screenshots/fs-uae-real-2609061513-02.png
 reading opengl frame buffer (960 x 720)
 saved screenshot
 Saved screenshot 2
@@ -1030,11 +1031,11 @@ need_metadata_file 2 WF_ALWAYS
 - writing mode ----rwed
 need_metadata_file 6 WF_ALWAYS WF_EXISTS
 - writing mode ----rwed
-writing screenshot to /tmp/amiguard-m03-auto-02/screenshots/fs-uae-full-2609061506-03.png
+writing screenshot to /tmp/amiguard-m03-targeted/screenshots/fs-uae-full-2609061513-03.png
 saved screenshot
-writing screenshot to /tmp/amiguard-m03-auto-02/screenshots/fs-uae-crop-2609061506-03.png
+writing screenshot to /tmp/amiguard-m03-targeted/screenshots/fs-uae-crop-2609061513-03.png
 saved screenshot
-writing screenshot to /tmp/amiguard-m03-auto-02/screenshots/fs-uae-real-2609061506-03.png
+writing screenshot to /tmp/amiguard-m03-targeted/screenshots/fs-uae-real-2609061513-03.png
 reading opengl frame buffer (960 x 720)
 saved screenshot
 Saved screenshot 3
@@ -1042,15 +1043,15 @@ handle_custom_action 359
 insert floppy (0) into drive (0)
 perform disk_swap drive 0 floppy entry 0
  -- stub -- target_addtorecent name="" t=0
- -- stub -- target_addtorecent name="/tmp/amiguard-m03-auto-02/workbench12.adf" t=0
-drive_insert drv=0x1037060 dnum=0 fname=/tmp/amiguard-m03-auto-02/workbench12.adf fake=0
-drive_insert drv=0x1037060 dnum=0 fname=/tmp/amiguard-m03-auto-02/workbench12.adf fake=1
-DISK_get_saveimagepath returning /tmp/amiguard-m03-auto-02/fsuae/Save States/runtime/workbench12.sdf
-DISK_get_saveimagepath returning /tmp/amiguard-m03-auto-02/fsuae/Save States/runtime/workbench12.sdf
+ -- stub -- target_addtorecent name="/tmp/amiguard-m03-targeted/workbench12.adf" t=0
+drive_insert drv=0x1037060 dnum=0 fname=/tmp/amiguard-m03-targeted/workbench12.adf fake=0
+drive_insert drv=0x1037060 dnum=0 fname=/tmp/amiguard-m03-targeted/workbench12.adf fake=1
+DISK_get_saveimagepath returning /tmp/amiguard-m03-targeted/fsuae/Save States/runtime/workbench12.sdf
+DISK_get_saveimagepath returning /tmp/amiguard-m03-targeted/fsuae/Save States/runtime/workbench12.sdf
 drive_insert returning, drv->wrprot=0
-gui_disk_image_change drive 0 name /tmp/amiguard-m03-auto-02/workbench12.adf write protected 1
-DISK_get_saveimagepath returning /tmp/amiguard-m03-auto-02/fsuae/Save States/runtime/workbench12.sdf
-DISK_get_saveimagepath returning /tmp/amiguard-m03-auto-02/fsuae/Save States/runtime/workbench12.sdf
+gui_disk_image_change drive 0 name /tmp/amiguard-m03-targeted/workbench12.adf write protected 1
+DISK_get_saveimagepath returning /tmp/amiguard-m03-targeted/fsuae/Save States/runtime/workbench12.sdf
+DISK_get_saveimagepath returning /tmp/amiguard-m03-targeted/fsuae/Save States/runtime/workbench12.sdf
 driveclick_insert drive=0 eject=0 click_initialized=1 wave_initialized=1 currprefs.floppyslots[drive].dfxclick=1
 drive_insert returning, drv->wrprot=0
 handle_custom_action 359
@@ -1066,11 +1067,11 @@ need_metadata_file 2 WF_ALWAYS
 - writing mode ----rwed
 need_metadata_file 6 WF_ALWAYS WF_EXISTS
 - writing mode ----rwed
-writing screenshot to /tmp/amiguard-m03-auto-02/screenshots/fs-uae-full-2609061506-04.png
+writing screenshot to /tmp/amiguard-m03-targeted/screenshots/fs-uae-full-2609061513-04.png
 saved screenshot
-writing screenshot to /tmp/amiguard-m03-auto-02/screenshots/fs-uae-crop-2609061506-04.png
+writing screenshot to /tmp/amiguard-m03-targeted/screenshots/fs-uae-crop-2609061513-04.png
 saved screenshot
-writing screenshot to /tmp/amiguard-m03-auto-02/screenshots/fs-uae-real-2609061506-04.png
+writing screenshot to /tmp/amiguard-m03-targeted/screenshots/fs-uae-real-2609061513-04.png
 reading opengl frame buffer (960 x 720)
 saved screenshot
 Saved screenshot 4
@@ -1163,71 +1164,71 @@ need_metadata_file 2 WF_ALWAYS
 - writing mode ----rwed
 need_metadata_file 6 WF_ALWAYS WF_EXISTS
 - writing mode ----rwed
-writing screenshot to /tmp/amiguard-m03-auto-02/screenshots/fs-uae-full-2609061507-01.png
+writing screenshot to /tmp/amiguard-m03-targeted/screenshots/fs-uae-full-2609061514-01.png
 saved screenshot
-writing screenshot to /tmp/amiguard-m03-auto-02/screenshots/fs-uae-crop-2609061507-01.png
+writing screenshot to /tmp/amiguard-m03-targeted/screenshots/fs-uae-crop-2609061514-01.png
 saved screenshot
-writing screenshot to /tmp/amiguard-m03-auto-02/screenshots/fs-uae-real-2609061507-01.png
+writing screenshot to /tmp/amiguard-m03-targeted/screenshots/fs-uae-real-2609061514-01.png
 reading opengl frame buffer (960 x 720)
 saved screenshot
 Saved screenshot 5
 handle_custom_action 360
 insert floppy (1) into drive (0)
 perform disk_swap drive 0 floppy entry 1
- -- stub -- target_addtorecent name="/tmp/amiguard-m03-auto-02/workbench12.adf" t=0
+ -- stub -- target_addtorecent name="/tmp/amiguard-m03-targeted/workbench12.adf" t=0
 [AUDIO] fs_emu_audio_resume_stream 0
- -- stub -- target_addtorecent name="/tmp/amiguard-m03-auto-02/unknown.adf" t=0
+ -- stub -- target_addtorecent name="/tmp/amiguard-m03-targeted/unknown.adf" t=0
 driveclick_insert drive=0 eject=1 click_initialized=1 wave_initialized=1 currprefs.floppyslots[drive].dfxclick=1
 gui_disk_image_change drive 0 <no disk>
 handle_custom_action 360
-drive_insert drv=0x1037060 dnum=0 fname=/tmp/amiguard-m03-auto-02/unknown.adf fake=0
-drive_insert drv=0x1037060 dnum=0 fname=/tmp/amiguard-m03-auto-02/unknown.adf fake=1
-DISK_get_saveimagepath returning /tmp/amiguard-m03-auto-02/fsuae/Save States/runtime/unknown.sdf
-DISK_get_saveimagepath returning /tmp/amiguard-m03-auto-02/fsuae/Save States/runtime/unknown.sdf
+drive_insert drv=0x1037060 dnum=0 fname=/tmp/amiguard-m03-targeted/unknown.adf fake=0
+drive_insert drv=0x1037060 dnum=0 fname=/tmp/amiguard-m03-targeted/unknown.adf fake=1
+DISK_get_saveimagepath returning /tmp/amiguard-m03-targeted/fsuae/Save States/runtime/unknown.sdf
+DISK_get_saveimagepath returning /tmp/amiguard-m03-targeted/fsuae/Save States/runtime/unknown.sdf
 drive_insert returning, drv->wrprot=0
-gui_disk_image_change drive 0 name /tmp/amiguard-m03-auto-02/unknown.adf write protected 1
-DISK_get_saveimagepath returning /tmp/amiguard-m03-auto-02/fsuae/Save States/runtime/unknown.sdf
-DISK_get_saveimagepath returning /tmp/amiguard-m03-auto-02/fsuae/Save States/runtime/unknown.sdf
+gui_disk_image_change drive 0 name /tmp/amiguard-m03-targeted/unknown.adf write protected 1
+DISK_get_saveimagepath returning /tmp/amiguard-m03-targeted/fsuae/Save States/runtime/unknown.sdf
+DISK_get_saveimagepath returning /tmp/amiguard-m03-targeted/fsuae/Save States/runtime/unknown.sdf
 driveclick_insert drive=0 eject=0 click_initialized=1 wave_initialized=1 currprefs.floppyslots[drive].dfxclick=1
 drive_insert returning, drv->wrprot=0
 need_metadata_file 2 WF_ALWAYS
 - writing mode ----rwed
 need_metadata_file 6 WF_ALWAYS WF_EXISTS
 - writing mode ----rwed
-need_metadata_file 2 WF_ALWAYS
-- writing mode ----rwed
-need_metadata_file 6 WF_ALWAYS WF_EXISTS
-- writing mode ----rwed
 [AUDIO] fs_emu_audio_resume_stream 0
 need_metadata_file 2 WF_ALWAYS
 - writing mode ----rwed
 need_metadata_file 6 WF_ALWAYS WF_EXISTS
 - writing mode ----rwed
-writing screenshot to /tmp/amiguard-m03-auto-02/screenshots/fs-uae-full-2609061507-02.png
+need_metadata_file 2 WF_ALWAYS
+- writing mode ----rwed
+need_metadata_file 6 WF_ALWAYS WF_EXISTS
+- writing mode ----rwed
+writing screenshot to /tmp/amiguard-m03-targeted/screenshots/fs-uae-full-2609061514-02.png
 saved screenshot
-writing screenshot to /tmp/amiguard-m03-auto-02/screenshots/fs-uae-crop-2609061507-02.png
+writing screenshot to /tmp/amiguard-m03-targeted/screenshots/fs-uae-crop-2609061514-02.png
 saved screenshot
-writing screenshot to /tmp/amiguard-m03-auto-02/screenshots/fs-uae-real-2609061507-02.png
+writing screenshot to /tmp/amiguard-m03-targeted/screenshots/fs-uae-real-2609061514-02.png
 reading opengl frame buffer (960 x 720)
 saved screenshot
 Saved screenshot 6
 handle_custom_action 359
 insert floppy (0) into drive (0)
 perform disk_swap drive 0 floppy entry 0
- -- stub -- target_addtorecent name="/tmp/amiguard-m03-auto-02/unknown.adf" t=0
- -- stub -- target_addtorecent name="/tmp/amiguard-m03-auto-02/workbench12.adf" t=0
+ -- stub -- target_addtorecent name="/tmp/amiguard-m03-targeted/unknown.adf" t=0
+ -- stub -- target_addtorecent name="/tmp/amiguard-m03-targeted/workbench12.adf" t=0
 driveclick_insert drive=0 eject=1 click_initialized=1 wave_initialized=1 currprefs.floppyslots[drive].dfxclick=1
 gui_disk_image_change drive 0 <no disk>
-handle_custom_action 359
 [AUDIO] fs_emu_audio_resume_stream 0
-drive_insert drv=0x1037060 dnum=0 fname=/tmp/amiguard-m03-auto-02/workbench12.adf fake=0
-drive_insert drv=0x1037060 dnum=0 fname=/tmp/amiguard-m03-auto-02/workbench12.adf fake=1
-DISK_get_saveimagepath returning /tmp/amiguard-m03-auto-02/fsuae/Save States/runtime/workbench12.sdf
-DISK_get_saveimagepath returning /tmp/amiguard-m03-auto-02/fsuae/Save States/runtime/workbench12.sdf
+handle_custom_action 359
+drive_insert drv=0x1037060 dnum=0 fname=/tmp/amiguard-m03-targeted/workbench12.adf fake=0
+drive_insert drv=0x1037060 dnum=0 fname=/tmp/amiguard-m03-targeted/workbench12.adf fake=1
+DISK_get_saveimagepath returning /tmp/amiguard-m03-targeted/fsuae/Save States/runtime/workbench12.sdf
+DISK_get_saveimagepath returning /tmp/amiguard-m03-targeted/fsuae/Save States/runtime/workbench12.sdf
 drive_insert returning, drv->wrprot=0
-gui_disk_image_change drive 0 name /tmp/amiguard-m03-auto-02/workbench12.adf write protected 1
-DISK_get_saveimagepath returning /tmp/amiguard-m03-auto-02/fsuae/Save States/runtime/workbench12.sdf
-DISK_get_saveimagepath returning /tmp/amiguard-m03-auto-02/fsuae/Save States/runtime/workbench12.sdf
+gui_disk_image_change drive 0 name /tmp/amiguard-m03-targeted/workbench12.adf write protected 1
+DISK_get_saveimagepath returning /tmp/amiguard-m03-targeted/fsuae/Save States/runtime/workbench12.sdf
+DISK_get_saveimagepath returning /tmp/amiguard-m03-targeted/fsuae/Save States/runtime/workbench12.sdf
 driveclick_insert drive=0 eject=0 click_initialized=1 wave_initialized=1 currprefs.floppyslots[drive].dfxclick=1
 drive_insert returning, drv->wrprot=0
 need_metadata_file 2 WF_ALWAYS
@@ -1242,12 +1243,12 @@ need_metadata_file 2 WF_ALWAYS
 - writing mode ----rwed
 need_metadata_file 6 WF_ALWAYS WF_EXISTS
 - writing mode ----rwed
+writing screenshot to /tmp/amiguard-m03-targeted/screenshots/fs-uae-full-2609061514-03.png
 [AUDIO] fs_emu_audio_resume_stream 0
-writing screenshot to /tmp/amiguard-m03-auto-02/screenshots/fs-uae-full-2609061507-03.png
 saved screenshot
-writing screenshot to /tmp/amiguard-m03-auto-02/screenshots/fs-uae-crop-2609061507-03.png
+writing screenshot to /tmp/amiguard-m03-targeted/screenshots/fs-uae-crop-2609061514-03.png
 saved screenshot
-writing screenshot to /tmp/amiguard-m03-auto-02/screenshots/fs-uae-real-2609061507-03.png
+writing screenshot to /tmp/amiguard-m03-targeted/screenshots/fs-uae-real-2609061514-03.png
 reading opengl frame buffer (960 x 720)
 saved screenshot
 Saved screenshot 7
@@ -1292,5 +1293,5 @@ OPENAL: alcDestroyContext
 OPENAL: alcCloseDevice
 [FSE] Returning from fs_emu_run
 fs-uae shutting down, fs_emu_run returned
-state dir /tmp/amiguard-m03-auto-02/fsuae/Save States/runtime was removed because it was empty
+state dir /tmp/amiguard-m03-targeted/fsuae/Save States/runtime was removed because it was empty
 end of main function

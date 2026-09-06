@@ -9,10 +9,12 @@ No release or tag is part of this qualification.
 - Initial local HEAD: `2759ae91aaab924e89e155fa5553b9fe0c024c46`, branch `main`, clean.
 - After `fetch`, `checkout main`, `pull --ff-only origin main`:
   `a9d5756f17199141b24f6fab9970175ef766c2c5`; HEAD = origin/main; status empty.
-- Qualification base commit: `a9d5756f17199141b24f6fab9970175ef766c2c5` **plus the
-  native fixes in this change**. This is not a claim that the unmodified base
-  passed. [manifest.json](evidence/m0.3/manifest.json) records the tested native
-  source hashes, compiler, binary hash and working-tree status.
+- Tested AmiGuard commit: `a9f615e97fa09598e660f4aef96f105595eb9b99`.
+  All native sources and the Makefile exactly match that commit. The final
+  run used a corrected host GUI driver; its manifest truthfully records
+  `M scripts/m03_gui.py`. This follow-up changes automation and evidence only,
+  not the tested AmiGuard code. [manifest.json](evidence/m0.3/manifest.json)
+  records the native source hashes, compiler and binary hash.
 - Binary: 13,648 bytes; SHA-256
   `ace7b44c2ab87cfd4b2848a969b9e63d2fb1ab6f094362ee0c01931ce1385f6f`.
 
@@ -95,10 +97,19 @@ logs have trailing whitespace removed; raw originals remain in the run directory
    without this bootstrap ([screenshot](evidence/m0.3/workbench12.png)).
    No acceptance criterion was relaxed.
 5. Initial X11 input focus and direct window capture were unreliable under
-   XWayland. Automation now requests desktop activation, checks the active
-   FS-UAE window before input, and uses FS-UAE's own frame capture. It does not
-   rely on stale XGetImage window contents. CLI redirection is placed before
-   command arguments for DOS 1.2 compatibility.
+   XWayland. Two full runs succeeded, but a later recheck lost desktop focus
+   during `Execute AGTest:repeat`; text reached the chat instead. That run
+   was interrupted and is **not** a completed qualification run. No repeated
+   scan logs existed for it. The final driver sends KeyPress/KeyRelease directly
+   to the selected FS-UAE X11 window using XSendEvent, rather than global XTest
+   input, so a desktop focus change does not redirect the remaining text.
+   FS-UAE accepted this method in the final complete run. Frame capture uses
+   FS-UAE's own screenshot action; stale XGetImage contents are not used.
+   See [Xlib event delivery](https://www.x.org/releases/X11R7.5/doc/libX11/libX11.html)
+   and [interruption record](evidence/m0.3/automation-focus-interruption.txt).
+6. CLI redirection is placed before command arguments for DOS 1.2 compatibility;
+   each program writes its own log instead of relying on Execute to inherit
+   redirected output. The directory check was rerun after correcting its syntax.
 
 ## Reproduce
 
@@ -148,5 +159,9 @@ and [hard-drive priority](https://fs-uae.net/docs/options/hard-drive-0-priority/
 - Raw disassembly includes strings in executable hunks; apparent newer opcodes
   decoded from string bytes are not treated as executed instructions. CPU flags,
   base multilib selection and the actual 68000 runtime provide additional evidence.
+- During intentional FS-UAE shutdown, two host X11 `BadWindow` messages were
+  emitted when key-release events reached the already destroyed window. All
+  gates and screenshots had completed; the emulator exited and post-exit
+  checksums matched. This is shutdown log noise, not an Amiga runtime failure.
 - No blockers remain for these gates. No real malware, repair, tag or release
   was used.

@@ -8,7 +8,6 @@ Examples: m03_gui.py shot evidence.png; m03_gui.py type 'AGTest:AmiGuard'
 import argparse
 import time
 from Xlib import X, XK, display, protocol
-from Xlib.ext import xtest
 from pathlib import Path
 import shutil
 
@@ -41,26 +40,41 @@ def main():
     if prop is None or prop.value[0] != w.id:
         raise SystemExit('FS-UAE is not the active desktop window; no input sent')
 
+    # Deliver events to this specific X11 window. XTest targets desktop focus
+    # and can type into another app if focus changes during a command.
+    modifiers = 0
+
+    def send(kind, code):
+        nonlocal modifiers
+        event_class = protocol.event.KeyPress if kind == X.KeyPress else protocol.event.KeyRelease
+        mask = X.KeyPressMask if kind == X.KeyPress else X.KeyReleaseMask
+        w.send_event(event_class(time=X.CurrentTime, root=root, window=w,
+                     child=X.NONE, root_x=0, root_y=0, event_x=1, event_y=1,
+                     state=modifiers, detail=code, same_screen=1), event_mask=mask)
+        if code == 50:
+            modifiers = X.ShiftMask if kind == X.KeyPress else 0
+        d.sync()
+
     def key(code, shift=False):
         if shift:
-            xtest.fake_input(d, X.KeyPress, 50)
-        xtest.fake_input(d, X.KeyPress, code)
+            send(X.KeyPress, 50)
+        send(X.KeyPress, code)
         d.sync()
         time.sleep(0.06)
-        xtest.fake_input(d, X.KeyRelease, code)
+        send(X.KeyRelease, code)
         if shift:
-            xtest.fake_input(d, X.KeyRelease, 50)
+            send(X.KeyRelease, 50)
         d.sync()
         time.sleep(0.06)
 
     if args.action == 'shot':
         before = set(args.screenshots_dir.glob('*crop*.png'))
         mod = d.keysym_to_keycode(XK.string_to_keysym('F12'))
-        xtest.fake_input(d, X.KeyPress, mod)
+        send(X.KeyPress, mod)
         d.sync()
         time.sleep(0.15)
         key(d.keysym_to_keycode(XK.string_to_keysym('s')))
-        xtest.fake_input(d, X.KeyRelease, mod)
+        send(X.KeyRelease, mod)
         d.sync()
         deadline = time.monotonic() + 10
         while time.monotonic() < deadline:
@@ -76,11 +90,11 @@ def main():
     elif args.action == 'chord':
         codes = [d.keysym_to_keycode(XK.string_to_keysym(n)) for n in args.args]
         for code in codes:
-            xtest.fake_input(d, X.KeyPress, code)
+            send(X.KeyPress, code)
             d.sync()
             time.sleep(0.12)
         for code in reversed(codes):
-            xtest.fake_input(d, X.KeyRelease, code)
+            send(X.KeyRelease, code)
             d.sync()
             time.sleep(0.12)
     elif args.action == 'key':
