@@ -1,6 +1,11 @@
+ifeq ($(origin CC),default)
+CC := m68k-amigaos-gcc
+endif
 CC ?= m68k-amigaos-gcc
 HOSTCC ?= cc
-CFLAGS ?= -O2 -Wall -Wextra -Werror -m68000
+CFLAGS ?= -O2 -Wall -Wextra -Werror
+# Keep the CPU and pre-2.0 runtime selection on compile AND link commands.
+AMIGAFLAGS := -m68000 -mcrt=nix13
 CPPFLAGS ?= -Isrc
 
 TARGET := AmiGuard
@@ -11,15 +16,17 @@ OBJ := $(SRC:.c=.o)
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $(OBJ)
+	$(CC) $(CFLAGS) $(AMIGAFLAGS) $(LDFLAGS) -o $@ $(OBJ)
 
 src/%.o: src/%.c
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(AMIGAFLAGS) -c -o $@ $<
 
 host-test:
 	mkdir -p build
 	$(HOSTCC) -std=c89 -pedantic -Wall -Wextra -Werror -Isrc tests/test_scanner.c src/scanner.c src/signatures.c -o build/test_scanner
 	./build/test_scanner
+	$(HOSTCC) -std=c89 -pedantic -Wall -Wextra -Werror -Itests/amiga_stubs -Isrc tests/test_trackdisk.c src/trackdisk.c -o build/test_trackdisk
+	./build/test_trackdisk
 
 check: host-test
 

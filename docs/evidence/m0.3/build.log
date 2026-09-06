@@ -1,0 +1,18 @@
+rm -f src/main.o src/scanner.o src/signatures.o src/trackdisk.o AmiGuard
+rm -rf build
+mkdir -p build
+cc -std=c89 -pedantic -Wall -Wextra -Werror -Isrc tests/test_scanner.c src/scanner.c src/signatures.c -o build/test_scanner
+./build/test_scanner
+PASS: DOS bootblock
+PASS: synthetic signature
+PASS: unknown bootblock
+PASS: short block rejected
+All scanner tests passed.
+cc -std=c89 -pedantic -Wall -Wextra -Werror -Itests/amiga_stubs -Isrc tests/test_trackdisk.c src/trackdisk.c -o build/test_trackdisk
+./build/test_trackdisk
+PASS: trackdisk validation, read-only request, short read and cleanup paths
+m68k-amigaos-gcc -Isrc -O2 -Wall -Wextra -Werror -m68000 -mcrt=nix13 -c -o src/main.o src/main.c
+m68k-amigaos-gcc -Isrc -O2 -Wall -Wextra -Werror -m68000 -mcrt=nix13 -c -o src/scanner.o src/scanner.c
+m68k-amigaos-gcc -Isrc -O2 -Wall -Wextra -Werror -m68000 -mcrt=nix13 -c -o src/signatures.o src/signatures.c
+m68k-amigaos-gcc -Isrc -O2 -Wall -Wextra -Werror -m68000 -mcrt=nix13 -c -o src/trackdisk.o src/trackdisk.c
+m68k-amigaos-gcc -O2 -Wall -Wextra -Werror -m68000 -mcrt=nix13  -o AmiGuard src/main.o src/scanner.o src/signatures.o src/trackdisk.o

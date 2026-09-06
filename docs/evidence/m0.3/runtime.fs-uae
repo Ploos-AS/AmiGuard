@@ -1,0 +1,41 @@
+# FS-UAE Amiga Reference Configurations v1.0-rc2
+# Amiga 500 / stock / accurate
+# Typical is the classic 512 KB trapdoor/slow expansion.
+# Storage and OS are deliberately separate overlays.
+
+[fs-uae]
+title = Amiga 500 / stock / accurate
+amiga_model = A500
+cpu = 68000
+chip_memory = 512
+slow_memory = 0
+fast_memory = 0
+motherboard_ram = 0
+
+accuracy = 1
+jit_compiler = 0
+uae_cpu_speed = real
+uae_cpu_multiplier = 2
+
+floppy_drive_count = 1
+
+# Disposable M0.3 storage and automation overlay
+base_dir = /tmp/amiguard-m03-auto-02/fsuae
+kickstart_file = /home/pgo/Documents/FS-UAE/Kickstarts/amiga-os-120.rom
+floppy_drive_0 = /tmp/amiguard-m03-auto-02/workbench12.adf
+floppy_image_0 = /tmp/amiguard-m03-auto-02/workbench12.adf
+floppy_image_1 = /tmp/amiguard-m03-auto-02/unknown.adf
+writable_floppy_images = 0
+uae_floppy_write_protect = true
+hard_drive_0 = /tmp/amiguard-m03-auto-02/work
+hard_drive_0_label = AGTest
+hard_drive_0_priority = 0
+fullscreen = 0
+window_hidden = 0
+window_minimized = 0
+window_width = 960
+window_height = 720
+screenshots_output_dir = /tmp/amiguard-m03-auto-02/screenshots
+keyboard_key_f6 = action_eject_floppy_0
+keyboard_key_f7 = action_drive_0_insert_floppy_0
+keyboard_key_f8 = action_drive_0_insert_floppy_1

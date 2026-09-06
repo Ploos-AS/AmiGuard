@@ -1,0 +1,4 @@
+/AmiGuard
+/build/
+/src/*.o
+__pycache__/

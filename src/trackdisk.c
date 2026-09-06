@@ -3,6 +3,7 @@
 #include <exec/ports.h>
 #include <devices/trackdisk.h>
 #include <proto/exec.h>
+#include <clib/alib_protos.h>
 
 #include "trackdisk.h"
 
@@ -53,6 +54,9 @@ LONG amiguard_read_bootblock(
     request->iotd_Req.io_Offset = 0UL;
 
     error = DoIO((struct IORequest *)request);
+    if (error == 0 && request->iotd_Req.io_Actual != AMIGUARD_BOOTBLOCK_BYTES) {
+        error = -1;
+    }
 
     CloseDevice((struct IORequest *)request);
     DeleteExtIO((struct IORequest *)request);

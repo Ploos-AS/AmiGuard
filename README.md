@@ -18,6 +18,8 @@ the first bootblock classification logic.
 ## Build
 
 The native target is intended for a classic m68k-amigaos cross toolchain.
+The default build uses `m68k-amigaos-gcc`, `-m68000` and the toolchain's
+`-mcrt=nix13` runtime to avoid OS 2.x dependencies.
 
 ```sh
 make
@@ -30,6 +32,8 @@ make check
 ```
 
 See [docs/M0.md](docs/M0.md) for scope and acceptance criteria.
+See [M0.3 runtime qualification](docs/M0_3_RUNTIME_QUALIFICATION.md) for the
+observed Kickstart/Workbench 1.2 results and the reproducible visible FS-UAE test.
 
 ## License
 

@@ -1,0 +1,33 @@
+{
+  "date_utc": "2026-09-06T13:05:45Z",
+  "head": "a9d5756f17199141b24f6fab9970175ef766c2c5",
+  "status": " M Makefile\n M docs/M0_3_RUNTIME_QUALIFICATION.md\n M src/main.c\n M src/trackdisk.c\n?? .gitignore\n?? docs/evidence/\n?? scripts/\n?? tests/amiga_stubs/\n?? tests/test_trackdisk.c\n",
+  "inputs": {
+    "reference": "/home/pgo/Projects/Amiga/FS-UAE_Config/fs-uae-amiga-reference-configs/a500/stock/a500-stock-accurate.fs-uae",
+    "rom": "/home/pgo/Documents/FS-UAE/Kickstarts/amiga-os-120.rom",
+    "workbench": "/home/pgo/Documents/FS-UAE/Floppies/amiga-os-120-workbench.adf"
+  },
+  "original_sha256": {
+    "/home/pgo/Projects/Amiga/FS-UAE_Config/fs-uae-amiga-reference-configs/a500/stock/a500-stock-accurate.fs-uae": "c280801f4129654f7dcd2dd4abf237a1d9c350dec5320b67d134154dcc43d3d4",
+    "/home/pgo/Documents/FS-UAE/Kickstarts/amiga-os-120.rom": "781a36914b49642ab14b5a6f1e7263c7fc2dcbaba3c1fc141a163fd5299b976d",
+    "/home/pgo/Documents/FS-UAE/Floppies/amiga-os-120-workbench.adf": "1035a9a317fbbf0056848a25397f245967d7a8f1bc5079b02a018f410899bdf0"
+  },
+  "source_sha256": {
+    "src/main.c": "3d47fd35c47577f0e91db64f69b5b3110564e881e7c4d0ff7294228f99cdf3ef",
+    "src/scanner.c": "df6feb951289e853325a9c7c391e053c27e41d8bcb3421900582cc407e2c93d0",
+    "src/scanner.h": "56d567a6b6e36552024d67745100556aa1a66c2f453145184dc1c8a9e3d8df49",
+    "src/signatures.c": "324b085c4def17713decdfc0fca56cc9621b665a29d169beed2c352b5928322a",
+    "src/signatures.h": "33717b70196141a0ce22ea51057a5d20241fd1be8135a3400145969520caa865",
+    "src/trackdisk.c": "92819aa7b3f7f4633926ed994792541bbc641a1823ee69ddf747a15b13911910",
+    "src/trackdisk.h": "22156687ccaa390ea04da8523733bc39ea2df2215370d7abe6d06ab43d69aef6",
+    "Makefile": "7311c0789483b0535aba43e6f1285749d891c2053eed4d59be8c1d870e3f8821"
+  },
+  "media_before": {
+    "workbench12.adf": "1035a9a317fbbf0056848a25397f245967d7a8f1bc5079b02a018f410899bdf0",
+    "unknown.adf": "9acd344236c1d414a85b56d23b322db62023feb48df642720aaa08697e873fbd"
+  },
+  "binary_sha256": "ace7b44c2ab87cfd4b2848a969b9e63d2fb1ab6f094362ee0c01931ce1385f6f",
+  "binary_bytes": 13648,
+  "compiler": "/opt/amiga/bin/m68k-amigaos-gcc",
+  "compiler_version": "m68k-amigaos-gcc (GCC) 6.5.0b 20260807212032"
+}

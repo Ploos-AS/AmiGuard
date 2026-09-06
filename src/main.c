@@ -1,6 +1,6 @@
 #include <exec/types.h>
 #include <dos/dos.h>
-#include <proto/dos.h>
+#include <stdio.h>
 
 #include "scanner.h"
 #include "trackdisk.h"
@@ -23,13 +23,13 @@ static int parse_unit(const char *arg, UBYTE *unit)
 static void print_result(const struct amiguard_detection *d)
 {
     if (d->result == AMIGUARD_RESULT_INFECTED) {
-        Printf("INFECTED: %s\n", (LONG)d->name);
+        printf("INFECTED: %s\n", d->name);
     } else if (d->result == AMIGUARD_RESULT_STANDARD) {
-        Printf("KNOWN: %s\n", (LONG)d->name);
+        printf("KNOWN: %s\n", d->name);
     } else if (d->result == AMIGUARD_RESULT_UNKNOWN) {
-        Printf("UNKNOWN: %s\n", (LONG)d->name);
+        printf("UNKNOWN: %s\n", d->name);
     } else {
-        Printf("ERROR: %s\n", (LONG)d->name);
+        printf("ERROR: %s\n", d->name);
     }
 }
 
@@ -40,25 +40,26 @@ int main(int argc, char **argv)
     UBYTE unit;
     LONG io_error;
 
-    Printf("AmiGuard 0.0.2 M0.2\n");
-    Printf("Target: Kickstart 1.2+ / Motorola 68000\n");
+    printf("AmiGuard 0.0.2 M0.2\n");
+    printf("Target: Kickstart 1.2+ / Motorola 68000\n");
 
     if (argc != 2 || !parse_unit(argv[1], &unit)) {
-        Printf("Usage: AmiGuard DF0:|DF1:|DF2:|DF3:\n");
+        printf("Usage: AmiGuard DF0:|DF1:|DF2:|DF3:\n");
         return RETURN_ERROR;
     }
 
-    Printf("Reading %s bootblock (read-only)...\n", (LONG)argv[1]);
+    printf("Reading %s bootblock (read-only)...\n", argv[1]);
     io_error = amiguard_read_bootblock(
         unit,
         block,
         AMIGUARD_BOOTBLOCK_SIZE
     );
     if (io_error != 0) {
-        Printf("trackdisk.device read failed, error %ld\n", io_error);
+        printf("trackdisk.device read failed, error %ld\n", (long)io_error);
         return RETURN_FAIL;
     }
 
+    printf("trackdisk.device: read 1024 bytes at offset 0\n");
     detection = amiguard_scan_bootblock(block, AMIGUARD_BOOTBLOCK_SIZE);
     print_result(&detection);
 

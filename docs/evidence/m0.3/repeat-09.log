@@ -1,0 +1,5 @@
+AmiGuard 0.0.2 M0.2
+Target: Kickstart 1.2+ / Motorola 68000
+Reading DF0: bootblock (read-only)...
+trackdisk.device: read 1024 bytes at offset 0
+KNOWN: Amiga DOS bootblock
