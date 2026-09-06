@@ -96,16 +96,42 @@ M1.0 runtime requalification is PASS only when R1-R6 are PASS. Any untested mand
 
 ## Result record
 
+### Execution record (2026-09-06)
+
+Starting HEAD: `c632f4dafcf8dd1c2258ea8f841c60131980d3ad` (also
+`origin/main`, divergence `0 0`). Tested commit is the same SHA on `main`.
+Host tests and native build were run with `/opt/amiga/bin/m68k-amigaos-gcc`
+GCC `6.5.0b 20260807212032`; the AmigaOS loadseg executable is 13,976 bytes
+and was built with `-m68000 -mcrt=nix13`.
+
+The existing visible FS-UAE 3.2.35 `a500-stock-accurate` profile was used:
+Motorola 68000, Kickstart 1.2 (33.180), Workbench 1.2 (33.56), 512 KiB Chip
+RAM, no Fast/Slow RAM. Evidence is retained in
+`/tmp/amiguard-m1-run/evidence/` and screenshots in its `screenshots/`
+directory. The Workbench ADF SHA-256 was
+`1035a9a317fbbf0056848a25397f245967d7a8f1bc5079b02a018f410899bdf0` before
+and after scanning. The harmless custom fixture was
+`9acd344236c1d414a85b56d23b322db62023feb48df642720aaa08697e873fbd` before
+and after.
+
+The visible session observed successful CLI startup, a valid DOS bootblock
+classified `KNOWN`, a custom bootblock classified `UNKNOWN`, and 10/10
+repeated valid scans with stable free Chip RAM (359,520 bytes). A separate
+invalid-checksum runtime attempt was stopped before its scan because stale
+FS-UAE windows made the GUI driver ambiguous; therefore that mandatory gate
+remains UNVERIFIED. Host regression tests do include and PASS invalid-checksum
+DOS → UNKNOWN.
+
 Fill in after execution:
 
 | Gate | Result | Evidence |
 | --- | --- | --- |
-| R1 Baseline build | UNVERIFIED | |
-| R2 Valid DOS → KNOWN | UNVERIFIED | |
-| R3 Invalid checksum DOS → UNKNOWN | UNVERIFIED | |
-| R4 Custom unknown → UNKNOWN | UNVERIFIED | |
-| R5 Read-only hashes unchanged | UNVERIFIED | |
-| R6 KS1.2 / 512 KiB runtime | UNVERIFIED | |
+| R1 Baseline build | PASS | `make clean && make check && make`; all host tests pass; native 68000 build succeeds. |
+| R2 Valid DOS → KNOWN | PASS | Visible FS-UAE output: 1024-byte read and `KNOWN: Amiga DOS bootblock (valid checksum)`. |
+| R3 Invalid checksum DOS → UNKNOWN | UNVERIFIED | Host test passes; visible runtime attempt did not reach the scan. |
+| R4 Custom unknown → UNKNOWN | PASS | Visible FS-UAE output: `UNKNOWN: unknown bootblock`. |
+| R5 Read-only hashes unchanged | PASS | Workbench and custom ADF SHA-256 unchanged before/after. |
+| R6 KS1.2 / 512 KiB runtime | PASS | Workbench boot, CLI start, DF0 read, and repeated scans observed in 512 KiB profile. |
 
 Also record:
 
