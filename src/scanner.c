@@ -8,6 +8,31 @@ static int bytes_equal(const unsigned char *a, const unsigned char *b, unsigned 
     return 1;
 }
 
+static unsigned long read_be32(const unsigned char *p)
+{
+    return ((unsigned long)p[0] << 24)
+         | ((unsigned long)p[1] << 16)
+         | ((unsigned long)p[2] << 8)
+         | (unsigned long)p[3];
+}
+
+int amiguard_bootblock_checksum_valid(const unsigned char *data, unsigned long size)
+{
+    unsigned long i;
+    unsigned long sum = 0;
+
+    if (data == 0 || size != AMIGUARD_BOOTBLOCK_SIZE) return 0;
+
+    for (i = 0; i < size; i += 4) {
+        unsigned long word = read_be32(data + i);
+        unsigned long previous = sum;
+        sum += word;
+        if (sum < previous) ++sum;
+    }
+
+    return sum == 0xffffffffUL;
+}
+
 struct amiguard_detection amiguard_scan_bootblock(const unsigned char *data, unsigned long size)
 {
     const struct amiguard_signature *items;
@@ -29,8 +54,13 @@ struct amiguard_detection amiguard_scan_bootblock(const unsigned char *data, uns
     }
 
     if (data[0] == 'D' && data[1] == 'O' && data[2] == 'S' && data[3] <= 7U) {
-        out.result = AMIGUARD_RESULT_STANDARD;
-        out.name = "Amiga DOS bootblock";
+        if (amiguard_bootblock_checksum_valid(data, size)) {
+            out.result = AMIGUARD_RESULT_STANDARD;
+            out.name = "Amiga DOS bootblock (valid checksum)";
+        } else {
+            out.result = AMIGUARD_RESULT_UNKNOWN;
+            out.name = "Amiga DOS bootblock (invalid checksum)";
+        }
     } else {
         out.result = AMIGUARD_RESULT_UNKNOWN;
         out.name = "unknown bootblock";
