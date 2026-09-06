@@ -1,7 +1,9 @@
 #include <exec/types.h>
 #include <dos/dos.h>
 #include <stdio.h>
+#include <string.h>
 
+#include "file_intake.h"
 #include "scanner.h"
 #include "trackdisk.h"
 
@@ -20,6 +22,11 @@ static int parse_unit(const char *arg, UBYTE *unit)
     return 1;
 }
 
+static int is_file_mode(const char *arg)
+{
+    return arg != 0 && strcmp(arg, "FILE") == 0;
+}
+
 static void print_result(const struct amiguard_detection *d)
 {
     if (d->result == AMIGUARD_RESULT_INFECTED) {
@@ -35,6 +42,33 @@ static void print_result(const struct amiguard_detection *d)
     }
 }
 
+static int scan_file_mode(const char *path)
+{
+    struct amiguard_file_result result;
+
+    printf("Reading file read-only: %s\n", path);
+    result = amiguard_scan_file_readonly(path);
+
+    if (result.status == AMIGUARD_FILE_VALID_HUNK) {
+        printf("VALID-HUNK: %s (%lu bytes)\n", result.message, result.size);
+        return RETURN_OK;
+    }
+    if (result.status == AMIGUARD_FILE_NOT_HUNK) {
+        printf("NOT-HUNK: %s (%lu bytes)\n", result.message, result.size);
+        return RETURN_OK;
+    }
+    if (result.status == AMIGUARD_FILE_MALFORMED_HUNK) {
+        printf("MALFORMED-HUNK: %s (%lu bytes)\n", result.message, result.size);
+        return RETURN_OK;
+    }
+
+    printf("ERROR: %s", result.message);
+    if (result.size != 0UL)
+        printf(" (%lu bytes)", result.size);
+    printf("\n");
+    return RETURN_FAIL;
+}
+
 int main(int argc, char **argv)
 {
     unsigned char block[AMIGUARD_BOOTBLOCK_SIZE];
@@ -45,8 +79,12 @@ int main(int argc, char **argv)
     printf("AmiGuard 0.0.2 M0.2\n");
     printf("Target: Kickstart 1.2+ / Motorola 68000\n");
 
+    if (argc == 3 && is_file_mode(argv[1]))
+        return scan_file_mode(argv[2]);
+
     if (argc != 2 || !parse_unit(argv[1], &unit)) {
         printf("Usage: AmiGuard DF0:|DF1:|DF2:|DF3:\n");
+        printf("       AmiGuard FILE <path>\n");
         return RETURN_ERROR;
     }
 
