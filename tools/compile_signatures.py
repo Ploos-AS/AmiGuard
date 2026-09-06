@@ -61,7 +61,7 @@ def validate(path, item):
         fail(path, "invalid family")
     if item["kind"] != "bootblock":
         fail(path, "signature compiler accepts bootblock records only")
-    if item["status"] not in ("test-only", "research", "verified"):
+    if item["status"] not in ("test-only", "research", "qualified", "verified"):
         fail(path, "invalid status")
     if not isinstance(item["synthetic"], bool):
         fail(path, "synthetic must be boolean")
@@ -84,14 +84,14 @@ def validate(path, item):
         if item["synthetic"]:
             fail(path, "research records must describe non-synthetic candidates")
         if sample_hash is not None:
-            fail(path, "research records must not claim a sample SHA-256 before verification")
+            fail(path, "research records must not claim a sample SHA-256 before qualification")
         if sig is not None:
             fail(path, "research records must not contain a production signature")
     else:
         if item["synthetic"]:
-            fail(path, "verified malware signatures must not be synthetic")
+            fail(path, "%s malware signatures must not be synthetic" % status)
         if not isinstance(sample_hash, str) or not SHA256_RE.match(sample_hash):
-            fail(path, "verified signatures require sample_sha256")
+            fail(path, "%s signatures require sample_sha256" % status)
         validate_signature(path, sig)
 
     if not isinstance(item["verifier"], str) or not item["verifier"]:
