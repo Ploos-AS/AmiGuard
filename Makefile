@@ -9,7 +9,7 @@ AMIGAFLAGS := -m68000 -mcrt=nix13
 CPPFLAGS ?= -Isrc
 
 TARGET := AmiGuard
-SRC := src/main.c src/scanner.c src/signatures.c src/trackdisk.c src/hunk.c
+SRC := src/main.c src/scanner.c src/signatures.c src/trackdisk.c src/hunk.c src/file_intake.c
 OBJ := $(SRC:.c=.o)
 
 .PHONY: all clean check host-test signatures signature-check
@@ -37,6 +37,8 @@ host-test: signature-check
 	./build/test_trackdisk
 	$(HOSTCC) -std=c89 -pedantic -Wall -Wextra -Werror -Isrc tests/test_hunk.c src/hunk.c -o build/test_hunk
 	./build/test_hunk
+	$(HOSTCC) -std=c89 -pedantic -Wall -Wextra -Werror -Isrc tests/test_file_intake.c src/file_intake.c src/hunk.c -o build/test_file_intake
+	./build/test_file_intake
 	python3 -m unittest tests/test_analyze_bootblock.py tests/test_triage_corpus.py tests/test_build_review_queue.py tests/test_qualify_signature.py tests/test_build_clean_manifest.py tests/test_promote_signature.py tests/test_preflight_signature.py tests/test_finalize_signature.py tests/test_identify_known_bootblock.py tests/test_import_known_clean.py tests/test_preflight_known_clean.py
 
 check: host-test
