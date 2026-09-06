@@ -15,10 +15,10 @@ static int bytes_match_masked(const unsigned char *data,
 
 static unsigned long read_be32(const unsigned char *p)
 {
-    return ((unsigned long)p[0] << 24)
-         | ((unsigned long)p[1] << 16)
-         | ((unsigned long)p[2] << 8)
-         | (unsigned long)p[3];
+    return (((unsigned long)p[0] << 24)
+          | ((unsigned long)p[1] << 16)
+          | ((unsigned long)p[2] << 8)
+          | (unsigned long)p[3]) & 0xffffffffUL;
 }
 
 int amiguard_bootblock_checksum_valid(const unsigned char *data, unsigned long size)
@@ -31,8 +31,10 @@ int amiguard_bootblock_checksum_valid(const unsigned char *data, unsigned long s
     for (i = 0; i < size; i += 4) {
         unsigned long word = read_be32(data + i);
         unsigned long previous = sum;
-        sum += word;
-        if (sum < previous) ++sum;
+        sum = (sum + word) & 0xffffffffUL;
+        if (sum < previous) {
+            sum = (sum + 1UL) & 0xffffffffUL;
+        }
     }
 
     return sum == 0xffffffffUL;
