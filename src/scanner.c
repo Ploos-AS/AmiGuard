@@ -44,6 +44,7 @@ struct amiguard_detection amiguard_scan_bootblock(const unsigned char *data, uns
 {
     const struct amiguard_signature *items;
     unsigned long count, i;
+    int checksum_valid;
     struct amiguard_detection out;
 
     out.result = AMIGUARD_RESULT_ERROR;
@@ -63,14 +64,19 @@ struct amiguard_detection amiguard_scan_bootblock(const unsigned char *data, uns
         }
     }
 
+    checksum_valid = amiguard_bootblock_checksum_valid(data, size);
+
     if (data[0] == 'D' && data[1] == 'O' && data[2] == 'S' && data[3] <= 7U) {
-        if (amiguard_bootblock_checksum_valid(data, size)) {
+        if (checksum_valid) {
             out.result = AMIGUARD_RESULT_STANDARD;
             out.name = "Amiga DOS bootblock (valid checksum)";
         } else {
             out.result = AMIGUARD_RESULT_UNKNOWN;
             out.name = "Amiga DOS bootblock (invalid checksum)";
         }
+    } else if (checksum_valid) {
+        out.result = AMIGUARD_RESULT_CUSTOM;
+        out.name = "custom bootblock (valid checksum)";
     } else {
         out.result = AMIGUARD_RESULT_UNKNOWN;
         out.name = "unknown bootblock";
