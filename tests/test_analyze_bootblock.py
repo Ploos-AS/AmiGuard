@@ -17,12 +17,28 @@ class AnalyzeBootblockTests(unittest.TestCase):
         block[4:8] = bytes.fromhex("bbb0acff")
         return block
 
+    def make_valid_custom(self):
+        block = bytearray(1024)
+        block[0:4] = bytes.fromhex("ffffffff")
+        block[4:8] = bytes.fromhex("ffffffff")
+        return block
+
     def test_checksum_and_dos_type(self):
         block = self.make_valid_dos()
         self.assertTrue(MOD.checksum_valid(bytes(block)))
         self.assertEqual(MOD.dos_type(bytes(block)), "DOS0")
         block[100] = 1
         self.assertFalse(MOD.checksum_valid(bytes(block)))
+
+    def test_structural_classification_reason_codes(self):
+        self.assertEqual(MOD.classify("DOS0", True),
+                         ("STANDARD", "dos-valid-checksum"))
+        self.assertEqual(MOD.classify("DOS0", False),
+                         ("UNKNOWN", "dos-invalid-checksum"))
+        self.assertEqual(MOD.classify(None, True),
+                         ("CUSTOM", "non-dos-valid-checksum"))
+        self.assertEqual(MOD.classify(None, False),
+                         ("UNKNOWN", "non-dos-invalid-checksum"))
 
     def test_extract_strings_with_offsets(self):
         block = bytearray(1024)
@@ -46,7 +62,20 @@ class AnalyzeBootblockTests(unittest.TestCase):
             self.assertEqual(report["input_size"], 3072)
             self.assertEqual(report["bootblock_sha256"], MOD.sha256(bytes(block)))
             self.assertEqual(report["dos_type"], "DOS0")
+            self.assertEqual(report["classification"], "STANDARD")
+            self.assertEqual(report["reason_code"], "dos-valid-checksum")
+            self.assertFalse(report["malware_claim"])
             self.assertTrue(any(item["text"] == "SAFEBOOT" for item in report["strings"]))
+
+    def test_valid_custom_is_neutral_custom_not_malware(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "custom.bin")
+            with open(path, "wb") as handle:
+                handle.write(self.make_valid_custom())
+            report = MOD.analyze(path)
+            self.assertEqual(report["classification"], "CUSTOM")
+            self.assertEqual(report["reason_code"], "non-dos-valid-checksum")
+            self.assertFalse(report["malware_claim"])
 
     def test_short_input_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:
