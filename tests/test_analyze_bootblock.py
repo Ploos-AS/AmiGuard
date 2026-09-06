@@ -56,7 +56,7 @@ class AnalyzeBootblockTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 MOD.analyze(path)
 
-    def test_research_draft_cannot_be_verified(self):
+    def test_research_draft_does_not_claim_sample_hash(self):
         report = {
             "input_sha256": "1" * 64,
             "bootblock_sha256": "2" * 64,
@@ -64,7 +64,8 @@ class AnalyzeBootblockTests(unittest.TestCase):
         draft = MOD.research_draft(report, "family.sample", "Family sample", "Family", "source")
         self.assertEqual(draft["status"], "research")
         self.assertIsNone(draft["signature"])
-        self.assertEqual(draft["sample_sha256"], "2" * 64)
+        self.assertIsNone(draft["sample_sha256"])
+        self.assertEqual(draft["provenance"]["bootblock_sha256"], "2" * 64)
         self.assertEqual(draft["verifier"], "pending")
 
 
