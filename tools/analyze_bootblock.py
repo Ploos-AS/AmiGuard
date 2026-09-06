@@ -40,6 +40,17 @@ def dos_type(data):
     return None
 
 
+def classify(dos, checksum):
+    """Mirror native structural classification without making malware claims."""
+    if dos is not None and checksum:
+        return "STANDARD", "dos-valid-checksum"
+    if dos is not None:
+        return "UNKNOWN", "dos-invalid-checksum"
+    if checksum:
+        return "CUSTOM", "non-dos-valid-checksum"
+    return "UNKNOWN", "non-dos-invalid-checksum"
+
+
 def extract_strings(data, minimum=4):
     found = []
     start = None
@@ -65,14 +76,20 @@ def analyze(path, minimum_string=4):
         raise ValueError("input is shorter than 1024 bytes")
 
     bootblock = raw[:BOOTBLOCK_SIZE]
+    dtype = dos_type(bootblock)
+    valid = checksum_valid(bootblock)
+    classification, reason_code = classify(dtype, valid)
     return {
         "path": os.path.abspath(path),
         "input_size": len(raw),
         "input_sha256": sha256(raw),
         "bootblock_size": BOOTBLOCK_SIZE,
         "bootblock_sha256": sha256(bootblock),
-        "dos_type": dos_type(bootblock),
-        "checksum_valid": checksum_valid(bootblock),
+        "dos_type": dtype,
+        "checksum_valid": valid,
+        "classification": classification,
+        "reason_code": reason_code,
+        "malware_claim": False,
         "strings": extract_strings(bootblock, minimum_string),
     }
 
@@ -109,6 +126,9 @@ def print_text(report):
     print("Bootblock SHA-256: %s" % report["bootblock_sha256"])
     print("DOS type: %s" % (report["dos_type"] or "custom/unknown"))
     print("Checksum: %s" % ("valid" if report["checksum_valid"] else "invalid/non-standard"))
+    print("Classification: %s" % report["classification"])
+    print("Reason: %s" % report["reason_code"])
+    print("Malware claim: no")
     print("Printable strings:")
     if not report["strings"]:
         print("  (none)")
