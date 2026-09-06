@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "id": "mount-eleni-2.2",
+  "name": "Mount / Eleni 2.2",
+  "family": "Mount/Eleni",
+  "kind": "bootblock",
+  "status": "research",
+  "synthetic": false,
+  "source": {
+    "type": "public-analysis",
+    "url": "https://www.vht-dk.dk/amiga/desc/txt/mount.htm",
+    "publisher": "Virus Help Team",
+    "note": "Public description identifies a 1024-byte bootblock/file virus and documents an encoded invariant text marker near the top of the bootblock."
+  },
+  "provenance": {
+    "derivation": "Research candidate only. No production signature bytes or sample are copied into AmiGuard from the public description.",
+    "verification_required": "Derive offset, pattern, mask and SHA-256 independently from a legally analyzable isolated sample before promotion."
+  },
+  "sample_sha256": null,
+  "signature": null,
+  "verifier": "pending-sample-qualification",
+  "cleaner": "none",
+  "research": {
+    "candidate_marker_ascii": "FMJOJ XJSUT V2.2",
+    "candidate_marker_location": "described as near the top of the bootblock",
+    "runtime_note": "The public description says the virus itself requires Kickstart 2.x+, but AmiGuard detection remains a read-only byte-level bootblock operation and must retain Kickstart 1.2 scanner compatibility."
+  }
+}
