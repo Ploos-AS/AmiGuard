@@ -35,6 +35,7 @@ host-test: signature-check
 	./build/test_scanner
 	$(HOSTCC) -std=c89 -pedantic -Wall -Wextra -Werror -Itests/amiga_stubs -Isrc tests/test_trackdisk.c src/trackdisk.c -o build/test_trackdisk
 	./build/test_trackdisk
+	python3 -m unittest tests/test_analyze_bootblock.py
 
 check: host-test
 
