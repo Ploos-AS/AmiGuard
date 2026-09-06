@@ -7,7 +7,8 @@ enum amiguard_result {
     AMIGUARD_RESULT_ERROR = -1,
     AMIGUARD_RESULT_UNKNOWN = 0,
     AMIGUARD_RESULT_STANDARD = 1,
-    AMIGUARD_RESULT_INFECTED = 2
+    AMIGUARD_RESULT_INFECTED = 2,
+    AMIGUARD_RESULT_CUSTOM = 3
 };
 
 struct amiguard_detection {
