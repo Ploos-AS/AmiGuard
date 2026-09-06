@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "id": "amiguard.test.masked",
+  "name": "AmiGuard.Test.Masked",
+  "family": "synthetic-test",
+  "kind": "bootblock",
+  "status": "test-only",
+  "synthetic": true,
+  "source": {
+    "type": "project-fixture",
+    "reference": "AmiGuard M1.1 masked-pattern regression fixture"
+  },
+  "provenance": {
+    "author": "Ploos AS",
+    "license": "MIT",
+    "notes": "Synthetic masked pattern; not derived from malware."
+  },
+  "sample_sha256": null,
+  "signature": {
+    "offset": 80,
+    "bytes": "a1b2c3d4",
+    "mask": "fff0ffff"
+  },
+  "verifier": "none",
+  "cleaner": "none"
+}
