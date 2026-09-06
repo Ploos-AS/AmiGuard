@@ -116,11 +116,18 @@ and after.
 
 The visible session observed successful CLI startup, a valid DOS bootblock
 classified `KNOWN`, a custom bootblock classified `UNKNOWN`, and 10/10
-repeated valid scans with stable free Chip RAM (359,520 bytes). A separate
-invalid-checksum runtime attempt was stopped before its scan because stale
-FS-UAE windows made the GUI driver ambiguous; therefore that mandatory gate
-remains UNVERIFIED. Host regression tests do include and PASS invalid-checksum
-DOS → UNKNOWN.
+repeated valid scans with stable free Chip RAM (359,520 bytes). After closing
+all stale FS-UAE windows, one and only one visible emulator instance was used
+for R3. A disposable copy derived from the known-clean Workbench image kept
+the `DOS` magic (`DOS` at bytes 0–2); exactly one bootblock byte (offset 100)
+was changed. Its SHA-256 was
+`2717ef98ca83cc1238ffa673f73d19660f76eed8925d1ccffb441e1eea35eeec` before
+and after both scans. The emulator output was `UNKNOWN: Amiga DOS bootblock
+(invalid checksum)` on both scans, with no `KNOWN`, `INFECTED`, or `ERROR`.
+Host regression tests also PASS invalid-checksum DOS → UNKNOWN.
+
+All mandatory gates R1–R6 are now PASS; M1.0 runtime requalification is
+complete.
 
 Fill in after execution:
 
@@ -128,7 +135,7 @@ Fill in after execution:
 | --- | --- | --- |
 | R1 Baseline build | PASS | `make clean && make check && make`; all host tests pass; native 68000 build succeeds. |
 | R2 Valid DOS → KNOWN | PASS | Visible FS-UAE output: 1024-byte read and `KNOWN: Amiga DOS bootblock (valid checksum)`. |
-| R3 Invalid checksum DOS → UNKNOWN | UNVERIFIED | Host test passes; visible runtime attempt did not reach the scan. |
+| R3 Invalid checksum DOS → UNKNOWN | PASS | One visible `a500-stock-accurate` FS-UAE instance after stale-window cleanup; two scans output `UNKNOWN: Amiga DOS bootblock (invalid checksum)`. |
 | R4 Custom unknown → UNKNOWN | PASS | Visible FS-UAE output: `UNKNOWN: unknown bootblock`. |
 | R5 Read-only hashes unchanged | PASS | Workbench and custom ADF SHA-256 unchanged before/after. |
 | R6 KS1.2 / 512 KiB runtime | PASS | Workbench boot, CLI start, DF0 read, and repeated scans observed in 512 KiB profile. |
