@@ -50,6 +50,9 @@ int main(void)
     make_carry_wrap_bootblock(block);
     expect(amiguard_bootblock_checksum_valid(block, sizeof(block)),
            "checksum preserves 32-bit end-around carry on wide hosts");
+    d = amiguard_scan_bootblock(block, sizeof(block));
+    expect(d.result == AMIGUARD_RESULT_CUSTOM,
+           "valid non-DOS bootblock classified custom");
 
     make_valid_dos_bootblock(block);
     block[100] = 1;
