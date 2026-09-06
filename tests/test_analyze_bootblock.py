@@ -11,10 +11,23 @@ SPEC.loader.exec_module(MOD)
 
 
 class AnalyzeBootblockTests(unittest.TestCase):
+    def set_checksum(self, block):
+        block[4:8] = b"\x00\x00\x00\x00"
+        total = 0
+        for offset in range(0, 1024, 4):
+            word = int.from_bytes(block[offset:offset + 4], "big")
+            previous = total
+            total = (total + word) & 0xffffffff
+            if total < previous:
+                total = (total + 1) & 0xffffffff
+        checksum = (~total) & 0xffffffff
+        block[4:8] = checksum.to_bytes(4, "big")
+        self.assertTrue(MOD.checksum_valid(bytes(block)))
+
     def make_valid_dos(self):
         block = bytearray(1024)
         block[0:4] = b"DOS\x00"
-        block[4:8] = bytes.fromhex("bbb0acff")
+        self.set_checksum(block)
         return block
 
     def make_valid_custom(self):
@@ -49,6 +62,7 @@ class AnalyzeBootblockTests(unittest.TestCase):
     def test_analyze_uses_first_1024_bytes_read_only(self):
         block = self.make_valid_dos()
         block[32:40] = b"SAFEBOOT"
+        self.set_checksum(block)
         image = bytes(block) + (b"X" * 2048)
         with tempfile.TemporaryDirectory() as tmp:
             path = os.path.join(tmp, "sample.adf")
