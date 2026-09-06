@@ -1,0 +1,35 @@
+Captured FS-UAE frame /tmp/amiguard-m20-run/screenshots/fs-uae-crop-2609062244-01.png to /tmp/amiguard-m20-run/evidence/startup.png
+type: ['Execute AGTest:invalid\n']
+Captured FS-UAE frame /tmp/amiguard-m20-run/screenshots/fs-uae-crop-2609062245-01.png to /tmp/amiguard-m20-run/evidence/invalid.png
+key: ['F6']
+type: ['Execute AGTest:empty\n']
+Captured FS-UAE frame /tmp/amiguard-m20-run/screenshots/fs-uae-crop-2609062245-02.png to /tmp/amiguard-m20-run/evidence/empty.png
+key: ['F7']
+type: ['Execute AGTest:clean\n']
+Captured FS-UAE frame /tmp/amiguard-m20-run/screenshots/fs-uae-crop-2609062245-03.png to /tmp/amiguard-m20-run/evidence/clean.png
+type: ['Execute AGTest:repeat\n']
+Captured FS-UAE frame /tmp/amiguard-m20-run/screenshots/fs-uae-crop-2609062245-04.png to /tmp/amiguard-m20-run/evidence/repeat.png
+key: ['F10']
+type: ['Execute AGTest:customone\n']
+Captured FS-UAE frame /tmp/amiguard-m20-run/screenshots/fs-uae-crop-2609062245-05.png to /tmp/amiguard-m20-run/evidence/customone.png
+type: ['Execute AGTest:customtwo\n']
+Captured FS-UAE frame /tmp/amiguard-m20-run/screenshots/fs-uae-crop-2609062245-06.png to /tmp/amiguard-m20-run/evidence/customtwo.png
+type: ['Execute AGTest:customrepeat\n']
+Captured FS-UAE frame /tmp/amiguard-m20-run/screenshots/fs-uae-crop-2609062246-01.png to /tmp/amiguard-m20-run/evidence/customrepeat.png
+key: ['F9']
+type: ['Execute AGTest:badone\n']
+Captured FS-UAE frame /tmp/amiguard-m20-run/screenshots/fs-uae-crop-2609062246-02.png to /tmp/amiguard-m20-run/evidence/badone.png
+type: ['Execute AGTest:badtwo\n']
+Captured FS-UAE frame /tmp/amiguard-m20-run/screenshots/fs-uae-crop-2609062246-03.png to /tmp/amiguard-m20-run/evidence/badtwo.png
+key: ['F8']
+type: ['Execute AGTest:custom\n']
+Captured FS-UAE frame /tmp/amiguard-m20-run/screenshots/fs-uae-crop-2609062246-04.png to /tmp/amiguard-m20-run/evidence/custom.png
+key: ['F7']
+type: ['Execute AGTest:post\n']
+Captured FS-UAE frame /tmp/amiguard-m20-run/screenshots/fs-uae-crop-2609062246-05.png to /tmp/amiguard-m20-run/evidence/post.png
+X protocol error:
+<class 'Xlib.error.BadWindow'>: code = 3, resource_id = <Resource 0x00a00008>, sequence_number = 67, major_opcode = 25, minor_opcode = 0
+X protocol error:
+<class 'Xlib.error.BadWindow'>: code = 3, resource_id = <Resource 0x00a00008>, sequence_number = 70, major_opcode = 25, minor_opcode = 0
+chord: ['F12', 'q']
+Log checks complete. Review screenshots and emulator configuration in /tmp/amiguard-m20-run/evidence; no automatic M0.3 PASS.

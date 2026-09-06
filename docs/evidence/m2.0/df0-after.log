@@ -1,0 +1,18 @@
+     Trashcan (dir)
+     c (dir)
+     System (dir)
+     l (dir)
+     devs (dir)
+     s (dir)
+     t (dir)
+     fonts (dir)
+     libs (dir)
+     Empty (dir)
+     Utilities (dir)
+     Expansion (dir)
+  .info                            Clock
+  Clock.info                       Disk.info
+  Empty.info                       Expansion.info
+  Preferences                      Preferences.info
+  System.info                      Trashcan.info
+  Utilities.info                   

@@ -1,0 +1,42 @@
+rm -f src/main.o src/scanner.o src/signatures.o src/trackdisk.o src/hunk.o AmiGuard
+rm -rf build
+python3 tools/compile_signatures.py --check
+Signature metadata and generated table are consistent.
+mkdir -p build
+cc -std=c89 -pedantic -Wall -Wextra -Werror -Isrc tests/test_scanner.c src/scanner.c src/signatures.c -o build/test_scanner
+./build/test_scanner
+PASS: valid DOS checksum
+PASS: valid DOS bootblock classified standard
+PASS: checksum preserves 32-bit end-around carry on wide hosts
+PASS: valid non-DOS bootblock classified custom
+PASS: corrupt DOS checksum rejected
+PASS: invalid-checksum DOS bootblock classified unknown
+PASS: synthetic exact signature
+PASS: synthetic exact signature name
+PASS: synthetic masked signature
+PASS: synthetic masked signature name
+PASS: masked signature rejects significant mismatch
+PASS: unknown bootblock
+PASS: checksum rejects short block
+PASS: short block rejected
+All scanner tests passed.
+cc -std=c89 -pedantic -Wall -Wextra -Werror -Itests/amiga_stubs -Isrc tests/test_trackdisk.c src/trackdisk.c -o build/test_trackdisk
+./build/test_trackdisk
+PASS: trackdisk validation, read-only request, short read and cleanup paths
+cc -std=c89 -pedantic -Wall -Wextra -Werror -Isrc tests/test_hunk.c src/hunk.c -o build/test_hunk
+./build/test_hunk
+hunk parser tests: PASS
+python3 -m unittest tests/test_analyze_bootblock.py tests/test_triage_corpus.py tests/test_build_review_queue.py tests/test_qualify_signature.py tests/test_build_clean_manifest.py tests/test_promote_signature.py tests/test_preflight_signature.py tests/test_finalize_signature.py tests/test_identify_known_bootblock.py tests/test_import_known_clean.py tests/test_preflight_known_clean.py
+....................signature promotion: qualification gate did not pass
+...........................
+----------------------------------------------------------------------
+Ran 47 tests in 0.015s
+
+OK
+Wrote qualified metadata draft to /tmp/tmp6rlm1ln_/qualified.json
+/opt/amiga/bin/m68k-amigaos-gcc -Isrc -O2 -Wall -Wextra -Werror -m68000 -mcrt=nix13 -c -o src/main.o src/main.c
+/opt/amiga/bin/m68k-amigaos-gcc -Isrc -O2 -Wall -Wextra -Werror -m68000 -mcrt=nix13 -c -o src/scanner.o src/scanner.c
+/opt/amiga/bin/m68k-amigaos-gcc -Isrc -O2 -Wall -Wextra -Werror -m68000 -mcrt=nix13 -c -o src/signatures.o src/signatures.c
+/opt/amiga/bin/m68k-amigaos-gcc -Isrc -O2 -Wall -Wextra -Werror -m68000 -mcrt=nix13 -c -o src/trackdisk.o src/trackdisk.c
+/opt/amiga/bin/m68k-amigaos-gcc -Isrc -O2 -Wall -Wextra -Werror -m68000 -mcrt=nix13 -c -o src/hunk.o src/hunk.c
+/opt/amiga/bin/m68k-amigaos-gcc -O2 -Wall -Wextra -Werror -m68000 -mcrt=nix13  -o AmiGuard src/main.o src/scanner.o src/signatures.o src/trackdisk.o src/hunk.o

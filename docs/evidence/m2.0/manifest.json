@@ -1,0 +1,37 @@
+{
+  "date_utc": "2026-09-06T20:44:17Z",
+  "head": "8154b1b048727d5e49b59b57241ed9b356d459d6",
+  "status": "",
+  "inputs": {
+    "reference": "/home/pgo/Projects/Amiga/FS-UAE_Config/fs-uae-amiga-reference-configs/a500/stock/a500-stock-accurate.fs-uae",
+    "rom": "/home/pgo/Documents/FS-UAE/Kickstarts/amiga-os-120.rom",
+    "workbench": "/home/pgo/Documents/FS-UAE/Floppies/amiga-os-120-workbench.adf"
+  },
+  "original_sha256": {
+    "/home/pgo/Projects/Amiga/FS-UAE_Config/fs-uae-amiga-reference-configs/a500/stock/a500-stock-accurate.fs-uae": "c280801f4129654f7dcd2dd4abf237a1d9c350dec5320b67d134154dcc43d3d4",
+    "/home/pgo/Documents/FS-UAE/Kickstarts/amiga-os-120.rom": "781a36914b49642ab14b5a6f1e7263c7fc2dcbaba3c1fc141a163fd5299b976d",
+    "/home/pgo/Documents/FS-UAE/Floppies/amiga-os-120-workbench.adf": "1035a9a317fbbf0056848a25397f245967d7a8f1bc5079b02a018f410899bdf0"
+  },
+  "source_sha256": {
+    "src/hunk.c": "025992c4d99c682f8f84c5b712124a85cf94dcbc7c6c52076b42aaa68d0ec476",
+    "src/hunk.h": "dc6539e01bafb09831240a4ffc5f1e013c1ff4e38ca0c3110eb5adef2075018a",
+    "src/main.c": "3ee8838551c6918383323ef8278c6b6590a436b391d18047de6ef18113adb739",
+    "src/scanner.c": "4dd6631ecc72899be546408bfc3329735b784e09b87b4de7c54d7ef9156686c7",
+    "src/scanner.h": "3c6e788b8b89d8d5dc143cb5853a020882f1e921b572168b995daea1419fe596",
+    "src/signatures.c": "09eb3f26b78d1f6a6fd688b84ce85b4087be3b402df162ac978d5fd260913326",
+    "src/signatures.h": "e1a7b1a33d66e63f1cd11095d16199b22b76b2d75aa3e56c6331857140e57c16",
+    "src/trackdisk.c": "92819aa7b3f7f4633926ed994792541bbc641a1823ee69ddf747a15b13911910",
+    "src/trackdisk.h": "22156687ccaa390ea04da8523733bc39ea2df2215370d7abe6d06ab43d69aef6",
+    "Makefile": "0ef57521932c0a99be9deb6cb8e759e41e37c30b426487523b2748b9de0d1429"
+  },
+  "media_before": {
+    "workbench12.adf": "1035a9a317fbbf0056848a25397f245967d7a8f1bc5079b02a018f410899bdf0",
+    "unknown.adf": "9acd344236c1d414a85b56d23b322db62023feb48df642720aaa08697e873fbd",
+    "invalid.adf": "2717ef98ca83cc1238ffa673f73d19660f76eed8925d1ccffb441e1eea35eeec",
+    "valid-custom.adf": "b4dac9336ac52879830f1a7b14f5bcd8cb4ace32e5dcd9c207019467017382d0"
+  },
+  "binary_sha256": "32c72315081b5379cd7c8c34caf340017909c42bd664f634ad52b2306d1b2505",
+  "binary_bytes": 15012,
+  "compiler": "/opt/amiga/bin/m68k-amigaos-gcc",
+  "compiler_version": "m68k-amigaos-gcc (GCC) 6.5.0b 20260807212032"
+}
