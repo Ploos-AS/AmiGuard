@@ -34,7 +34,7 @@ class PromoteSignatureTests(unittest.TestCase):
                 }],
             }, handle)
 
-    def test_build_verified_after_pass(self):
+    def test_build_qualified_after_pass(self):
         report = {
             "qualified": True,
             "sample_bootblock_sha256": "a" * 64,
@@ -43,10 +43,10 @@ class PromoteSignatureTests(unittest.TestCase):
             "mask": "ffffff",
             "clean_results": [{"path": "/clean"}],
         }
-        item = PROMOTE.build_verified(
+        item = PROMOTE.build_qualified(
             report, "virus.test", "Virus Test", "TestFamily", "source",
             "derived independently", "none", "none")
-        self.assertEqual(item["status"], "verified")
+        self.assertEqual(item["status"], "qualified")
         self.assertFalse(item["synthetic"])
         self.assertEqual(item["sample_sha256"], "a" * 64)
         self.assertEqual(item["signature"]["offset"], 12)
@@ -56,7 +56,7 @@ class PromoteSignatureTests(unittest.TestCase):
 
     def test_rejects_failed_qualification(self):
         with self.assertRaises(ValueError):
-            PROMOTE.build_verified(
+            PROMOTE.build_qualified(
                 {"qualified": False}, "virus.test", "Virus Test", "TestFamily",
                 "source", "note", "none", "none")
 
@@ -85,7 +85,7 @@ class PromoteSignatureTests(unittest.TestCase):
             ])
             self.assertEqual(rc, 1)
 
-    def test_cli_writes_verified_draft_after_pass(self):
+    def test_cli_writes_qualified_draft_after_pass(self):
         with tempfile.TemporaryDirectory() as directory:
             sample = bytearray(1024)
             clean = bytearray(1024)
@@ -95,7 +95,7 @@ class PromoteSignatureTests(unittest.TestCase):
             clean_path = self.make_file(directory, "clean.adf", clean)
             clean_hash = PROMOTE.qualify_signature.sha256(bytes(clean))
             manifest = os.path.join(directory, "clean.json")
-            output = os.path.join(directory, "verified.json")
+            output = os.path.join(directory, "qualified.json")
             self.make_manifest(manifest, clean_path, clean_hash)
             rc = PROMOTE.main([
                 sample_path,
@@ -113,7 +113,7 @@ class PromoteSignatureTests(unittest.TestCase):
             self.assertEqual(rc, 0)
             with open(output, "r", encoding="utf-8") as handle:
                 item = json.load(handle)
-            self.assertEqual(item["status"], "verified")
+            self.assertEqual(item["status"], "qualified")
             self.assertEqual(item["signature"]["bytes"], "54455354")
 
 
