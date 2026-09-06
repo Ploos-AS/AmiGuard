@@ -25,7 +25,7 @@ static void print_result(const struct amiguard_detection *d)
     if (d->result == AMIGUARD_RESULT_INFECTED) {
         printf("INFECTED: %s\n", d->name);
     } else if (d->result == AMIGUARD_RESULT_STANDARD) {
-        printf("KNOWN: %s\n", d->name);
+        printf("STANDARD: %s\n", d->name);
     } else if (d->result == AMIGUARD_RESULT_UNKNOWN) {
         printf("UNKNOWN: %s\n", d->name);
     } else {
