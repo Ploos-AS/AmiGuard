@@ -21,6 +21,20 @@ static void make_valid_dos_bootblock(unsigned char *block)
     block[7] = 0xff;
 }
 
+static void make_carry_wrap_bootblock(unsigned char *block)
+{
+    memset(block, 0, AMIGUARD_BOOTBLOCK_SIZE);
+    block[0] = 0xff;
+    block[1] = 0xff;
+    block[2] = 0xff;
+    block[3] = 0xff;
+    block[4] = 0xff;
+    block[5] = 0xff;
+    block[6] = 0xff;
+    block[7] = 0xff;
+    /* End-around carry: 0xffffffff + 0xffffffff -> 0xffffffff. */
+}
+
 int main(void)
 {
     unsigned char block[AMIGUARD_BOOTBLOCK_SIZE];
@@ -31,8 +45,13 @@ int main(void)
            "valid DOS checksum");
     d = amiguard_scan_bootblock(block, sizeof(block));
     expect(d.result == AMIGUARD_RESULT_STANDARD,
-           "valid DOS bootblock classified known");
+           "valid DOS bootblock classified standard");
 
+    make_carry_wrap_bootblock(block);
+    expect(amiguard_bootblock_checksum_valid(block, sizeof(block)),
+           "checksum preserves 32-bit end-around carry on wide hosts");
+
+    make_valid_dos_bootblock(block);
     block[100] = 1;
     expect(!amiguard_bootblock_checksum_valid(block, sizeof(block)),
            "corrupt DOS checksum rejected");
