@@ -66,7 +66,7 @@ class PreflightSignatureTests(unittest.TestCase):
     def test_duplicate_repository_id_is_rejected(self):
         with tempfile.TemporaryDirectory() as directory:
             item = self.valid_verified()
-            item["id"] = "amiguard-test-marker"
+            item["id"] = "amiguard.test.marker"
             path = self.write_json(directory, "draft.json", item)
             with self.assertRaisesRegex(ValueError, "already exists"):
                 preflight_signature.preflight(path)
