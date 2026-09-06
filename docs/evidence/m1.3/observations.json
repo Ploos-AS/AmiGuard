@@ -1,0 +1,14 @@
+{
+  "completed_log_checks": true,
+  "media_after": {
+    "workbench12.adf": "1035a9a317fbbf0056848a25397f245967d7a8f1bc5079b02a018f410899bdf0",
+    "unknown.adf": "9acd344236c1d414a85b56d23b322db62023feb48df642720aaa08697e873fbd",
+    "invalid.adf": "2717ef98ca83cc1238ffa673f73d19660f76eed8925d1ccffb441e1eea35eeec"
+  },
+  "original_after": {
+    "/home/pgo/Projects/Amiga/FS-UAE_Config/fs-uae-amiga-reference-configs/a500/stock/a500-stock-accurate.fs-uae": "c280801f4129654f7dcd2dd4abf237a1d9c350dec5320b67d134154dcc43d3d4",
+    "/home/pgo/Documents/FS-UAE/Kickstarts/amiga-os-120.rom": "781a36914b49642ab14b5a6f1e7263c7fc2dcbaba3c1fc141a163fd5299b976d",
+    "/home/pgo/Documents/FS-UAE/Floppies/amiga-os-120-workbench.adf": "1035a9a317fbbf0056848a25397f245967d7a8f1bc5079b02a018f410899bdf0"
+  },
+  "screenshots_require_human_review": true
+}

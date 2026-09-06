@@ -1,0 +1,28 @@
+FS-UAE 3.2.35 (Built for Linux x86-64)
+Copyright 1995-2002 Bernd Schmidt, 1999-2017 Toni Wilen,
+2003-2007 Richard Drummond, 2006-2011 Mustafa 'GnoStiC' Tufan,
+2011-2017 Frode Solheim, and contributors.
+
+This is free software; see the file COPYING for copying conditions. There
+is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE. See the README for more copyright info, and the source code for
+a full list of contributors
+
+UAE: Initializing core derived from WinUAE 3300b2
+LOG: /tmp/amiguard-m13-run/fsuae/Cache/Logs/fs-uae.log.txt
+# Keyboards path: /tmp/amiguard-m13-run/fsuae/Data/Devs/Keyboards
+MESSAGE: notify_user msg #2
+WARNING: notify_user msg #2
+UAE: KS ROM v1.2 (A500,A1000,A2000) rev 33.180 (256k) [315093-01]
+ -- stub -- my_resolvesoftlink 
+res_initcode context = (nil)
+ -- stub -- target_addtorecent name="" t=0
+ -- stub -- target_addtorecent name="/tmp/amiguard-m13-run/workbench12.adf" t=0
+ -- stub -- target_addtorecent name="/tmp/amiguard-m13-run/workbench12.adf" t=0
+ -- stub -- target_addtorecent name="/tmp/amiguard-m13-run/invalid.adf" t=0
+ -- stub -- target_addtorecent name="/tmp/amiguard-m13-run/invalid.adf" t=0
+ -- stub -- target_addtorecent name="/tmp/amiguard-m13-run/unknown.adf" t=0
+ -- stub -- target_addtorecent name="/tmp/amiguard-m13-run/unknown.adf" t=0
+ -- stub -- target_addtorecent name="/tmp/amiguard-m13-run/workbench12.adf" t=0
+UAE: Calling uae_quit
+UAE: Stopping

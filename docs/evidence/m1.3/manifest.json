@@ -1,0 +1,34 @@
+{
+  "date_utc": "2026-09-06T19:29:24Z",
+  "head": "15b900ae294c2b91f2e2ae26cdba8f7be73c7805",
+  "status": "",
+  "inputs": {
+    "reference": "/home/pgo/Projects/Amiga/FS-UAE_Config/fs-uae-amiga-reference-configs/a500/stock/a500-stock-accurate.fs-uae",
+    "rom": "/home/pgo/Documents/FS-UAE/Kickstarts/amiga-os-120.rom",
+    "workbench": "/home/pgo/Documents/FS-UAE/Floppies/amiga-os-120-workbench.adf"
+  },
+  "original_sha256": {
+    "/home/pgo/Projects/Amiga/FS-UAE_Config/fs-uae-amiga-reference-configs/a500/stock/a500-stock-accurate.fs-uae": "c280801f4129654f7dcd2dd4abf237a1d9c350dec5320b67d134154dcc43d3d4",
+    "/home/pgo/Documents/FS-UAE/Kickstarts/amiga-os-120.rom": "781a36914b49642ab14b5a6f1e7263c7fc2dcbaba3c1fc141a163fd5299b976d",
+    "/home/pgo/Documents/FS-UAE/Floppies/amiga-os-120-workbench.adf": "1035a9a317fbbf0056848a25397f245967d7a8f1bc5079b02a018f410899bdf0"
+  },
+  "source_sha256": {
+    "src/main.c": "3dbd72b553337c8b9733331819b4d90bde49eaae9284519763b2841e3663595a",
+    "src/scanner.c": "5c6632afb4be15771ea79ef9d1cabb7e3b0498fccf63f3c312139dd3fc9ff329",
+    "src/scanner.h": "ab088800e307a377003cb489ff3b7c37c6fccfc9e8b383432d6482216cf489bf",
+    "src/signatures.c": "09eb3f26b78d1f6a6fd688b84ce85b4087be3b402df162ac978d5fd260913326",
+    "src/signatures.h": "e1a7b1a33d66e63f1cd11095d16199b22b76b2d75aa3e56c6331857140e57c16",
+    "src/trackdisk.c": "92819aa7b3f7f4633926ed994792541bbc641a1823ee69ddf747a15b13911910",
+    "src/trackdisk.h": "22156687ccaa390ea04da8523733bc39ea2df2215370d7abe6d06ab43d69aef6",
+    "Makefile": "6f6f099557ffab98610cdbf2ea1c53a85c2aa5ba74a2ec9adf16f249da55a037"
+  },
+  "media_before": {
+    "workbench12.adf": "1035a9a317fbbf0056848a25397f245967d7a8f1bc5079b02a018f410899bdf0",
+    "unknown.adf": "9acd344236c1d414a85b56d23b322db62023feb48df642720aaa08697e873fbd",
+    "invalid.adf": "2717ef98ca83cc1238ffa673f73d19660f76eed8925d1ccffb441e1eea35eeec"
+  },
+  "binary_sha256": "2f435c88a14cbc4ae901813bcffff99c4edb2f4fa63fbfb4a0fb65f621ca4085",
+  "binary_bytes": 14056,
+  "compiler": "/opt/amiga/bin/m68k-amigaos-gcc",
+  "compiler_version": "m68k-amigaos-gcc (GCC) 6.5.0b 20260807212032"
+}
