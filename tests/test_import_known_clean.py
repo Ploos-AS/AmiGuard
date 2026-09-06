@@ -43,31 +43,46 @@ class ImportKnownCleanTests(unittest.TestCase):
         self.assertEqual(rc, 0, err)
         entry = json.loads(out)
         self.assertEqual(entry["status"], "candidate-clean")
+        self.assertIsNone(entry["verification"])
         self.assertEqual(entry["dos_type"], "DOS0")
         self.assertTrue(entry["checksum_valid"])
         self.assertEqual(len(entry["bootblock_sha256"]), 64)
         self.assertEqual(entry["input"]["size"], 5120)
 
-    def test_verified_clean_requires_verifier(self):
+    def test_verified_clean_status_option_is_not_exposed(self):
         path = self.make_image(self.valid_dos())
-        rc, out, err = self.run_main([
-            path, "--id", "example.clean", "--name", "Example clean",
-            "--status", "verified-clean", "--source", "source",
-            "--provenance", "provenance",
-        ])
-        self.assertEqual(rc, 2)
-        self.assertEqual(out, "")
-        self.assertIn("requires --verifier", err)
+        with self.assertRaises(SystemExit) as raised:
+            self.run_main([
+                path, "--id", "example.clean", "--name", "Example clean",
+                "--status", "verified-clean", "--source", "source",
+                "--provenance", "provenance",
+            ])
+        self.assertEqual(raised.exception.code, 2)
 
-    def test_verified_clean_with_verifier(self):
+    def test_verifier_option_is_not_exposed(self):
         path = self.make_image(self.valid_dos())
-        rc, out, err = self.run_main([
-            path, "--id", "example.clean", "--name", "Example clean",
-            "--status", "verified-clean", "--source", "source",
-            "--provenance", "provenance", "--verifier", "independent hash/source check",
-        ])
-        self.assertEqual(rc, 0, err)
-        self.assertEqual(json.loads(out)["status"], "verified-clean")
+        with self.assertRaises(SystemExit) as raised:
+            self.run_main([
+                path, "--id", "example.clean", "--name", "Example clean",
+                "--source", "source", "--provenance", "provenance",
+                "--verifier", "independent check",
+            ])
+        self.assertEqual(raised.exception.code, 2)
+
+    def test_build_entry_cannot_emit_verified_clean(self):
+        path = self.make_image(self.valid_dos())
+        bootblock, input_size, input_sha = mod.load_bootblock(path)
+
+        class Args:
+            entry_id = "example.clean"
+            name = "Example clean"
+            source = "source"
+            provenance = "provenance"
+            input = path
+
+        entry = mod.build_entry(Args(), bootblock, input_size, input_sha)
+        self.assertEqual(entry["status"], "candidate-clean")
+        self.assertIsNone(entry["verification"])
 
     def test_short_input_rejected(self):
         path = self.make_image(b"short")
