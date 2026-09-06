@@ -1,0 +1,22 @@
+{
+  "valid-custom.adf": {
+    "checksum": "0xffffffff",
+    "dos": false,
+    "synthetic_signature_match": false
+  },
+  "invalid.adf": {
+    "checksum": "0x1000000",
+    "dos": true,
+    "synthetic_signature_match": false
+  },
+  "unknown.adf": {
+    "checksum": "0x5a5a5a5a",
+    "dos": false,
+    "synthetic_signature_match": false
+  },
+  "workbench12.adf": {
+    "checksum": "0xffffffff",
+    "dos": true,
+    "synthetic_signature_match": false
+  }
+}

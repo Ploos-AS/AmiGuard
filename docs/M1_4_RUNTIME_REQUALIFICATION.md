@@ -1,166 +1,148 @@
 # M1.4 — Kickstart 1.2 runtime requalification
 
-## Purpose
+## Result: PASS — 2026-09-06
 
-Requalify the M1.4 custom-bootblock classification change on the minimum supported runtime. The key runtime-visible change is that a non-DOS bootblock with a valid Amiga bootblock checksum is reported as `CUSTOM`, not `UNKNOWN`.
+All mandatory R1–R8 gates PASS. Numbering follows the execution request,
+superseding the draft gate numbering. No functional changes were needed.
+No release, tag, or temporary branch was created.
 
-## Required environment
+## Repository and build
 
-- FS-UAE visible, not headless
-- exactly one relevant FS-UAE instance
-- existing `a500-stock-accurate` profile
-- A500 / Motorola 68000
-- Kickstart 1.2 (33.180)
-- Workbench 1.2 (33.56)
-- 512 KiB Chip RAM
-- no Fast/Slow RAM
-- native AmiGuard built with Bebbo `m68k-amigaos-gcc -m68000`
+- Starting HEAD / tested HEAD / starting origin/main: `f55457efab774d58c66f0aadc9f844f1fbe30087` (`main`).
+- Baseline `ebdd5833615adc1e8b327aac4a0cb7e1a8217d3f` is an ancestor.
+- Starting divergence: `0 0`; working tree clean (`git status --short` empty).
+- Final HEAD: the documentation/evidence commit containing this record,
+  resolved by `git log -1 --format=%H -- docs/M1_4_RUNTIME_REQUALIFICATION.md`.
+  A commit cannot contain its own hash. Final HEAD, origin/main, divergence
+  and clean worktree are verified after push and reported in the final response.
+- Bebbo `/opt/amiga/bin/m68k-amigaos-gcc`: `m68k-amigaos-gcc (GCC) 6.5.0b 20260807212032`.
+- `make clean`, `make check`, `make` with the Bebbo compiler: PASS.
+- All host C tests PASS; all 18 Python tests PASS; signature metadata consistent.
+  The promotion-gate rejection in build.log is an expected negative test.
+- Explicit host output: `PASS: checksum preserves 32-bit end-around carry on wide hosts`
+  and `PASS: valid non-DOS bootblock classified custom`.
+- Native executable: **14,140 bytes**; compile/link flags
+  `-m68000 -mcrt=nix13`; objdump architecture `m68k:68000`, Amiga loadseg format.
+- Binary SHA-256: `16fcebab612bea29698fc9b7d7a1ca679e5d20997125ce07e02ee20cecb457d8`.
 
-Reuse the previously qualified M1.3 environment and safe fixtures where possible. Do not modify original Workbench/reference media. All scanner access must remain read-only.
+## Runtime environment
+
+FS-UAE **3.2.35**, existing **a500-stock-accurate** profile, A500,
+Motorola 68000, Kickstart **1.2 / 33.180**, Workbench **1.2 / 33.56**,
+**512 KiB Chip RAM**, zero Fast/Slow/motherboard RAM. The reference profile
+was read unchanged with a disposable storage/keyboard overlay. No headless
+mode was used. Zero stale FS-UAE processes were found before launch;
+exactly **one visible FS-UAE window** was required by every GUI operation.
+The emulator was closed normally after completion.
+
+`startup.png` shows Kickstart/Workbench versions and successful AmiGuard
+startup. Probe library versions Exec 33.192 / DOS 33.124 are distinct from
+the ROM revision. No crash, hang, missing API/library or OS 2.x dependency
+was observed.
 
 ## Gates
 
-### R1 — Repository/baseline
+| Gate | Result | Evidence |
+| --- | --- | --- |
+| R1 Host tests + native build | PASS | build.log, binary-format.txt, manifest.json |
+| R2 Minimum visible runtime | PASS | startup.png, start-probe.log, runtime.fs-uae, emulator logs |
+| R3 Valid DOS → STANDARD | PASS | clean.log / clean.png; read 1024 bytes at offset 0 |
+| R4 Valid non-DOS → CUSTOM | PASS | customone.log and customtwo.log / screenshots; 2/2, return code 0 |
+| R5 Invalid DOS → UNKNOWN | PASS | badone.log and badtwo.log / screenshots; 2/2, return code 0 |
+| R6 Invalid non-DOS → UNKNOWN | PASS | custom.log / custom.png (legacy harness stage name); return code 0 |
+| R7 Stability | PASS | repeat-01..10.log: 10/10 STANDARD; custom-repeat-01..05.log: 5/5 CUSTOM; all reads successful and return code 0 |
+| R8 Read-only / safety | PASS | manifest.json and observations.json; all four media hashes unchanged |
 
-Record starting HEAD, `origin/main`, divergence, and worktree status. The tree must include the M1.4 classification implementation and this document.
+Free Chip RAM before and after every STANDARD scan: **359,520 bytes**.
+Free Chip RAM before and after every CUSTOM stability scan:
+**359,744 bytes**. No progressive memory loss, crash or hang.
+All measurements are retained in memory logs and verified-results.json.
 
-### R2 — Host tests and native build
+## Observed CLI output
 
-Run:
-
-```sh
-make clean
-make check
-make
-```
-
-Expected:
-
-- all host tests PASS;
-- existing checksum carry-wrap regression PASS;
-- M1.4 valid non-DOS custom bootblock regression PASS;
-- all Python tests PASS;
-- native Motorola 68000 build PASS.
-
-Record compiler version and executable size.
-
-### R3 — Visible KS1.2 startup
-
-Start exactly one visible FS-UAE instance with the minimum qualified profile and launch AmiGuard.
-
-Expected: no crash, hang, missing API/library, or OS 2.x dependency.
-
-### R4 — Valid DOS regression
-
-Scan the same known-clean DOS test/Workbench ADF used for M1.3 where available:
+Each invocation was `AmiGuard DF0:` with DOS 1.2 output redirection to the
+host-backed AGTest directory; individual results were displayed with Type.
+All required scans include this exact prefix:
 
 ```text
-AmiGuard DF0:
-```
-
-Expected:
-
-```text
+AmiGuard 0.0.2 M0.2
+Target: Kickstart 1.2+ / Motorola 68000
+Reading DF0: bootblock (read-only)...
 trackdisk.device: read 1024 bytes at offset 0
+```
+
+The four classification outputs were:
+
+```text
 STANDARD: Amiga DOS bootblock (valid checksum)
-```
-
-It must not be reported as `CUSTOM`, `UNKNOWN`, or `INFECTED`.
-
-### R5 — Valid custom bootblock => CUSTOM
-
-Use a harmless disposable non-DOS bootblock fixture whose 1024-byte Amiga checksum is valid. Prefer the existing safe custom fixture if it can be made/verified checksum-valid without touching an original image. Otherwise create a disposable local fixture/image solely for this qualification.
-
-Scan it with:
-
-```text
-AmiGuard DF0:
-```
-
-Expected:
-
-```text
 CUSTOM: custom bootblock (valid checksum)
-```
-
-It must not be reported as `STANDARD`, `UNKNOWN`, or `INFECTED`.
-
-Record how the fixture was constructed/verified, but do not commit copyrighted disk images.
-
-### R6 — Invalid/unknown regressions
-
-Recheck both safe negative cases:
-
-1. DOS magic retained but checksum invalid =>
-
-```text
 UNKNOWN: Amiga DOS bootblock (invalid checksum)
-```
-
-2. Non-DOS unrecognized block with invalid checksum =>
-
-```text
 UNKNOWN: unknown bootblock
 ```
 
-Neither case may be reported as `CUSTOM` merely because it is non-DOS.
+Each scan contained exactly its expected classification, with no conflicting
+STANDARD/CUSTOM/UNKNOWN label and no INFECTED/ERROR/KNOWN label.
 
-### R7 — Stability/minimum memory
+## Fixtures and SHA-256
 
-On the visible A500 / KS1.2 / 512 KiB session, perform at least 10 repeated scans covering the valid DOS and/or valid CUSTOM case.
+Disposable ADFs were prepared under `/tmp/amiguard-m14-run` before launching
+FS-UAE. Each is mode 0444; `writable_floppy_images = 0` and
+`uae_floppy_write_protect = true`. Only the known-clean Workbench copy was
+booted. The other fixtures were inserted after startup and only scanned.
 
-Expected:
+- workbench12.adf: copy of the same known-clean Workbench source used for M1.3.
+- valid-custom.adf: first two big-endian words `0xffffffff`, all remaining
+  bytes zero, total size 901120 bytes. Non-DOS; 32-bit end-around sum of the
+  first 1024 bytes is `0xffffffff`. Harmless data, not a loader or malware.
+- invalid.adf: disposable Workbench copy with only byte 100 XOR 1; bytes 0–3
+  unchanged. Bootblock sum `0x01000000`, therefore invalid.
+- unknown.adf: same harmless fixture as M1.3, 1024 bytes of `0x5a` followed
+  by zeros; sum `0x5a5a5a5a`, therefore invalid non-DOS.
 
-- 10/10 successful 1024-byte reads;
-- classifications remain stable;
-- no crash/hang;
-- no obvious progressive Chip RAM loss.
+Host validation checks the compiled exact/masked synthetic signature
+positions and confirms none of these fixtures matches. See
+fixture-validation.json and retained preparation driver. No live malware
+was used and no disk image is committed.
 
-Record free Chip RAM before/after if practical.
-
-### R8 — Read-only media integrity
-
-For every host-backed ADF used during R4-R6, record SHA-256 before and after runtime testing.
-
-Expected: all hashes unchanged.
-
-## Acceptance
-
-M1.4 runtime requalification is PASS only when R1-R8 are PASS. Any mandatory untested gate is `UNVERIFIED`; do not infer runtime PASS from CI or host tests.
-
-`CUSTOM` is a neutral structural classification. It is not a malware verdict. `INFECTED` remains reserved for compiled signature matches.
-
-## Result record
-
-Fill in after execution:
-
-| Gate | Result | Evidence |
+| Image | SHA-256 before | SHA-256 after |
 | --- | --- | --- |
-| R1 Repository/baseline | UNVERIFIED | |
-| R2 Host + native build | UNVERIFIED | |
-| R3 Visible KS1.2 startup | UNVERIFIED | |
-| R4 Valid DOS => STANDARD | UNVERIFIED | |
-| R5 Valid non-DOS checksum => CUSTOM | UNVERIFIED | |
-| R6 Invalid/unknown regressions | UNVERIFIED | |
-| R7 Stability / 512 KiB | UNVERIFIED | |
-| R8 Read-only hashes | UNVERIFIED | |
+| `workbench12.adf` | `1035a9a317fbbf0056848a25397f245967d7a8f1bc5079b02a018f410899bdf0` | `1035a9a317fbbf0056848a25397f245967d7a8f1bc5079b02a018f410899bdf0` |
+| `unknown.adf` | `9acd344236c1d414a85b56d23b322db62023feb48df642720aaa08697e873fbd` | `9acd344236c1d414a85b56d23b322db62023feb48df642720aaa08697e873fbd` |
+| `invalid.adf` | `2717ef98ca83cc1238ffa673f73d19660f76eed8925d1ccffb441e1eea35eeec` | `2717ef98ca83cc1238ffa673f73d19660f76eed8925d1ccffb441e1eea35eeec` |
+| `valid-custom.adf` | `b4dac9336ac52879830f1a7b14f5bcd8cb4ace32e5dcd9c207019467017382d0` | `b4dac9336ac52879830f1a7b14f5bcd8cb4ace32e5dcd9c207019467017382d0` |
 
-Also record:
+Hashes were measured before emulator launch and after all scans and normal
+quit. Original Workbench ADF, ROM and reference profile also remained
+byte-identical; source paths/hashes are retained in the manifests.
+Source inspection of src/trackdisk.c confirms the only device request is
+CMD_READ; no write, format or update command was used against trackdisk.device.
+The host trackdisk tests corroborate the read-only request and cleanup path.
 
-- Starting HEAD
-- Final HEAD
-- `origin/main`
-- divergence
-- worktree status
-- compiler/toolchain version
-- native executable size
-- FS-UAE version/profile
-- Kickstart/Workbench versions
-- CPU and RAM
-- exact observed CLI output for STANDARD, CUSTOM, and UNKNOWN cases
-- SHA-256 before/after for every test image
-- visible FS-UAE instance count
-- screenshot/log/evidence paths where applicable
-- blockers
+## Semantic acceptance
 
-Do not tag or create a release as part of this requalification.
+Confirmed against scanner.c, scanner.h, main.c and runtime results:
+
+- STANDARD = DOS0–DOS7 + valid checksum, structurally standard/valid;
+  **not a guarantee of a malware-free disk**.
+- CUSTOM = non-DOS + valid Amiga bootblock checksum; **neutral**, neither
+  suspicious nor infected.
+- UNKNOWN = structure/checksum does not qualify as STANDARD or CUSTOM.
+- INFECTED = **only a compiled signature match**. Signature matching takes
+  precedence over structural classifications; no heuristic virus accusation
+  was introduced in M1.4.
+
+## Evidence and blockers
+
+Committed evidence: [evidence/m1.4](evidence/m1.4/). Full disposable run:
+`/tmp/amiguard-m14-run/`; GUI driver transcript: driver.log. Build, native
+format, emulator configuration/logs, individual CLI/probe logs, hashes,
+fixture validation and screenshots are retained. Gate screenshots were
+visually reviewed against the CLI logs; the generic observations.json
+human-review reminder does not imply automatic screenshot approval.
+
+The reused harness additionally checks invalid targets and an empty drive;
+the expected error 29 from the empty-drive test is separate from required
+media scans. Any Xlib BadWindow messages on normal quit concern key release
+after the window closes, after successful gate completion.
+
+Blockers: **none**.
