@@ -12,7 +12,7 @@ TARGET := AmiGuard
 SRC := src/main.c src/scanner.c src/signatures.c src/trackdisk.c
 OBJ := $(SRC:.c=.o)
 
-.PHONY: all clean check host-test
+.PHONY: all clean check host-test signatures signature-check
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
@@ -21,7 +21,15 @@ $(TARGET): $(OBJ)
 src/%.o: src/%.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(AMIGAFLAGS) -c -o $@ $<
 
-host-test:
+src/signatures.o: src/signatures_generated.inc
+
+signatures:
+	python3 tools/compile_signatures.py --write
+
+signature-check:
+	python3 tools/compile_signatures.py --check
+
+host-test: signature-check
 	mkdir -p build
 	$(HOSTCC) -std=c89 -pedantic -Wall -Wextra -Werror -Isrc tests/test_scanner.c src/scanner.c src/signatures.c -o build/test_scanner
 	./build/test_scanner
