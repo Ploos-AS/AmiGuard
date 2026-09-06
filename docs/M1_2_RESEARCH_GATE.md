@@ -40,6 +40,66 @@ A public encyclopedia description is research evidence, not sufficient proof for
 - no new runtime dependency is introduced;
 - no malware bytes or sample are committed.
 
-## Handoff to M1.2b
+## M1.2b — Local sample analyzer
 
-M1.2b is sample qualification. Use an isolated local/RAB sample set, never a public repo fixture. Record hashes and derived metadata, then promote only signatures that pass both positive sample detection and negative clean-media regression.
+`tools/analyze_bootblock.py` provides a reproducible, read-only host-side analysis step for isolated samples. It accepts either a raw 1024-byte bootblock or a larger disk image such as an ADF and analyzes only the first 1024 bytes as the bootblock.
+
+Example:
+
+```sh
+python3 tools/analyze_bootblock.py /isolated/sample.adf
+```
+
+Machine-readable output:
+
+```sh
+python3 tools/analyze_bootblock.py /isolated/sample.adf --json
+```
+
+The report contains:
+
+- total input size;
+- SHA-256 of the complete input;
+- SHA-256 of the 1024-byte bootblock;
+- DOS type when the bootblock begins with a supported `DOS` identifier;
+- Amiga bootblock checksum status;
+- printable ASCII strings and their exact byte offsets.
+
+A research metadata draft can be produced with:
+
+```sh
+python3 tools/analyze_bootblock.py /isolated/sample.adf \
+  --draft \
+  --id mount-eleni.sample1 \
+  --name "Mount / Eleni sample 1" \
+  --family "Mount / Eleni" \
+  --source "isolated local sample"
+```
+
+The draft is deliberately `status: research`, has `signature: null`, and sets the verifier to `pending`. The analyzer never promotes a sample to `verified` and never chooses signature bytes automatically.
+
+This boundary is intentional: candidate signature offsets, byte patterns and masks must be selected only after comparing isolated positive samples against clean media and, where possible, multiple variants of the same family. This prevents one arbitrary byte sequence from being mistaken for a stable family signature.
+
+The analyzer opens inputs read-only. Tests verify that analysis leaves the input SHA-256 unchanged and that short inputs are rejected.
+
+## M1.2b acceptance criteria
+
+- raw 1024-byte bootblocks and larger disk images are supported;
+- complete-input and bootblock SHA-256 values are reported independently;
+- DOS type and checksum state are reported;
+- printable strings include exact offsets;
+- input files are never modified;
+- research-draft output cannot claim `verified` status or generate a concrete signature;
+- analyzer tests run as part of `make check`;
+- no malware sample or malware-derived payload is committed.
+
+## Handoff to M1.2c
+
+M1.2c is the first real signature qualification. Use the analyzer on an isolated local/RAB sample set, compare candidate evidence across samples and clean media, then promote only a detection that passes:
+
+1. recorded sample/bootblock SHA-256;
+2. independently derived stable offset/pattern/mask;
+3. positive isolated-sample detection;
+4. negative clean-media/custom-bootblock regression;
+5. visible Kickstart 1.2 runtime detection;
+6. documented provenance.
