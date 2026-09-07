@@ -3,8 +3,10 @@
 
 This tool is read-only. It validates the safe-test metadata, confirms that the
 proposed signature matches the positive artifact, then proves that no supplied
-clean file matches the same signature. It does not edit repository metadata and
-does not activate the signature natively.
+clean file matches the same signature. Clean inputs can be supplied directly or
+through an ``amiguard-clean-file-corpus`` manifest produced by
+``extract_clean_adf_corpus.py``. It does not edit repository metadata and does
+not activate the signature natively.
 """
 
 import argparse
@@ -71,6 +73,55 @@ def matches(data, offset, pattern, mask):
     return True
 
 
+def clean_paths_from_manifest(manifest_path):
+    manifest = load_json(manifest_path)
+    if manifest.get("schema") != 1:
+        raise ValueError("unsupported clean corpus manifest schema")
+    if manifest.get("kind") != "amiguard-clean-file-corpus":
+        raise ValueError("clean corpus manifest has wrong kind")
+    entries = manifest.get("files")
+    if not isinstance(entries, list) or not entries:
+        raise ValueError("clean corpus manifest must contain files")
+
+    paths = []
+    for index, entry in enumerate(entries):
+        if not isinstance(entry, dict):
+            raise ValueError("clean corpus manifest file entry %d is invalid" % index)
+        path = entry.get("extracted_path")
+        expected_size = entry.get("size")
+        expected_hash = entry.get("sha256")
+        if not isinstance(path, str) or not path:
+            raise ValueError("clean corpus manifest file entry %d has no extracted_path" % index)
+        if not isinstance(expected_size, int) or expected_size < 0:
+            raise ValueError("clean corpus manifest file entry %d has invalid size" % index)
+        if not isinstance(expected_hash, str) or len(expected_hash) != 64:
+            raise ValueError("clean corpus manifest file entry %d has invalid SHA-256" % index)
+        try:
+            int(expected_hash, 16)
+        except ValueError:
+            raise ValueError("clean corpus manifest file entry %d has invalid SHA-256" % index)
+
+        data = read(path)
+        if len(data) != expected_size:
+            raise ValueError("clean corpus manifest size mismatch: %s" % path)
+        if sha256(data) != expected_hash.lower():
+            raise ValueError("clean corpus manifest SHA-256 mismatch: %s" % path)
+        paths.append(path)
+    return paths
+
+
+def merge_clean_paths(explicit_paths, manifest_paths):
+    merged = []
+    seen = set()
+    for path in list(explicit_paths) + list(manifest_paths):
+        real = os.path.realpath(path)
+        if real in seen:
+            continue
+        seen.add(real)
+        merged.append(path)
+    return merged
+
+
 def preflight(proposal_path, positive_path, clean_paths):
     proposal = load_json(proposal_path)
     offset, pattern, mask = parse_signature(proposal)
@@ -120,12 +171,24 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description="Preflight an AmiGuard safe-test against a local clean-file corpus")
     parser.add_argument("proposal")
     parser.add_argument("positive")
-    parser.add_argument("clean", nargs="+")
+    parser.add_argument("clean", nargs="*")
+    parser.add_argument(
+        "--clean-manifest",
+        action="append",
+        default=[],
+        help="amiguard-clean-file-corpus manifest; may be repeated",
+    )
     parser.add_argument("-o", "--output")
     args = parser.parse_args(argv)
 
     try:
-        report = preflight(args.proposal, args.positive, args.clean)
+        manifest_clean = []
+        for manifest_path in args.clean_manifest:
+            manifest_clean.extend(clean_paths_from_manifest(manifest_path))
+        clean_paths = merge_clean_paths(args.clean, manifest_clean)
+        if not clean_paths:
+            raise ValueError("at least one clean file or --clean-manifest is required")
+        report = preflight(args.proposal, args.positive, clean_paths)
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print("safe-test preflight: %s" % exc, file=sys.stderr)
         return 2

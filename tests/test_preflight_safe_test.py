@@ -41,6 +41,21 @@ class SafeTestPreflightTests(unittest.TestCase):
         self.addCleanup(lambda: os.path.exists(handle.name) and os.unlink(handle.name))
         return handle.name
 
+    def clean_manifest(self, paths):
+        files = []
+        for path in paths:
+            data = p.read(path)
+            files.append({
+                "extracted_path": path,
+                "size": len(data),
+                "sha256": p.sha256(data),
+            })
+        return {
+            "schema": 1,
+            "kind": "amiguard-clean-file-corpus",
+            "files": files,
+        }
+
     def test_passes_with_positive_and_clean_near_miss(self):
         positive_data = b"SAFE-TEST"
         proposal_path = self.write_json(self.proposal(positive_data))
@@ -83,6 +98,44 @@ class SafeTestPreflightTests(unittest.TestCase):
         positive = self.write(positive_data)
         report = p.preflight(proposal_path, positive, [])
         self.assertFalse(report["preflight_pass"])
+
+    def test_loads_clean_paths_from_manifest(self):
+        clean_one = self.write(b"CLEAN-ONE")
+        clean_two = self.write(b"CLEAN-TWO")
+        manifest_path = self.write_json(self.clean_manifest([clean_one, clean_two]))
+        self.assertEqual(
+            p.clean_paths_from_manifest(manifest_path),
+            [clean_one, clean_two],
+        )
+
+    def test_manifest_hash_mismatch_rejected(self):
+        clean = self.write(b"CLEAN")
+        manifest = self.clean_manifest([clean])
+        manifest["files"][0]["sha256"] = "0" * 64
+        manifest_path = self.write_json(manifest)
+        with self.assertRaises(ValueError):
+            p.clean_paths_from_manifest(manifest_path)
+
+    def test_manifest_size_mismatch_rejected(self):
+        clean = self.write(b"CLEAN")
+        manifest = self.clean_manifest([clean])
+        manifest["files"][0]["size"] += 1
+        manifest_path = self.write_json(manifest)
+        with self.assertRaises(ValueError):
+            p.clean_paths_from_manifest(manifest_path)
+
+    def test_manifest_wrong_kind_rejected(self):
+        clean = self.write(b"CLEAN")
+        manifest = self.clean_manifest([clean])
+        manifest["kind"] = "wrong-kind"
+        manifest_path = self.write_json(manifest)
+        with self.assertRaises(ValueError):
+            p.clean_paths_from_manifest(manifest_path)
+
+    def test_merge_clean_paths_deduplicates_realpaths(self):
+        clean = self.write(b"CLEAN")
+        merged = p.merge_clean_paths([clean], [clean])
+        self.assertEqual(merged, [clean])
 
 
 if __name__ == "__main__":
