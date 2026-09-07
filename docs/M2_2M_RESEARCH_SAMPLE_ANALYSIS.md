@@ -25,3 +25,5 @@ M2.2m is complete when repository CI passes with tests covering neutral report g
 ```sh
 python3 tools/analyze_research_sample.py sample.bin --intake intake.json -o analysis.json
 ```
+
+The generated analysis JSON is research evidence. Do not place real sample bytes in the repository; only sanitized metadata/evidence may be reviewed for a future signature milestone.
