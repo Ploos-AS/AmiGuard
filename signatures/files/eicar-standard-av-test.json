@@ -13,10 +13,10 @@
       "size": 68,
       "source_url": "https://www.eicar.org/download/eicar.com.txt"
     },
-    "derivation": "Research metadata only. No EICAR file bytes or derived native signature are committed by this record.",
-    "redistribution_status": "authoritative distribution exists; repository inclusion not yet approved by AmiGuard provenance gate",
+    "derivation": "Exact 68-byte safe-test signature derived locally from the independently qualified EICAR test artifact; no downloaded EICAR file is stored as a standalone repository artifact.",
+    "redistribution_status": "EICAR explicitly describes the test file as safe to pass around and encourages its use for antivirus testing. AmiGuard stores the exact safe-test byte pattern solely for interoperability testing; this metadata does not assert that the EICAR test file is licensed under AmiGuard's MIT license.",
     "signature_derivation": "Exact full-file signature derived locally from the independently qualified harmless artifact; offset 0 with an all-0xff mask.",
-    "verification_required": "Obtain the test file from EICAR or reproduce it exactly from EICAR's published specification, record SHA-256, then derive and qualify any AmiGuard test signature independently."
+    "verification_required": "Verify against an independently acquired authoritative EICAR test artifact with the recorded 68-byte size and SHA-256 before changing this signature."
   },
   "safe_test": {
     "malware_claim": false,
