@@ -88,6 +88,17 @@ class AnalyzeResearchSampleTests(unittest.TestCase):
             self.assertEqual(d["kind"], "amiguard-research-sample-analysis")
             self.assertFalse(d["malware_claim"])
 
+    def test_short_input_is_neutral(self):
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td) / "short.bin"
+            p.write_bytes(b"A")
+            r = self.run_tool(p)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            d = json.loads(r.stdout)
+            self.assertIsNone(d["observations"]["first_u32_be"])
+            self.assertEqual(d["observations"]["candidate_windows"], [])
+            self.assertEqual(d["interpretation"]["classification"], "UNDETERMINED")
+
 
 if __name__ == "__main__":
     unittest.main()
