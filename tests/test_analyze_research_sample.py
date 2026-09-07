@@ -1,3 +1,4 @@
+import hashlib
 import json
 import subprocess
 import tempfile
@@ -27,6 +28,17 @@ class AnalyzeResearchSampleTests(unittest.TestCase):
             self.assertIn("HUNK_HEADER", [x["record"] for x in d["observations"]["hunk_record_candidates"]])
             self.assertIn("HELLO-AMIGA", [x["text"] for x in d["observations"]["printable_strings"]])
 
+    def test_accepts_matching_intake(self):
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td) / "sample.bin"
+            data = b"synthetic benign fixture"
+            p.write_bytes(data)
+            intake = Path(td) / "intake.json"
+            intake.write_text(json.dumps({"kind": "amiguard-research-sample-intake", "id": "fixture-1", "sample": {"sha256": hashlib.sha256(data).hexdigest()}}))
+            r = self.run_tool(p, "--intake", intake)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            self.assertEqual(json.loads(r.stdout)["intake_id"], "fixture-1")
+
     def test_intake_hash_must_match(self):
         with tempfile.TemporaryDirectory() as td:
             p = Path(td) / "sample.bin"
@@ -36,6 +48,16 @@ class AnalyzeResearchSampleTests(unittest.TestCase):
             r = self.run_tool(p, "--intake", intake)
             self.assertNotEqual(r.returncode, 0)
             self.assertIn("does not match", r.stderr)
+
+    def test_rejects_wrong_intake_kind(self):
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td) / "sample.bin"
+            p.write_bytes(b"abc")
+            intake = Path(td) / "intake.json"
+            intake.write_text(json.dumps({"kind": "wrong", "sample": {"sha256": hashlib.sha256(b"abc").hexdigest()}}))
+            r = self.run_tool(p, "--intake", intake)
+            self.assertNotEqual(r.returncode, 0)
+            self.assertIn("invalid research intake kind", r.stderr)
 
     def test_rejects_symlink(self):
         with tempfile.TemporaryDirectory() as td:
