@@ -19,9 +19,13 @@ the first bootblock classification logic.
 
 AmiGuard is looking for authentic historical Amiga virus and trojan samples so future detections can be backed by real evidence rather than assumptions.
 
-**Submission channel coming shortly.** Do not attach suspected malware to GitHub issues, pull requests, discussions, or repository commits.
+**The public submission channel is live at https://amiguard.ploos.no/.**
 
-See the [sample submission page](docs/SAMPLE_SUBMISSION.md) and the [GitHub Pages landing page](docs/index.html) for why samples are needed, what material is useful, and how the research workflow handles them.
+Please use that service for suspected malware. Do **not** attach suspected malware to GitHub issues, pull requests, discussions, or repository commits.
+
+The submission service is write-only: it accepts one sample with explicit consent, records a server-generated submission ID, SHA-256, size and receipt time, and does not expose a public retrieval endpoint. The original client filename is not retained.
+
+See the [sample submission page](docs/SAMPLE_SUBMISSION.md) and the [GitHub Pages landing page](docs/index.html) for submission guidance, privacy/retention notes, and the research workflow.
 
 ## Build
 
