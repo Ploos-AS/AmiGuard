@@ -14,7 +14,7 @@ When `--intake` is supplied, the sample SHA-256 must match the M2.2l intake meta
 
 There is deliberately no promotion output. A future real-malware detection still requires lawful sample provenance, human analysis, sample-backed verification, clean-corpus qualification, explicit signature lifecycle gates, and native runtime qualification before AmiGuard may make an `INFECTED` claim.
 
-This milestone can be qualified entirely with synthetic benign fixtures. No real malware is required and no sample bytes are committed to the repository.
+This milestone can be qualified entirely with synthetic benign fixtures. No real malware is required and no sample bytes are committed to the repository. Because M2.2m changes host-only research tooling and does not alter generated signature tables or native C code, visible FS-UAE qualification is not required for this milestone.
 
 ## Example
 
