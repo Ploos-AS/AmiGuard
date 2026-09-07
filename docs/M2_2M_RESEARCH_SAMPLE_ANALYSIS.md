@@ -27,3 +27,7 @@ python3 tools/analyze_research_sample.py sample.bin --intake intake.json -o anal
 ```
 
 The generated analysis JSON is research evidence. Do not place real sample bytes in the repository; only sanitized metadata/evidence may be reviewed for a future signature milestone.
+
+## Status
+
+Implemented on `main`. Completion is determined by the qualification contract above and CI on the final milestone commit; it does not imply that AmiGuard has acquired or detected any real Amiga malware.
