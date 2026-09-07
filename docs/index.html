@@ -34,7 +34,7 @@
     <div class="kicker">AmiGuard community sample project</div>
     <h1>Help us preserve and detect historical Amiga malware.</h1>
     <p>AmiGuard is an open-source antivirus for classic Amiga systems, targeting <strong>AmigaOS / Kickstart 1.2+</strong> and Motorola 68000. To build trustworthy detections, we need authentic historical samples that can be analyzed and verified safely.</p>
-    <div class="cta"><strong>Submission channel coming shortly.</strong><br>Please do not attach malware to GitHub issues, pull requests, discussions, or repository commits.</div>
+    <div class="cta"><strong>Public sample submission is live.</strong><br><a href="https://amiguard.ploos.no/">Submit suspected Amiga malware at amiguard.ploos.no</a>. Please do not attach malware to GitHub issues, pull requests, discussions, or repository commits.</div>
   </section>
 
   <h2>Why we are asking for samples</h2>
@@ -49,15 +49,15 @@
     <div class="card"><h3>Old private collections</h3><p>Archived material from BBSes, repair disks, personal collections, backups, magazines, or recovered media.</p></div>
   </div>
 
-  <h2>How to prepare a future submission</h2>
-  <p>Until the upload channel is ready, please preserve the original files unchanged. When submissions open, we will prefer:</p>
+  <h2>How to prepare a submission</h2>
+  <p>The public intake service is available at <a href="https://amiguard.ploos.no/">amiguard.ploos.no</a>. Please preserve original files unchanged. We prefer:</p>
   <ul>
     <li>the original sample or disk image, not a modified recreation;</li>
     <li>a SHA-256 hash if you can provide one;</li>
     <li>the original filename and approximate date, if known;</li>
     <li>where it came from, such as a disk, BBS, archive, collection, or publication;</li>
     <li>any known virus name, antivirus verdict, or historical notes;</li>
-    <li>password-protected archive packaging when requested by the submission channel.</li>
+    <li>any archive password or other handling note kept separately for later reference with the submission ID; the intake service does not automatically extract archives.</li>
   </ul>
 
   <div class="warning">
@@ -78,13 +78,16 @@
   <p>Receipt of a file does <strong>not</strong> automatically mean we will call it malware. Unknown and suspicious artifacts remain research material until the evidence supports a specific conclusion.</p>
 
   <h2>Privacy, rights, and publication</h2>
-  <p>Please only submit material you are entitled to share for security research and preservation. We do not need to publish your identity. Samples will not automatically be committed to the public AmiGuard repository, and public research metadata can be sanitized to avoid exposing personal paths or unnecessary identifying information.</p>
+  <p>Please only submit material you are entitled to share for security research and preservation. Do not submit personal documents, credentials, private communications, or unrelated data. The intake service assigns a random submission ID and records SHA-256, size, receipt time, and consent state; the original client filename is not retained. Unclassified submissions are normally retained for up to 90 days, while material selected as research evidence may be retained longer when needed. Samples are not automatically committed to the public AmiGuard repository, and there is no public sample retrieval endpoint.</p>
 
   <h2>About EICAR</h2>
   <p>AmiGuard currently uses the harmless EICAR antivirus test file to qualify parts of the file-signature pipeline. EICAR is a safe-test, <strong>not Amiga malware</strong>, and it is not evidence that AmiGuard detects a real historical Amiga virus.</p>
 
+  <h2>Submit a sample</h2>
+  <p><a href="https://amiguard.ploos.no/">Open the AmiGuard sample submission service</a>. After a successful submission, keep the receipt&#39;s submission ID and SHA-256 if you need to refer to the sample later.</p>
+
   <h2>Follow the project</h2>
-  <p>Source code and research tooling are developed openly in <a href="https://github.com/Ploos-AS/AmiGuard">Ploos-AS/AmiGuard</a>. The sample submission channel will be announced here when it is ready.</p>
+  <p>Source code and research tooling are developed openly in <a href="https://github.com/Ploos-AS/AmiGuard">Ploos-AS/AmiGuard</a>.</p>
 
   <footer>AmiGuard — open-source antivirus research for classic Amiga systems. MIT-licensed project code; submitted third-party samples retain their own legal status.</footer>
 </main>
