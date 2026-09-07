@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "file_intake.h"
+#include "file_signatures.h"
 
 #define AMIGUARD_FILE_READ_CHUNK 4096UL
 
@@ -43,6 +44,7 @@ struct amiguard_file_result amiguard_scan_file_readonly(const char *path)
     unsigned long size = 0UL;
     unsigned long capacity = AMIGUARD_FILE_READ_CHUNK;
     enum amiguard_file_status status;
+    struct amiguard_file_signature_match signature_match;
 
     if (path == 0 || path[0] == '\0')
         return make_result(AMIGUARD_FILE_ERROR, "invalid file path", 0UL);
@@ -107,6 +109,17 @@ struct amiguard_file_result amiguard_scan_file_readonly(const char *path)
     }
 
     fclose(fp);
+
+    signature_match = amiguard_match_file_signature(buffer, size);
+    if (signature_match.matched) {
+        enum amiguard_file_status match_status = signature_match.test_only
+            ? AMIGUARD_FILE_TEST_SIGNATURE
+            : AMIGUARD_FILE_INFECTED;
+        const char *match_name = signature_match.name;
+        free(buffer);
+        return make_result(match_status, match_name, size);
+    }
+
     status = amiguard_classify_file_buffer(buffer, size);
     free(buffer);
 
