@@ -74,7 +74,11 @@ def main():
     p = Path(args.sample)
     if p.is_symlink() or not p.is_file():
         raise SystemExit("sample must be a regular non-symlink file")
+    before = p.stat()
     data = p.read_bytes()
+    after = p.stat()
+    if (before.st_dev, before.st_ino, before.st_size, before.st_mtime_ns) != (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns):
+        raise SystemExit("sample changed during analysis")
     if len(data) > MAX_SIZE:
         raise SystemExit("sample exceeds AmiGuard 128 KiB file intake limit")
     digest = sha256(data)
