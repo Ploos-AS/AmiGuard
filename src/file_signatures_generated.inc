@@ -4,5 +4,5 @@ static const unsigned char file_pattern_amiguard_file_test_marker[] = { 0x41, 0x
 static const unsigned char file_mask_amiguard_file_test_marker[] = { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };
 
 static const struct amiguard_file_signature file_signatures[] = {
-    { "AmiGuard synthetic file test marker", 4UL, 18U, file_pattern_amiguard_file_test_marker, file_mask_amiguard_file_test_marker },
+    { "AmiGuard synthetic file test marker", 4UL, 18U, file_pattern_amiguard_file_test_marker, file_mask_amiguard_file_test_marker, 1 },
 };
