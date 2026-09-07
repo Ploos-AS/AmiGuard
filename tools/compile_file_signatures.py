@@ -1,0 +1,187 @@
+#!/usr/bin/env python3
+import argparse
+import glob
+import json
+import os
+import re
+import sys
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SIGNATURE_DIR = os.path.join(ROOT, "signatures", "files")
+OUTPUT = os.path.join(ROOT, "src", "file_signatures_generated.inc")
+HEX_RE = re.compile(r"^[0-9a-fA-F]+$")
+SHA256_RE = re.compile(r"^[0-9a-fA-F]{64}$")
+ID_RE = re.compile(r"^[a-z0-9][a-z0-9._-]*$")
+MAX_FILE_SIZE = 128 * 1024
+
+
+def fail(path, message):
+    raise ValueError("%s: %s" % (path, message))
+
+
+def validate_signature(path, sig):
+    if not isinstance(sig, dict):
+        fail(path, "signature must be an object")
+    for key in ("offset", "bytes", "mask"):
+        if key not in sig:
+            fail(path, "signature missing %s" % key)
+    if not isinstance(sig["offset"], int) or sig["offset"] < 0:
+        fail(path, "invalid signature offset")
+
+    pattern = sig["bytes"]
+    mask = sig["mask"]
+    if (not isinstance(pattern, str) or not pattern or len(pattern) % 2 or
+            not HEX_RE.match(pattern)):
+        fail(path, "signature bytes must be non-empty even-length hex")
+    if (not isinstance(mask, str) or len(mask) != len(pattern) or
+            not HEX_RE.match(mask)):
+        fail(path, "mask must be hex and exactly match signature byte length")
+
+    length = len(pattern) // 2
+    if length > 255:
+        fail(path, "native signature length exceeds 255 bytes")
+    if sig["offset"] + length > MAX_FILE_SIZE:
+        fail(path, "signature extends beyond M2.1 128 KiB file intake limit")
+
+
+def validate(path, item):
+    required = ["schema", "id", "name", "family", "kind", "status",
+                "synthetic", "source", "provenance", "sample_sha256",
+                "signature", "verifier", "cleaner"]
+    for key in required:
+        if key not in item:
+            fail(path, "missing required field %s" % key)
+
+    if item["schema"] != 1:
+        fail(path, "unsupported schema version")
+    if not isinstance(item["id"], str) or not ID_RE.match(item["id"]):
+        fail(path, "invalid id")
+    if not isinstance(item["name"], str) or not item["name"]:
+        fail(path, "invalid name")
+    if not isinstance(item["family"], str) or not item["family"]:
+        fail(path, "invalid family")
+    if item["kind"] != "file":
+        fail(path, "file signature compiler accepts file records only")
+    if item["status"] not in ("test-only", "research", "qualified", "verified"):
+        fail(path, "invalid status")
+    if not isinstance(item["synthetic"], bool):
+        fail(path, "synthetic must be boolean")
+
+    for object_name in ("source", "provenance"):
+        if not isinstance(item[object_name], dict) or not item[object_name]:
+            fail(path, "%s must be a non-empty object" % object_name)
+
+    status = item["status"]
+    sample_hash = item["sample_sha256"]
+    sig = item["signature"]
+
+    if status == "test-only":
+        if not item["synthetic"]:
+            fail(path, "test-only signatures must be synthetic")
+        if sample_hash is not None:
+            fail(path, "synthetic signatures must not claim a sample SHA-256")
+        validate_signature(path, sig)
+    elif status == "research":
+        if item["synthetic"]:
+            fail(path, "research records must describe non-synthetic candidates")
+        if sample_hash is not None:
+            fail(path, "research records must not claim a sample SHA-256 before qualification")
+        if sig is not None:
+            fail(path, "research records must not contain a production signature")
+    else:
+        if item["synthetic"]:
+            fail(path, "%s malware signatures must not be synthetic" % status)
+        if not isinstance(sample_hash, str) or not SHA256_RE.match(sample_hash):
+            fail(path, "%s signatures require sample_sha256" % status)
+        validate_signature(path, sig)
+
+    if not isinstance(item["verifier"], str) or not item["verifier"]:
+        fail(path, "invalid verifier")
+    if not isinstance(item["cleaner"], str) or not item["cleaner"]:
+        fail(path, "invalid cleaner")
+
+
+def load_items():
+    items = []
+    ids = set()
+    for path in sorted(glob.glob(os.path.join(SIGNATURE_DIR, "*.json"))):
+        with open(path, "r", encoding="utf-8") as handle:
+            item = json.load(handle)
+        validate(path, item)
+        if item["id"] in ids:
+            fail(path, "duplicate id %s" % item["id"])
+        ids.add(item["id"])
+        items.append(item)
+    if not items:
+        raise ValueError("no file signature metadata found")
+    return items
+
+
+def c_bytes(hex_text):
+    raw = bytes.fromhex(hex_text)
+    return ", ".join("0x%02x" % value for value in raw)
+
+
+def symbol(signature_id):
+    return re.sub(r"[^a-zA-Z0-9_]", "_", signature_id)
+
+
+def render(items):
+    compiled = [item for item in items if item["status"] in ("test-only", "verified")]
+    lines = [
+        "/* Generated by tools/compile_file_signatures.py. Do not edit by hand. */",
+        ""
+    ]
+    for item in compiled:
+        sym = symbol(item["id"])
+        lines.append("static const unsigned char file_pattern_%s[] = { %s };" %
+                     (sym, c_bytes(item["signature"]["bytes"])))
+        lines.append("static const unsigned char file_mask_%s[] = { %s };" %
+                     (sym, c_bytes(item["signature"]["mask"])))
+        lines.append("")
+
+    lines.append("static const struct amiguard_file_signature file_signatures[] = {")
+    for item in compiled:
+        sym = symbol(item["id"])
+        length = len(item["signature"]["bytes"]) // 2
+        lines.append("    { \"%s\", %dUL, %dU, file_pattern_%s, file_mask_%s }," %
+                     (item["name"].replace("\\", "\\\\").replace('"', '\\"'),
+                      item["signature"]["offset"], length, sym, sym))
+    lines.append("};")
+    lines.append("")
+    return "\n".join(lines)
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--write", action="store_true")
+    group.add_argument("--check", action="store_true")
+    args = parser.parse_args()
+
+    try:
+        rendered = render(load_items())
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        print("file signature compiler: %s" % exc, file=sys.stderr)
+        return 1
+
+    if args.write:
+        with open(OUTPUT, "w", encoding="utf-8", newline="\n") as handle:
+            handle.write(rendered)
+        return 0
+
+    try:
+        with open(OUTPUT, "r", encoding="utf-8") as handle:
+            current = handle.read()
+    except OSError as exc:
+        print("file signature compiler: %s" % exc, file=sys.stderr)
+        return 1
+    if current != rendered:
+        print("file signature compiler: generated table is stale; run tools/compile_file_signatures.py --write", file=sys.stderr)
+        return 1
+    print("File signature metadata and generated table are consistent.")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
