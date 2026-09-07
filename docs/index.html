@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AmiGuard — Help us preserve and detect Amiga malware</title>
+  <meta name="description" content="AmiGuard is building an open-source antivirus for AmigaOS 1.2+. We are looking for authentic historical Amiga virus and trojan samples for careful, isolated research.">
+  <style>
+    :root { color-scheme: dark; --bg:#11131a; --panel:#1a1e29; --panel2:#222838; --text:#eef2ff; --muted:#aeb7cc; --accent:#ff9f1c; --accent2:#75d5ff; --line:#343b4e; --ok:#80e27e; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace; background:radial-gradient(circle at top,#20263a 0,var(--bg) 44%); color:var(--text); line-height:1.6; }
+    main { max-width:980px; margin:0 auto; padding:48px 22px 72px; }
+    .hero { border:1px solid var(--line); background:linear-gradient(180deg,rgba(34,40,56,.95),rgba(20,23,32,.95)); border-radius:18px; padding:34px; box-shadow:0 20px 60px rgba(0,0,0,.32); }
+    .kicker { color:var(--accent); font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+    h1 { font-size:clamp(2.1rem,6vw,4.5rem); line-height:1.05; margin:.35rem 0 1rem; }
+    h2 { margin-top:2.2rem; color:var(--accent2); }
+    h3 { color:var(--text); }
+    p,li { color:var(--muted); }
+    strong { color:var(--text); }
+    .cta { margin:24px 0 0; padding:18px 20px; border:1px solid var(--accent); background:rgba(255,159,28,.08); border-radius:12px; }
+    .cta strong { color:var(--accent); }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px; margin-top:18px; }
+    .card { border:1px solid var(--line); background:var(--panel); border-radius:14px; padding:20px; }
+    code { color:#ffd580; }
+    a { color:var(--accent2); }
+    .pipeline { white-space:pre-wrap; padding:18px; border-radius:12px; background:#0c0e14; border:1px solid var(--line); color:var(--ok); overflow-x:auto; }
+    .warning { border-left:4px solid var(--accent); padding-left:16px; }
+    footer { margin-top:44px; color:#7f899f; font-size:.92rem; }
+  </style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <div class="kicker">AmiGuard community sample project</div>
+    <h1>Help us preserve and detect historical Amiga malware.</h1>
+    <p>AmiGuard is an open-source antivirus for classic Amiga systems, targeting <strong>AmigaOS / Kickstart 1.2+</strong> and Motorola 68000. To build trustworthy detections, we need authentic historical samples that can be analyzed and verified safely.</p>
+    <div class="cta"><strong>Submission channel coming shortly.</strong><br>Please do not attach malware to GitHub issues, pull requests, discussions, or repository commits.</div>
+  </section>
+
+  <h2>Why we are asking for samples</h2>
+  <p>We do not want to guess. A named virus should only produce an <code>INFECTED</code> verdict after its detection has been backed by an actual sample, independent analysis, clean-corpus regression testing, and native Amiga runtime qualification.</p>
+  <p>Historic Amiga antivirus collections are not generally available to new projects. Some established teams explicitly do not redistribute their collections, and relying on <code>xvs.library</code> would not meet AmiGuard's goal of having its own open detection engine with support reaching back to AmigaOS 1.2.</p>
+
+  <h2>What we are looking for</h2>
+  <div class="grid">
+    <div class="card"><h3>Bootblock viruses</h3><p>Original infected ADFs, disk images, or raw bootblocks with known or suspected infection.</p></div>
+    <div class="card"><h3>File / link viruses</h3><p>Infected Amiga executables, HUNK files, libraries, commands, or other affected files.</p></div>
+    <div class="card"><h3>Trojans</h3><p>Historical Amiga trojans where provenance, original filename, source, or contemporary notes are known.</p></div>
+    <div class="card"><h3>Old private collections</h3><p>Archived material from BBSes, repair disks, personal collections, backups, magazines, or recovered media.</p></div>
+  </div>
+
+  <h2>How to prepare a future submission</h2>
+  <p>Until the upload channel is ready, please preserve the original files unchanged. When submissions open, we will prefer:</p>
+  <ul>
+    <li>the original sample or disk image, not a modified recreation;</li>
+    <li>a SHA-256 hash if you can provide one;</li>
+    <li>the original filename and approximate date, if known;</li>
+    <li>where it came from, such as a disk, BBS, archive, collection, or publication;</li>
+    <li>any known virus name, antivirus verdict, or historical notes;</li>
+    <li>password-protected archive packaging when requested by the submission channel.</li>
+  </ul>
+
+  <div class="warning">
+    <h2>Do not execute suspected malware</h2>
+    <p>Please do not run a suspected sample merely to identify it for us. Preserve the artifact as-is. AmiGuard's research workflow is designed around offline hashing, metadata intake, static analysis, isolated testing, and read-only verification wherever possible.</p>
+  </div>
+
+  <h2>What happens after we receive a sample</h2>
+  <div class="pipeline">isolated intake
+→ SHA-256 + provenance
+→ neutral static analysis
+→ human review
+→ candidate signature / verifier
+→ regression against trusted clean corpus
+→ native visible Amiga runtime qualification
+→ verified detection
+→ only then: INFECTED</div>
+  <p>Receipt of a file does <strong>not</strong> automatically mean we will call it malware. Unknown and suspicious artifacts remain research material until the evidence supports a specific conclusion.</p>
+
+  <h2>Privacy, rights, and publication</h2>
+  <p>Please only submit material you are entitled to share for security research and preservation. We do not need to publish your identity. Samples will not automatically be committed to the public AmiGuard repository, and public research metadata can be sanitized to avoid exposing personal paths or unnecessary identifying information.</p>
+
+  <h2>About EICAR</h2>
+  <p>AmiGuard currently uses the harmless EICAR antivirus test file to qualify parts of the file-signature pipeline. EICAR is a safe-test, <strong>not Amiga malware</strong>, and it is not evidence that AmiGuard detects a real historical Amiga virus.</p>
+
+  <h2>Follow the project</h2>
+  <p>Source code and research tooling are developed openly in <a href="https://github.com/Ploos-AS/AmiGuard">Ploos-AS/AmiGuard</a>. The sample submission channel will be announced here when it is ready.</p>
+
+  <footer>AmiGuard — open-source antivirus research for classic Amiga systems. MIT-licensed project code; submitted third-party samples retain their own legal status.</footer>
+</main>
+</body>
+</html>
