@@ -8,7 +8,7 @@ import string
 from pathlib import Path
 
 MAX_SIZE = 128 * 1024
-PRINTABLE = set(bytes(string.printable, "ascii")) - {11, 12}
+PRINTABLE = set(bytes(string.printable, "ascii")) - {9, 10, 11, 12, 13}
 HUNK_NAMES = {
     0x3E7: "HUNK_UNIT", 0x3E8: "HUNK_NAME", 0x3E9: "HUNK_CODE",
     0x3EA: "HUNK_DATA", 0x3EB: "HUNK_BSS", 0x3EC: "HUNK_RELOC32",
@@ -25,7 +25,7 @@ def strings(data, minimum=4):
     out = []
     start = None
     for i, b in enumerate(data + b"\x00"):
-        if b in PRINTABLE and b not in (10, 13, 9):
+        if b in PRINTABLE:
             if start is None:
                 start = i
         elif start is not None:
