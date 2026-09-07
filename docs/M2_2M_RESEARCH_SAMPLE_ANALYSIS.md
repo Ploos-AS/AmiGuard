@@ -31,3 +31,5 @@ The generated analysis JSON is research evidence. Do not place real sample bytes
 ## Status
 
 Implemented on `main`. Completion is determined by the qualification contract above and CI on the final milestone commit; it does not imply that AmiGuard has acquired or detected any real Amiga malware.
+
+No native signature tables, file scanner verdicts, or bootblock scanner behavior are changed by M2.2m.
