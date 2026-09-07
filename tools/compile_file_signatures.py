@@ -144,9 +144,10 @@ def render(items):
     for item in compiled:
         sym = symbol(item["id"])
         length = len(item["signature"]["bytes"]) // 2
-        lines.append("    { \"%s\", %dUL, %dU, file_pattern_%s, file_mask_%s }," %
+        test_only = 1 if item["status"] == "test-only" else 0
+        lines.append("    { \"%s\", %dUL, %dU, file_pattern_%s, file_mask_%s, %d }," %
                      (item["name"].replace("\\", "\\\\").replace('"', '\\"'),
-                      item["signature"]["offset"], length, sym, sym))
+                      item["signature"]["offset"], length, sym, sym, test_only))
     lines.append("};")
     lines.append("")
     return "\n".join(lines)
