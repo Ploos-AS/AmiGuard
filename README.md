@@ -15,6 +15,14 @@ M0 establishes the portable scanner core, a compact signature format, a
 Kickstart 1.2-compatible Amiga CLI shell, host-side qualification tests, and
 the first bootblock classification logic.
 
+## Community malware sample project
+
+AmiGuard is looking for authentic historical Amiga virus and trojan samples so future detections can be backed by real evidence rather than assumptions.
+
+**Submission channel coming shortly.** Do not attach suspected malware to GitHub issues, pull requests, discussions, or repository commits.
+
+See the [sample submission page](docs/SAMPLE_SUBMISSION.md) and the [GitHub Pages landing page](docs/index.html) for why samples are needed, what material is useful, and how the research workflow handles them.
+
 ## Build
 
 The native target is intended for a classic m68k-amigaos cross toolchain.
