@@ -1,0 +1,1005 @@
+fs_data_init fs-uae fs-uae.dat
+checking dat file: /usr/bin/fs-uae
+no dat file: /usr/bin/fs-uae
+checking dat file: /usr/bin/fs-uae.dat
+checking dat file: /usr/bin/../share/fs-uae/fs-uae.dat
+FS-UAE 3.2.35 (Built for Linux x86-64)
+Copyright 1995-2002 Bernd Schmidt, 1999-2017 Toni Wilen,
+2003-2007 Richard Drummond, 2006-2011 Mustafa 'GnoStiC' Tufan,
+2011-2017 Frode Solheim, and contributors.
+
+This is free software; see the file COPYING for copying conditions. There
+is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE. See the README for more copyright info, and the source code for
+a full list of contributors
+
+current directory is /home/pgo/Projects/Ploos-AS/AmiGuard
+UAE: Initializing core derived from WinUAE 3300b2
+
+----------------------------------------------------------------------------
+libfsemu init
+----------------------------------------------------------------------------
+
+[FSE] Init (early)
+current time() is: 1788760216
+localtime+timegm:  1788763816
+localtime+mktime:  1788760216
+time of day:       1788760216 + (149447 / 1000000)
+localtime offset:  7200
+[FSE] Calling fs_ml_init
+fs_ml_init (operating system: linux)
+load config file
+loading config from /tmp/amiguard-m21-run/runtime.fs-uae
+
+----------------------------------------------------------------------------
+config (/tmp/amiguard-m21-run/runtime.fs-uae)
+----------------------------------------------------------------------------
+
+accuracy = 1
+amiga_model = A500
+base_dir = /tmp/amiguard-m21-run/fsuae
+chip_memory = 512
+cpu = 68000
+fast_memory = 0
+floppy_drive_0 = /tmp/amiguard-m21-run/workbench12.adf
+floppy_drive_count = 1
+floppy_image_0 = /tmp/amiguard-m21-run/workbench12.adf
+floppy_image_1 = /tmp/amiguard-m21-run/unknown.adf
+floppy_image_2 = /tmp/amiguard-m21-run/invalid.adf
+floppy_image_3 = /tmp/amiguard-m21-run/valid-custom.adf
+fullscreen = 0
+hard_drive_0 = /tmp/amiguard-m21-run/work
+hard_drive_0_label = AGTest
+hard_drive_0_priority = 0
+jit_compiler = 0
+keyboard_key_f10 = action_drive_0_insert_floppy_3
+keyboard_key_f6 = action_eject_floppy_0
+keyboard_key_f7 = action_drive_0_insert_floppy_0
+keyboard_key_f8 = action_drive_0_insert_floppy_1
+keyboard_key_f9 = action_drive_0_insert_floppy_2
+kickstart_file = /home/pgo/Documents/FS-UAE/Kickstarts/amiga-os-120.rom
+motherboard_ram = 0
+screenshots_output_dir = /tmp/amiguard-m21-run/screenshots
+slow_memory = 0
+title = Amiga 500 / stock / accurate
+uae_cpu_multiplier = 2
+uae_cpu_speed = real
+uae_floppy_write_protect = true
+window_height = 720
+window_hidden = 0
+window_minimized = 0
+window_width = 960
+writable_floppy_images = 0
+- checking /home/pgo/.config/fs-uae/configurations-dir
+base specified via base_dir option
+- using base ($BASE / $FSUAE) directory "/tmp/amiguard-m21-run/fsuae"
+resolve_path /tmp/amiguard-m21-run/fsuae/Configurations (absolute)
+- using "Configurations" directory "/tmp/amiguard-m21-run/fsuae/Configurations"
+checking config file /tmp/amiguard-m21-run/fsuae/Configurations/Host.fs-uae
+- checking /home/pgo/.config/fs-uae/data-dir
+resolve_path /tmp/amiguard-m21-run/fsuae/Data (absolute)
+- using "Data" directory "/tmp/amiguard-m21-run/fsuae/Data"
+[I18N] Locale is set to C.UTF-8
+[I18N] Checking locale dir "/usr/bin/../../Locale"
+[I18N] Using data dir "/usr/bin/../share/fs-uae/share-dir"
+[I18N] Using locale dir "/usr/bin/../share/locale"
+GameMode: Enabled game mode
+CPU scaling governor: 'powersave'
+
+----------------------------------------------------------------------------
+fs-uae init
+----------------------------------------------------------------------------
+
+configure logging: none
+[GLIB] Version 2.88.0 (Compiled against 2.86.1)
+- checking /home/pgo/.config/fs-uae/kickstarts-dir
+resolve_path /tmp/amiguard-m21-run/fsuae/Kickstarts (absolute)
+- using "Kickstarts" directory "/tmp/amiguard-m21-run/fsuae/Kickstarts"
+- checking /home/pgo/.config/fs-uae/floppies-dir
+resolve_path /tmp/amiguard-m21-run/fsuae/Floppies (absolute)
+- using "Floppies" directory "/tmp/amiguard-m21-run/fsuae/Floppies"
+- checking /home/pgo/.config/fs-uae/cdroms-dir
+resolve_path /tmp/amiguard-m21-run/fsuae/CD-ROMs (absolute)
+- using "CD-ROMs" directory "/tmp/amiguard-m21-run/fsuae/CD-ROMs"
+- checking /home/pgo/.config/fs-uae/hard-drives-dir
+resolve_path /tmp/amiguard-m21-run/fsuae/Hard Drives (absolute)
+- using "Hard Drives" directory "/tmp/amiguard-m21-run/fsuae/Hard Drives"
+[PLUGINS] Initializing
+- checking /home/pgo/.config/fs-uae/system-dir
+resolve_path /tmp/amiguard-m21-run/fsuae/System (absolute)
+- using "System" directory "/tmp/amiguard-m21-run/fsuae/System"
+[PLUGINS] Loading plugins from /tmp/amiguard-m21-run/fsuae/System
+[PLUGINS] Could not open plugins dir /tmp/amiguard-m21-run/fsuae/System
+- checking /home/pgo/.config/fs-uae/plugins-dir
+resolve_path /tmp/amiguard-m21-run/fsuae/Plugins (absolute)
+- using "Plugins" directory "/tmp/amiguard-m21-run/fsuae/Plugins"
+[PLUGINS] Loading plugins from /tmp/amiguard-m21-run/fsuae/Plugins
+[PLUGINS] Could not open plugins dir /tmp/amiguard-m21-run/fsuae/Plugins
+[PLUGINS] Test /usr/bin/../../Plugin.ini
+[PLUGINS] Is plugin: 0
+fs_uae_configure_amiga_model
+using PAL mode (50Hz)
+[VIDEO] fs_emu_set_video_frame_rate: 50.00 (50)
+[DISPLAY] Sync: g_fs_emu_video_sync_to_vblank = 0
+config match for "A500"
+fs_uae_state_dir:
+- checking /home/pgo/.config/fs-uae/save-states-dir
+resolve_path /tmp/amiguard-m21-run/fsuae/Save States (absolute)
+- using "Save States" directory "/tmp/amiguard-m21-run/fsuae/Save States"
+save_states_dir: /tmp/amiguard-m21-run/fsuae/Save States
+save_dir_name not set, using runtime
+- using state dir /tmp/amiguard-m21-run/fsuae/Save States/runtime
+final state dir path: /tmp/amiguard-m21-run/fsuae/Save States/runtime
+- checking /home/pgo/.config/fs-uae/controllers-dir
+resolve_path /tmp/amiguard-m21-run/fsuae/Controllers (absolute)
+- using "Controllers" directory "/tmp/amiguard-m21-run/fsuae/Controllers"
+- checking /home/pgo/.config/fs-uae/logs-dir
+- checking /home/pgo/.config/fs-uae/cache-dir
+resolve_path /tmp/amiguard-m21-run/fsuae/Cache (absolute)
+- using "Cache" directory "/tmp/amiguard-m21-run/fsuae/Cache"
+resolve_path /tmp/amiguard-m21-run/fsuae/Cache/Logs (absolute)
+- using "Logs" directory "/tmp/amiguard-m21-run/fsuae/Cache/Logs"
+switch to log file /tmp/amiguard-m21-run/fsuae/Cache/Logs/fs-uae.log.txt
+- checking /home/pgo/.config/fs-uae/themes-dir
+resolve_path /tmp/amiguard-m21-run/fsuae/Themes (absolute)
+- using "Themes" directory "/tmp/amiguard-m21-run/fsuae/Themes"
+themes_dir = /tmp/amiguard-m21-run/fsuae/Themes
+[FSE] Init
+[FSE] Read config
+THEME: Init
+THEME: Loading ""
+[VIDEO] Initialize
+fs_emu_video_dummy_init
+[VIDEO] Initialize legacy video
+[FSE] fse_init_video_2
+[RENDER] Stretch mode = 2
+[RENDER] Scale mode = 1
+full-scene anti-aliasing is not requested
+checking video sync mode
+not specified: no video sync
+no video sync (using timers only)
+using default video format BGRA
+using default texture format
+[VIDEO] Using low latency vsync when full vsync is enabled
+[VIDEO] Creating window
+fs_ml_video_create_window
+keyboard input grab: 305419896
+[SDL] Version 2.32.10 (Compiled against 2.32.4)
+[DISPLAY] 0: 3072x1920+0+0 @60
+Monitor - j 0 pos 0
+Monitor - j 1 pos 0
+Monitor - j 2 pos 0
+Monitor - j 3 pos 0
+Monitor index 0 flags 15
+Monitor: found index 0 for flag 2
+Monitor "middle-left" (flag 2) => index 0
+[SDL] Defaulting to fullscreen_mode = desktop for SDL 2
+automatic input grab: 1
+using windowed mode
+setting (windowed) video mode 960 720
+[SDL] CreateWindow(x=805240832, y=805240832, w=960, h=720, flags=290)
+[DISPLAY] Host refresh rate: 60 Hz
+[X11] Requesting dark window manager theme
+[X11] Setting _NET_WM_ICON from icon images
+fs_image_destroy
+fs_image_destroy
+fs_image_destroy
+fs_image_destroy
+fs_image_destroy
+opengl vendor: AMD
+opengl renderer: AMD Radeon 660M (radeonsi, rembrandt, ACO, DRM 3.64, 7.0.0-30-generic)
+opengl version: 4.6 (Compatibility Profile) Mesa 26.0.3-1ubuntu1
+opengl shading language version: 4.60
+opengl extensions: GL_ARB_multisample GL_EXT_abgr GL_EXT_bgra GL_EXT_blend_color GL_EXT_blend_minmax GL_EXT_blend_subtract GL_EXT_copy_texture GL_EXT_subtexture GL_EXT_texture_object GL_EXT_vertex_array GL_EXT_compiled_vertex_array GL_EXT_texture GL_EXT_texture3D GL_IBM_rasterpos_clip GL_ARB_point_parameters GL_EXT_draw_range_elements GL_EXT_packed_pixels GL_EXT_point_parameters GL_EXT_rescale_normal GL_EXT_separate_specular_color GL_EXT_texture_edge_clamp GL_SGIS_generate_mipmap GL_SGIS_texture_border_clamp GL_SGIS_texture_edge_clamp GL_SGIS_texture_lod GL_ARB_framebuffer_sRGB GL_ARB_multitexture GL_EXT_framebuffer_sRGB GL_IBM_multimode_draw_arrays GL_IBM_texture_mirrored_repeat GL_ARB_texture_cube_map GL_ARB_texture_env_add GL_ARB_transpose_matrix GL_EXT_blend_func_separate GL_EXT_fog_coord GL_EXT_multi_draw_arrays GL_EXT_secondary_color GL_EXT_texture_env_add GL_EXT_texture_filter_anisotropic GL_EXT_texture_lod_bias GL_INGR_blend_func_separate GL_NV_blend_square GL_NV_light_max_exponent GL_NV_texgen_reflection GL_NV_texture_env_combine4 GL_S3_s3tc GL_SUN_multi_draw_arrays GL_ARB_texture_border_clamp GL_ARB_texture_compression GL_EXT_framebuffer_object GL_EXT_texture_compression_s3tc GL_EXT_texture_env_combine GL_EXT_texture_env_dot3 GL_MESA_window_pos GL_NV_packed_depth_stencil GL_NV_texture_rectangle GL_ARB_depth_texture GL_ARB_occlusion_query GL_ARB_shadow GL_ARB_texture_env_combine GL_ARB_texture_env_crossbar GL_ARB_texture_env_dot3 GL_ARB_texture_mirrored_repeat GL_ARB_window_pos GL_ATI_fragment_shader GL_EXT_stencil_two_side GL_EXT_texture_cube_map GL_NV_copy_depth_to_color GL_NV_depth_clamp GL_NV_fog_distance GL_NV_half_float GL_APPLE_packed_pixels GL_ARB_draw_buffers GL_ARB_fragment_program GL_ARB_fragment_shader GL_ARB_shader_objects GL_ARB_vertex_program GL_ARB_vertex_shader GL_ATI_draw_buffers GL_ATI_texture_env_combine3 GL_ATI_texture_float GL_EXT_depth_bounds_test GL_EXT_shadow_funcs GL_EXT_stencil_wrap GL_MESA_pack_invert GL_NV_primitive_restart GL_ARB_depth_clamp GL_ARB_fragment_program_shadow GL_ARB_half_float_pixel GL_ARB_occlusion_query2 GL_ARB_point_sprite GL_ARB_shading_language_100 GL_ARB_sync GL_ARB_texture_non_power_of_two GL_ARB_vertex_buffer_object GL_ATI_blend_equation_separate GL_EXT_blend_equation_separate GL_OES_read_format GL_ARB_color_buffer_float GL_ARB_pixel_buffer_object GL_ARB_texture_compression_rgtc GL_ARB_texture_float GL_ARB_texture_rectangle GL_ATI_texture_compression_3dc GL_EXT_packed_float GL_EXT_pixel_buffer_object GL_EXT_texture_compression_dxt1 GL_EXT_texture_compression_rgtc GL_EXT_texture_mirror_clamp GL_EXT_texture_rectangle GL_EXT_texture_sRGB GL_EXT_texture_shared_exponent GL_ARB_framebuffer_object GL_EXT_framebuffer_blit GL_EXT_framebuffer_multisample GL_EXT_packed_depth_stencil GL_ARB_vertex_array_object GL_ATI_separate_stencil GL_ATI_texture_mirror_once GL_EXT_draw_buffers2 GL_EXT_draw_instanced GL_EXT_gpu_program_parameters GL_EXT_gpu_shader4 GL_EXT_texture_array GL_EXT_texture_compression_latc GL_EXT_texture_integer GL_EXT_texture_sRGB_decode GL_EXT_timer_query GL_OES_EGL_image GL_AMD_performance_monitor GL_EXT_texture_buffer_object GL_AMD_texture_texture4 GL_ARB_copy_buffer GL_ARB_depth_buffer_float GL_ARB_draw_instanced GL_ARB_half_float_vertex GL_ARB_instanced_arrays GL_ARB_map_buffer_range GL_ARB_texture_buffer_object GL_ARB_texture_rg GL_ARB_texture_swizzle GL_ARB_vertex_array_bgra GL_EXT_texture_swizzle GL_EXT_vertex_array_bgra GL_NV_conditional_render GL_AMD_conservative_depth GL_AMD_depth_clamp_separate GL_AMD_draw_buffers_blend GL_AMD_seamless_cubemap_per_texture GL_AMD_shader_stencil_export GL_ARB_ES2_compatibility GL_ARB_blend_func_extended GL_ARB_compatibility GL_ARB_debug_output GL_ARB_draw_buffers_blend GL_ARB_draw_elements_base_vertex GL_ARB_explicit_attrib_location GL_ARB_fragment_coord_conventions GL_ARB_provoking_vertex GL_ARB_sample_shading GL_ARB_sampler_objects GL_ARB_seamless_cube_map GL_ARB_shader_stencil_export GL_ARB_shader_texture_lod GL_ARB_tessellation_shader GL_ARB_texture_buffer_object_rgb32 GL_ARB_texture_cube_map_array GL_ARB_texture_gather GL_ARB_texture_multisample GL_ARB_texture_query_lod GL_ARB_texture_rgb10_a2ui GL_ARB_uniform_buffer_object GL_ARB_vertex_type_2_10_10_10_rev GL_ATI_meminfo GL_EXT_provoking_vertex GL_EXT_texture_snorm GL_EXT_texture_storage GL_MESA_texture_signed_rgba GL_NV_copy_image GL_NV_texture_barrier GL_ARB_draw_indirect GL_ARB_get_program_binary GL_ARB_gpu_shader5 GL_ARB_gpu_shader_fp64 GL_ARB_robustness GL_ARB_separate_shader_objects GL_ARB_shader_bit_encoding GL_ARB_shader_precision GL_ARB_shader_subroutine GL_ARB_texture_compression_bptc GL_ARB_timer_query GL_ARB_transform_feedback2 GL_ARB_transform_feedback3 GL_ARB_vertex_attrib_64bit GL_ARB_viewport_array GL_EXT_direct_state_access GL_EXT_shader_image_load_store GL_EXT_vertex_attrib_64bit GL_AMD_multi_draw_indirect GL_ANGLE_texture_compression_dxt3 GL_ANGLE_texture_compression_dxt5 GL_ARB_base_instance GL_ARB_compressed_texture_pixel_storage GL_ARB_conservative_depth GL_ARB_internalformat_query GL_ARB_map_buffer_alignment GL_ARB_shader_atomic_counters GL_ARB_shader_image_load_store GL_ARB_shading_language_420pack GL_ARB_shading_language_packing GL_ARB_texture_storage GL_ARB_transform_feedback_instanced GL_EXT_framebuffer_multisample_blit_scaled GL_EXT_transform_feedback GL_AMD_query_buffer_object GL_AMD_shader_trinary_minmax GL_AMD_vertex_shader_layer GL_AMD_vertex_shader_viewport_index GL_ARB_ES3_compatibility GL_ARB_arrays_of_arrays GL_ARB_clear_buffer_object GL_ARB_compute_shader GL_ARB_copy_image GL_ARB_explicit_uniform_location GL_ARB_fragment_layer_viewport GL_ARB_framebuffer_no_attachments GL_ARB_invalidate_subdata GL_ARB_multi_draw_indirect GL_ARB_program_interface_query GL_ARB_robust_buffer_access_behavior GL_ARB_shader_image_size GL_ARB_shader_storage_buffer_object GL_ARB_stencil_texturing GL_ARB_texture_buffer_range GL_ARB_texture_query_levels GL_ARB_texture_storage_multisample GL_ARB_texture_view GL_ARB_vertex_attrib_binding GL_KHR_debug GL_KHR_robustness GL_KHR_texture_compression_astc_ldr GL_AMD_pinned_memory GL_ARB_bindless_texture GL_ARB_buffer_storage GL_ARB_clear_texture GL_ARB_compute_variable_group_size GL_ARB_enhanced_layouts GL_ARB_indirect_parameters GL_ARB_internalformat_query2 GL_ARB_multi_bind GL_ARB_query_buffer_object GL_ARB_seamless_cubemap_per_texture GL_ARB_shader_draw_parameters GL_ARB_shader_group_vote GL_ARB_shading_language_include GL_ARB_sparse_texture GL_ARB_texture_mirror_clamp_to_edge GL_ARB_texture_stencil8 GL_ARB_vertex_type_10f_11f_11f_rev GL_EXT_debug_label GL_EXT_shader_integer_mix GL_NVX_gpu_memory_info GL_ARB_ES3_1_compatibility GL_ARB_clip_control GL_ARB_conditional_render_inverted GL_ARB_cull_distance GL_ARB_derivative_control GL_ARB_direct_state_access GL_ARB_get_texture_sub_image GL_ARB_pipeline_statistics_query GL_ARB_shader_texture_image_samples GL_ARB_sparse_buffer GL_ARB_texture_barrier GL_ARB_transform_feedback_overflow_query GL_EXT_polygon_offset_clamp GL_EXT_shader_image_load_formatted GL_KHR_blend_equation_advanced GL_KHR_context_flush_control GL_KHR_robust_buffer_access_behavior GL_NV_shader_atomic_int64 GL_ARB_ES3_2_compatibility GL_ARB_gpu_shader_int64 GL_ARB_parallel_shader_compile GL_ARB_post_depth_coverage GL_ARB_shader_atomic_counter_ops GL_ARB_shader_ballot GL_ARB_shader_clock GL_ARB_shader_viewport_layer_array GL_ARB_sparse_texture2 GL_ARB_sparse_texture_clamp GL_ARB_texture_filter_minmax GL_EXT_shader_samples_identical GL_EXT_texture_filter_minmax GL_EXT_texture_sRGB_R8 GL_EXT_texture_sRGB_RG8 GL_KHR_no_error GL_KHR_texture_compression_astc_sliced_3d GL_ARB_gl_spirv GL_ARB_spirv_extensions GL_EXT_window_rectangles GL_MESA_shader_integer_functions GL_ARB_polygon_offset_clamp GL_ARB_texture_filter_anisotropic GL_EXT_memory_object GL_EXT_memory_object_fd GL_EXT_semaphore GL_EXT_semaphore_fd GL_KHR_parallel_shader_compile GL_NV_alpha_to_coverage_dither_control GL_AMD_framebuffer_multisample_advanced GL_EXT_EGL_image_storage GL_EXT_texture_shadow_lod GL_INTEL_blackhole_render GL_MESA_framebuffer_flip_y GL_NV_compute_shader_derivatives GL_EXT_EGL_sync GL_EXT_demote_to_helper_invocation GL_KHR_shader_subgroup GL_EXT_EGL_image_storage_compression GL_NV_ES1_1_compatibility GL_MESA_texture_const_bandwidth GL_EXT_mesh_shader GL_EXT_shader_clock 
+opengl max texture size (estimate): 16384x16384
+*** Setting swap interval to 0 ***
+initial input grab: 1
+init_opengl
+fse_init_video_opengl
+setup_opengl
+loaded sub-texture "sidebar_edge.png"
+fs_image_destroy
+loaded sub-texture "sidebar.png"
+fs_image_destroy
+loaded sub-texture "gloss.png"
+fs_image_destroy
+loaded sub-texture "glow_left.png"
+fs_image_destroy
+loaded sub-texture "glow_top.png"
+fs_image_destroy
+loaded sub-texture "glow_top_left.png"
+fs_image_destroy
+loaded sub-texture "close.png"
+fs_image_destroy
+loaded sub-texture "volume.png"
+fs_image_destroy
+loaded sub-texture "volume_muted.png"
+fs_image_destroy
+loaded sub-texture "stretch-aspect.png"
+fs_image_destroy
+loaded sub-texture "stretch.png"
+fs_image_destroy
+loaded sub-texture "item_background.png"
+fs_image_destroy
+loaded sub-texture "top_item_background.png"
+fs_image_destroy
+loaded sub-texture "heading_strip.png"
+fs_image_destroy
+loaded sub-texture "pause_indicator.png"
+fs_image_destroy
+loaded sub-texture "logo-32.png"
+fs_image_destroy
+loaded sub-texture "top_background.png"
+fs_image_destroy
+loaded sub-texture "top_background_fade.png"
+fs_image_destroy
+loaded sub-texture "bezel/left.png"
+fs_image_destroy
+loaded sub-texture "bezel/right.png"
+fs_image_destroy
+loaded sub-texture "stretch-none.png"
+fs_image_destroy
+loaded sub-texture "bezel/left-overlay.png"
+fs_image_destroy
+loaded sub-texture "bezel/right-overlay.png"
+fs_image_destroy
+initializing menu
+load font from data 0x1e7eea80 size 26822
+font height: 32 pixels
+512 characters
+load font from data 0x1e8053b0 size 26832
+font height: 32 pixels
+512 characters
+[SHADERS] Initialize
+create windows is done
+fse_init_renderer
+scale: -1.00 -1.00 align: 0.50 0.50
+[FSE] Calling fs_ml_init_2
+[INPUT] fs_ml_input_init
+[INPUT] fs_ml_mouse_init
+[INPUT] Adding system mouse
+[MANYMOUSE] Copyright (c) 2005-2012 Ryan C. Gordon
+[MANYMOUSE] Thread running
+MANYMOUSE: no mice found
+[INPUT] Joystick device count: 0
+[INPUT] Initialize
+fs_emu_input_sdl_init
+[INPUT] fs_emu_input_init
+init_input_configs
+reading input device configs from /tmp/amiguard-m21-run/fsuae/Controllers
+reading input device configs from /tmp/amiguard-m21-run/fsuae/Data/Devs/Keyboards
+could not read directory /tmp/amiguard-m21-run/fsuae/Data/Devs/Keyboards
+reading input device configs from /tmp/amiguard-m21-run/fsuae/Controllers
+[INPUT] Using default modifier key LALT
+[INPUT] Initializing devices for "menu"
+0 Keyboard
+[INPUT] Config name "Keyboard"
+get system config for device: Keyboard
+checked data "input/Keyboard.conf" = 3
+config file for Keyboard was not found
+[INPUT] Did not find config for device "Keyboard"
+get system config for device: keyboard_0_0_0_0_linux
+checked data "input/keyboard_0_0_0_0_linux.conf" = 3
+config file for keyboard_0_0_0_0_linux was not found
+[INPUT] Did not find menu config for device "keyboard_0_0_0_0_linux"
+get system config for device: keyboard
+checked data "input/keyboard.conf" = 0
+read config for keyboard for menu (from data)
+checked data "input/default_keyboard.conf" = 0
+read config for default_keyboard for menu (from data)
+did not find action for "skip_right"
+key_down (274) => action "down" (4)
+key_backspace (8) => action "back" (6)
+did not find action for "skip_left"
+key_return (13) => action "primary" (5)
+did not find action for "default_keyboard"
+key_left (276) => action "left" (1)
+did not find action for "secondary"
+key_escape (27) => action "escape" (10)
+key_right (275) => action "right" (2)
+key_up (273) => action "up" (3)
+1 MOUSE
+[INPUT] Config name "MOUSE"
+get system config for device: MOUSE
+checked data "input/MOUSE.conf" = 3
+config file for MOUSE was not found
+[INPUT] Did not find config for device "MOUSE"
+get system config for device: mouse_0_0_0_0_linux
+checked data "input/mouse_0_0_0_0_linux.conf" = 3
+config file for mouse_0_0_0_0_linux was not found
+[INPUT] Did not find menu config for device "mouse_0_0_0_0_linux"
+get system config for device: mouse
+checked data "input/mouse.conf" = 0
+read config for mouse for menu (from data)
+no config for platform menu
+[INPUT] Did not find menu config for device"mouse"
+[AUDIO] Initialize
+[AUDIO] Initialize OpenAL audio driver
+[OPENAL] Opened device: OpenAL Soft
+[OPENAL] Information:
+[OPENAL] Devices:
+- OpenAL Soft
+[OPENAL] Default device: OpenAL Soft
+OPENAL: trying frequency 48000
+OPENAL: created context
+OPENAL: made context current
+openal: number of stereo sources is 2
+[AUDIO] Buffer target size (ms) = 40
+fs_uae_init_recording
+not running in record mode
+[AUDIO] Stream 0, frequency: 48000, buffers: 48 buffer size: 512 bytes
+[AUDIO] Stream 1, frequency: 44100, buffers: 48 buffer size: 28224 bytes
+adding rtg resolution 672x540
+adding rtg resolution 960x540
+adding rtg resolution 1344x1080
+adding rtg resolution 960x720
+adding rtg resolution 3072x1920
+fs_uae_init_video
+fs_uae_configure_menu
+[FSE] fs_emu_run, main_function at 0x419cc0
+checking OpenGL capabilities
+[FSE] Emulation thread started
+[FSE] Run main function at 0x419cc0
+amiga_main
+KB: keyboard_settrans
+GL_ARB_sync extension found
+[OPENGL] Deciding video sync method
+[OPENGL] Using default sync method
+- SYNC_FINISH_SWAP_FINISH
+target_default_options p=0x11f2440 type=0
+target_default_options: enabling floppy sounds
+ -- stub -- target_save_options zfile=0x768ce0000c10 p=0x11f2440
+built_in_chipset_prefs, ignore = 0
+fixup_cpu
+built_in_chipset_prefs, ignore = 0
+ -- stub -- target_fixup_options 
+graphics_setup
+preinit_shm
+NATMEM: Total physical RAM 12505 MB, all RAM 12505 MB
+NATMEM: Attempting to reserve: 2048 MB
+NATMEM: jit compiler 0
+VM: Reserve  0x80000000 bytes
+VM: Reserve  0x80000000 bytes, got address 0x768c5c000000
+NATMEM: Reserved 0x768c5c000000-0x768cdc000000 (0x80000000 2048M)
+ -- stub -- target_cfgfile_load 
+built_in_chipset_prefs, ignore = 0
+fixup_cpu
+built_in_chipset_prefs, ignore = 0
+ -- stub -- target_fixup_options 
+set_device_rom path=(null) romtype=262144 devnum=0
+boardromconfig (nil)
+target_default_options p=0x11f2440 type=1
+target_default_options: enabling floppy sounds
+built_in_chipset_prefs, ignore = 0
+
+----------------------------------------------------------------------------
+uae configuration
+----------------------------------------------------------------------------
+
+fs_uae_configure_amiga_hardware
+fs_uae_load_rom_files /tmp/amiguard-m21-run/fsuae/Kickstarts
+configuring "Amiga 500", accuracy=1
+amiga_quickstart model=0 config=0 compa=0 (accuracy 1)
+set_device_rom path=(null) romtype=262144 devnum=0
+boardromconfig (nil)
+target_default_options p=0x11f2440 type=1
+target_default_options: enabling floppy sounds
+built_in_chipset_prefs, ignore = 0
+set option "cachesize" to "0" (result: 1)
+resolve_path /home/pgo/Documents/FS-UAE/Kickstarts/amiga-os-120.rom (absolute)
+set option "kickstart_rom_file" to "/home/pgo/Documents/FS-UAE/Kickstarts/amiga-os-120.rom" (result: 1)
+set option "cpu_model" to "68000" (result: 1)
+set option "fpu_model" to "0" (result: 1)
+set option "mmu_model" to "0" (result: 1)
+set option "cpu_24bit_addressing" to "true" (result: 1)
+set option "cpu_speed" to "real" (result: 1)
+set option "blitter_cycle_exact" to "true" (result: 1)
+set option "cpu_compatible" to "true" (result: 1)
+set option "cpu_cycle_exact" to "true" (result: 1)
+set option "waiting_blits" to "false" (result: 1)
+set option "immediate_blits" to "false" (result: 1)
+set option "chipmem_size" to "1" (result: 1)
+set option "bogomem_size" to "0" (result: 1)
+set option "fastmem_size" to "0" (result: 1)
+set option "a3000mem_size" to "0" (result: 1)
+set option "sound_stereo_separation" to "7" (result: 1)
+configure_floppies
+value for option floppy_drive_0: /tmp/amiguard-m21-run/workbench12.adf
+resolve_path /tmp/amiguard-m21-run/workbench12.adf (absolute)
+set option "floppy0" to "/tmp/amiguard-m21-run/workbench12.adf" (result: 1)
+set option "floppy0type" to "0" (result: 1)
+value for option floppy_drive_1: (null)
+set option "floppy1" to "" (result: 1)
+set option "floppy1type" to "0" (result: 1)
+value for option floppy_drive_2: (null)
+set option "floppy2" to "" (result: 1)
+set option "floppy2type" to "0" (result: 1)
+value for option floppy_drive_3: (null)
+set option "floppy3" to "" (result: 1)
+set option "floppy3type" to "0" (result: 1)
+set option "nr_floppies" to "1" (result: 1)
+set option "floppy1" to "" (result: 1)
+set option "floppy1type" to "-1" (result: 1)
+set option "floppy2" to "" (result: 1)
+set option "floppy2type" to "-1" (result: 1)
+set option "floppy3" to "" (result: 1)
+set option "floppy3type" to "-1" (result: 1)
+set option "floppy_volume" to "80" (result: 1)
+resolve_path /tmp/amiguard-m21-run/workbench12.adf (absolute)
+set option "diskimage0" to "/tmp/amiguard-m21-run/workbench12.adf" (result: 1)
+resolve_path /tmp/amiguard-m21-run/unknown.adf (absolute)
+set option "diskimage1" to "/tmp/amiguard-m21-run/unknown.adf" (result: 1)
+resolve_path /tmp/amiguard-m21-run/invalid.adf (absolute)
+set option "diskimage2" to "/tmp/amiguard-m21-run/invalid.adf" (result: 1)
+resolve_path /tmp/amiguard-m21-run/valid-custom.adf (absolute)
+set option "diskimage3" to "/tmp/amiguard-m21-run/valid-custom.adf" (result: 1)
+set option "diskimage4" to "" (result: 1)
+set option "diskimage5" to "" (result: 1)
+set option "diskimage6" to "" (result: 1)
+set option "diskimage7" to "" (result: 1)
+set option "diskimage8" to "" (result: 1)
+set option "diskimage9" to "" (result: 1)
+set option "diskimage10" to "" (result: 1)
+set option "diskimage11" to "" (result: 1)
+set option "diskimage12" to "" (result: 1)
+set option "diskimage13" to "" (result: 1)
+set option "diskimage14" to "" (result: 1)
+set option "diskimage15" to "" (result: 1)
+set option "diskimage16" to "" (result: 1)
+set option "diskimage17" to "" (result: 1)
+set option "diskimage18" to "" (result: 1)
+set option "diskimage19" to "" (result: 1)
+fs_uae_configure_hard_drives
+resolve_path /tmp/amiguard-m21-run/work (absolute)
+hard drive mount: /tmp/amiguard-m21-run/work
+device: DH0
+mount name: AGTest
+read only: 0
+boot priority: 0
+set option "filesystem2" to "rw,DH0:AGTest:/tmp/amiguard-m21-run/work,0" (result: 1)
+set option "uaehf0" to "dir,rw,DH0:AGTest:/tmp/amiguard-m21-run/work,0" (result: 1)
+configure_cdrom
+configuring joystick ports:
+set option "joyport0" to "none" (result: 1)
+set option "joyport1" to "none" (result: 1)
+fs_uae_configure_actions
+fs_uae_read_override_actions_for_port 0
+fs_uae_read_override_actions_for_port 1
+fs_uae_read_override_actions_for_port 2
+fs_uae_read_override_actions_for_port 3
+fs_uae_read_override_actions_for_port 4
+fs_uae_read_override_actions_for_port 5
+fs_uae_read_override_actions_for_port 6
+fs_uae_read_override_actions_for_port 7
+configuring joystick port 1 (auto)
+trying to auto-configure joystick in port 1
+configure joystick "JOYSTICK" for "amiga" (port index 1
+did not match device #0 (Keyboard)
+did not match device #1 (MOUSE)
+configure joystick "JOYSTICK #2" for "amiga" (port index 1
+did not match device #0 (Keyboard)
+did not match device #1 (MOUSE)
+could not auto-configure joystick,using keyboard emulation
+configuring joystick port 0 (auto)
+configuring joystick port 2 (nothing)
+nothing connected to port
+configuring joystick port 3 (nothing)
+nothing connected to port
+configuring joystick port 4 (nothing)
+nothing connected to port
+configuring joystick port 5 (nothing)
+nothing connected to port
+configuring joystick port 6 (nothing)
+nothing connected to port
+configuring joystick port 7 (nothing)
+nothing connected to port
+set option "statefile" to "/tmp/amiguard-m21-run/fsuae/Save States/runtime/Saved State.uss" (result: 1)
+amiga_set_save_image_dir /tmp/amiguard-m21-run/fsuae/Save States/runtime
+- checking /home/pgo/.config/fs-uae/module-ripper-dir
+resolve_path /tmp/amiguard-m21-run/fsuae/Cache/Modules (absolute)
+- using "Modules" directory "/tmp/amiguard-m21-run/fsuae/Cache/Modules"
+amiga_set_module_ripper_dir /tmp/amiguard-m21-run/fsuae/Cache/Modules
+set option "sound_frequency" to "48000" (result: 1)
+amiga_set_audio_frequency: 48000
+fs_uae_set_uae_paths
+did not find "built-in" driveclick directory
+read_custom_uae_options
+WARNING: custom uae_* options used! Your warranty is now void! ;)
+(not that there was any warranty before...)
+set option "cpu_speed" to "real" (result: 1)
+set option "cpu_multiplier" to "2" (result: 1)
+set option "floppy_write_protect" to "true" (result: 1)
+writing uae config to /tmp/amiguard-m21-run/fsuae/Cache/Logs/debug.uae
+ -- stub -- target_save_options zfile=0x768ce0000f40 p=0x11f2440
+WARNING: notify_user msg #2
+
+----------------------------------------------------------------------------
+end of uae configuration
+----------------------------------------------------------------------------
+
+ -- stub -- init_joystick return 1
+ -- stub -- init_mouse return 1
+ -- stub -- init_kb return 1
+ -- stub -- gui_init 
+ -- stub -- logging_init 
+init_shm
+NATMEM: size            0x01000000
+NATMEM: z3size        + 0x00000000
+NATMEM: z3rtgmem_size + 0x00000000
+NATMEM: othersize     + 0x00000000
+NATMEM: totalsize     = 0x01000000
+Z3 REAL mapping. Not JIT direct compatible.
+NATMEM: JIT direct compatible: 0
+NATMEM: Our special area: 0x768c5c000000-0x768c5d000000 (0x01000000 16M)
+built_in_chipset_prefs, ignore = 0
+fixup_cpu
+built_in_chipset_prefs, ignore = 0
+ -- stub -- target_fixup_options 
+ -- stub -- target_run 
+ -- stub -- get_mouse_num return 0
+[WARNING] Will not log further calls to get_mouse_num
+ -- stub -- get_joystick_num return 0
+[WARNING] Will not log further calls to get_joystick_num
+ -- stub -- get_kb_num return 0
+[WARNING] Will not log further calls to get_kb_num
+ -- stub -- input_get_default_keyboard num=0 return 0
+ -- stub -- input_get_default_keyboard num=1 return 0
+ -- stub -- input_get_default_keyboard num=2 return 0
+ -- stub -- input_get_default_keyboard num=3 return 0
+ -- stub -- input_get_default_keyboard num=4 return 0
+ -- stub -- input_get_default_keyboard num=5 return 0
+ -- stub -- input_get_default_keyboard num=6 return 0
+ -- stub -- input_get_default_keyboard num=7 return 0
+ -- stub -- input_get_default_keyboard num=8 return 0
+ -- stub -- input_get_default_keyboard num=9 return 0
+ -- stub -- input_get_default_keyboard num=10 return 0
+ -- stub -- input_get_default_keyboard num=11 return 0
+ -- stub -- input_get_default_keyboard num=12 return 0
+ -- stub -- input_get_default_keyboard num=13 return 0
+ -- stub -- input_get_default_keyboard num=14 return 0
+ -- stub -- input_get_default_keyboard num=15 return 0
+ -- stub -- input_get_default_keyboard num=16 return 0
+ -- stub -- input_get_default_keyboard num=17 return 0
+ -- stub -- input_get_default_keyboard num=18 return 0
+ -- stub -- input_get_default_keyboard num=19 return 0
+RTAREA located at 00F00000
+MMAN: mapped_malloc 0x00010000 start=0x00000000 UAE Boot ROM (rtarea)
+MMAN: Flags: ROMIN
+uaegfx.card magic code: 00F03000-00F0313E ABI=00000000
+segtracker: install
+MMAN: mapped_malloc 0x00010000 start=0x00000000 Filesystem autoconfig (filesys)
+MMAN: Flags: IO SAFE
+bsdsocket.library installed
+MMAN: mapped_malloc 0x00080000 start=0x00000000 Kickstart ROM (kick)
+MMAN: Flags: ROM THREADSAFE
+ -- stub -- my_issamepath 
+ -- stub -- my_issamepath 
+ -- stub -- my_issamepath 
+[WARNING] Will not log further calls to my_issamepath
+MMAN: mapped_malloc 0x00100000 start=0x00000000 Chip memory (chip)
+MMAN: Flags: RAM THREADSAFE
+ROM loader.. (<none>)
+read_rom_name /home/pgo/Documents/FS-UAE/Kickstarts/amiga-os-120.rom
+romlist_patch_rom
+ROM: SHA1=11f9e62cf299f72184835b7b2a70a16333fc0d88
+Known ROM 'KS ROM v1.2 (A500,A1000,A2000)' loaded
+ROM loader end
+cpuboard_map currprefs.cpuboard_type = 0
+MAPROM: cs_ksmirror_e0 set - mirroring kickstart at 0x00e00000
+memory init end
+gfx_set_picasso_state 0
+using text cache texture size 2048x2048
+drive_insert drv=0x109e2c0 dnum=3 fname= fake=0
+drive_insert drv=0x109e2c0 dnum=3 fname= fake=1
+gui_disk_image_change drive 3 <no disk>
+driveclick_insert drive=3 eject=1 click_initialized=0 wave_initialized=0 currprefs.floppyslots[drive].dfxclick=1
+gui_disk_image_change drive 3 <no disk>
+drive_insert drv=0x107bca0 dnum=2 fname= fake=0
+drive_insert drv=0x107bca0 dnum=2 fname= fake=1
+gui_disk_image_change drive 2 <no disk>
+driveclick_insert drive=2 eject=1 click_initialized=0 wave_initialized=0 currprefs.floppyslots[drive].dfxclick=1
+gui_disk_image_change drive 2 <no disk>
+drive_insert drv=0x1059680 dnum=1 fname= fake=0
+drive_insert drv=0x1059680 dnum=1 fname= fake=1
+gui_disk_image_change drive 1 <no disk>
+driveclick_insert drive=1 eject=1 click_initialized=0 wave_initialized=0 currprefs.floppyslots[drive].dfxclick=1
+gui_disk_image_change drive 1 <no disk>
+drive_insert drv=0x1037060 dnum=0 fname=/tmp/amiguard-m21-run/workbench12.adf fake=0
+drive_insert drv=0x1037060 dnum=0 fname=/tmp/amiguard-m21-run/workbench12.adf fake=1
+DISK_get_saveimagepath returning /tmp/amiguard-m21-run/fsuae/Save States/runtime/workbench12.sdf
+DISK_get_saveimagepath returning /tmp/amiguard-m21-run/fsuae/Save States/runtime/workbench12.sdf
+drive_insert returning, drv->wrprot=0
+gui_disk_image_change drive 0 name /tmp/amiguard-m21-run/workbench12.adf write protected 1
+DISK_get_saveimagepath returning /tmp/amiguard-m21-run/fsuae/Save States/runtime/workbench12.sdf
+DISK_get_saveimagepath returning /tmp/amiguard-m21-run/fsuae/Save States/runtime/workbench12.sdf
+driveclick_insert drive=0 eject=0 click_initialized=0 wave_initialized=0 currprefs.floppyslots[drive].dfxclick=1
+drive_insert returning, drv->wrprot=0
+fixup_cpu
+CPU cycleunit: 256 (0.500)
+1870 CPU functions
+Building CPU, 44274 opcodes (0 -2 1)
+JIT: &countdown =  0x29d1a78
+JIT: &build_comp = 0x55c0c0
+JIT: JIT: JIT compiler is not enabled
+CPU=68000, FPU=0, MMU=0, JIT=0. prefetch and cycle-exact 24-bit
+graphics_init
+calling reset_drawing
+init_colors
+init_sound
+ -- stub -- input_get_default_keyboard num=0 return 0
+ -- stub -- input_get_default_keyboard num=1 return 0
+ -- stub -- input_get_default_keyboard num=2 return 0
+ -- stub -- input_get_default_keyboard num=3 return 0
+ -- stub -- input_get_default_keyboard num=4 return 0
+ -- stub -- input_get_default_keyboard num=5 return 0
+ -- stub -- input_get_default_keyboard num=6 return 0
+ -- stub -- input_get_default_keyboard num=7 return 0
+ -- stub -- input_get_default_keyboard num=8 return 0
+ -- stub -- input_get_default_keyboard num=9 return 0
+ -- stub -- input_get_default_keyboard num=10 return 0
+ -- stub -- input_get_default_keyboard num=11 return 0
+ -- stub -- input_get_default_keyboard num=12 return 0
+ -- stub -- input_get_default_keyboard num=13 return 0
+ -- stub -- input_get_default_keyboard num=14 return 0
+ -- stub -- input_get_default_keyboard num=15 return 0
+ -- stub -- input_get_default_keyboard num=16 return 0
+ -- stub -- input_get_default_keyboard num=17 return 0
+ -- stub -- input_get_default_keyboard num=18 return 0
+ -- stub -- input_get_default_keyboard num=19 return 0
+CPU cycleunit: 256 (0.500)
+ -- stub -- target_reset 
+ -- stub -- my_resolvesoftlink 
+my_getvolumeinfo /tmp/amiguard-m21-run/work
+ -- stub -- filesys_addexternals 
+init_shm
+cpuboard_map currprefs.cpuboard_type = 0
+MAPROM: cs_ksmirror_e0 set - mirroring kickstart at 0x00e00000
+memory init end
+uae_start_tread "filesys" function at 0x4e4830 arg 0x29dd240
+initparallel
+Reset at 00000000. Chipset mask = 00000000
+00000000    2048K/4 =     512K Chip memory
+00200000    8192K/0 =    8192K <none>
+00A00000    2048K/0 =    2048K CIA
+00C00000    1536K/0 =    1536K Custom chipset
+00D80000     256K/0 =     256K <none>
+00DC0000      64K/0 =      64K Battery backed up clock (none)
+00DD0000      64K/0 =      64K <none>
+00DE0000     128K/0 =     128K Custom chipset
+00E00000     512K/2 =     256K Kickstart ROM (A6CE1636)
+=KS ROM v1.2 (A500,A1000,A2000) rev 33.180 (256k) [315093-01]
+00E80000      64K/0 =      64K Autoconfig Z2
+00E90000     448K/0 =     448K <none>
+00F00000      64K/1 =      64K UAE Boot ROM
+00F10000     448K/0 =     448K <none>
+00F80000     512K/2 =     256K Kickstart ROM (A6CE1636)
+=KS ROM v1.2 (A500,A1000,A2000) rev 33.180 (256k) [315093-01]
+uae_start_tread "ide" function at 0x524420 arg 0x46c9080
+drive_insert drv=0x109e2c0 dnum=3 fname= fake=0
+drive_insert drv=0x109e2c0 dnum=3 fname= fake=1
+gui_disk_image_change drive 3 <no disk>
+driveclick_insert drive=3 eject=1 click_initialized=0 wave_initialized=0 currprefs.floppyslots[drive].dfxclick=1
+gui_disk_image_change drive 3 <no disk>
+drive_insert drv=0x107bca0 dnum=2 fname= fake=0
+drive_insert drv=0x107bca0 dnum=2 fname= fake=1
+gui_disk_image_change drive 2 <no disk>
+driveclick_insert drive=2 eject=1 click_initialized=0 wave_initialized=0 currprefs.floppyslots[drive].dfxclick=1
+gui_disk_image_change drive 2 <no disk>
+drive_insert drv=0x1059680 dnum=1 fname= fake=0
+drive_insert drv=0x1059680 dnum=1 fname= fake=1
+gui_disk_image_change drive 1 <no disk>
+driveclick_insert drive=1 eject=1 click_initialized=0 wave_initialized=0 currprefs.floppyslots[drive].dfxclick=1
+gui_disk_image_change drive 1 <no disk>
+drive_insert drv=0x1037060 dnum=0 fname=/tmp/amiguard-m21-run/workbench12.adf fake=0
+drive_insert drv=0x1037060 dnum=0 fname=/tmp/amiguard-m21-run/workbench12.adf fake=1
+DISK_get_saveimagepath returning /tmp/amiguard-m21-run/fsuae/Save States/runtime/workbench12.sdf
+DISK_get_saveimagepath returning /tmp/amiguard-m21-run/fsuae/Save States/runtime/workbench12.sdf
+drive_insert returning, drv->wrprot=0
+gui_disk_image_change drive 0 name /tmp/amiguard-m21-run/workbench12.adf write protected 1
+DISK_get_saveimagepath returning /tmp/amiguard-m21-run/fsuae/Save States/runtime/workbench12.sdf
+DISK_get_saveimagepath returning /tmp/amiguard-m21-run/fsuae/Save States/runtime/workbench12.sdf
+driveclick_insert drive=0 eject=0 click_initialized=0 wave_initialized=0 currprefs.floppyslots[drive].dfxclick=1
+drive_insert returning, drv->wrprot=0
+mousehack_reset
+PAL mode V=50.0000Hz H=15625.0881Hz (227x312+0) IDX=10 (PAL) D=0 RTG=0/0
+target_graphics_buffer_update - clearing buffer
+RTGFREQ: 312*50.0000 = 15600.0000 / 50.0 = 312
+[AUDIO] fs_emu_audio_resume_stream 0
+gfx_set_picasso_state 0
+ -- stub -- fpux_restore 
+hardreset, memory cleared
+init_sound
+driveclick_init
+open_sound returning 1
+[AUDIO] Buffer underrun in stream 0
+wait_for_frame_no_netplay: new frame rate 50.00 (time: 20000)
+fs_uae_reconfigure_input_ports_amiga
+sending event to set port 0 to mode 1
+sending event to set port 1 to mode 2
+fs_uae_reconfigure_input_ports_host
+configuring joystick port 0
+* nothing in port
+* FIXME
+configuring joystick port 1
+* nothing in port
+* FIXME
+configuring joystick port 2
+* nothing in port
+* FIXME
+configuring joystick port 3
+* nothing in port
+* FIXME
+configuring joystick port 4
+* nothing in port
+* FIXME
+configuring joystick port 5
+* nothing in port
+* FIXME
+configuring joystick port 6
+* nothing in port
+* FIXME
+configuring joystick port 7
+* nothing in port
+* FIXME
+map_custom_keyboard_actions
+map_custom_joystick_actions
+[INPUT] Map custom joystick actions for keyboard
+[INPUT] Config name "keyboard_0_0_0_0_linux"
+get system config for device: keyboard_0_0_0_0_linux
+checked data "input/keyboard_0_0_0_0_linux.conf" = 3
+config file for keyboard_0_0_0_0_linux was not found
+[INPUT] Did not find generic gamepad config for device "keyboard_0_0_0_0_linux"
+config name "keyboard"
+get system config for device: keyboard
+checked data "input/keyboard.conf" = 0
+read config for keyboard for universal (from data)
+checked data "input/default_keyboard.conf" = 0
+read config for default_keyboard for universal (from data)
+no config for platform universal
+[INPUT] Did not find generic gamepad config for device"keyboard"
+[INPUT] Map custom joystick actions for mouse
+[INPUT] Config name "mouse_0_0_0_0_linux"
+get system config for device: mouse_0_0_0_0_linux
+checked data "input/mouse_0_0_0_0_linux.conf" = 3
+config file for mouse_0_0_0_0_linux was not found
+[INPUT] Did not find generic gamepad config for device "mouse_0_0_0_0_linux"
+config name "mouse"
+get system config for device: mouse
+checked data "input/mouse.conf" = 0
+read config for mouse for universal (from data)
+no config for platform universal
+[INPUT] Did not find generic gamepad config for device"mouse"
+amiga_set_joystick_port_mode port=0 mode=1
+fs_uae_reconfigure_input_ports_host
+configuring joystick port 0
+* amiga mouse
+* using device MOUSE
+mapping mouse to port 0
+fs_emu_configure_mouse (device: MOUSE)
+did not match device #0 (Keyboard)
+matched device #1
+configuring joystick port 1
+* nothing in port
+* FIXME
+configuring joystick port 2
+* nothing in port
+* FIXME
+configuring joystick port 3
+* nothing in port
+* FIXME
+configuring joystick port 4
+* nothing in port
+* FIXME
+configuring joystick port 5
+* nothing in port
+* FIXME
+configuring joystick port 6
+* nothing in port
+* FIXME
+configuring joystick port 7
+* nothing in port
+* FIXME
+map_custom_keyboard_actions
+map_custom_joystick_actions
+[INPUT] Map custom joystick actions for keyboard
+[INPUT] Config name "keyboard_0_0_0_0_linux"
+get system config for device: keyboard_0_0_0_0_linux
+checked data "input/keyboard_0_0_0_0_linux.conf" = 3
+config file for keyboard_0_0_0_0_linux was not found
+[INPUT] Did not find generic gamepad config for device "keyboard_0_0_0_0_linux"
+config name "keyboard"
+get system config for device: keyboard
+checked data "input/keyboard.conf" = 0
+read config for keyboard for universal (from data)
+checked data "input/default_keyboard.conf" = 0
+read config for default_keyboard for universal (from data)
+no config for platform universal
+[INPUT] Did not find generic gamepad config for device"keyboard"
+[INPUT] Map custom joystick actions for mouse
+[INPUT] Config name "mouse_0_0_0_0_linux"
+get system config for device: mouse_0_0_0_0_linux
+checked data "input/mouse_0_0_0_0_linux.conf" = 3
+config file for mouse_0_0_0_0_linux was not found
+[INPUT] Did not find generic gamepad config for device "mouse_0_0_0_0_linux"
+config name "mouse"
+get system config for device: mouse
+checked data "input/mouse.conf" = 0
+read config for mouse for universal (from data)
+no config for platform universal
+[INPUT] Did not find generic gamepad config for device"mouse"
+amiga_set_joystick_port_mode port=1 mode=2
+fs_uae_reconfigure_input_ports_host
+configuring joystick port 0
+* amiga mouse
+* using device MOUSE
+mapping mouse to port 0
+fs_emu_configure_mouse (device: MOUSE)
+did not match device #0 (Keyboard)
+matched device #1
+configuring joystick port 1
+* amiga joystick
+* using device KEYBOARD
+configure joystick "KEYBOARD" for "amiga" (port index 1
+matched device #0
+config name "Keyboard"
+get system config for device: Keyboard
+checked data "input/Keyboard.conf" = 3
+config file for Keyboard was not found
+did not find config for device "Keyboard"
+config name "keyboard_0_0_0_0_linux"
+get system config for device: keyboard_0_0_0_0_linux
+checked data "input/keyboard_0_0_0_0_linux.conf" = 3
+config file for keyboard_0_0_0_0_linux was not found
+did not find config for device "keyboard_0_0_0_0_linux"
+config name "keyboard"
+get system config for device: keyboard
+checked data "input/keyboard.conf" = 0
+read config for keyboard for amiga (from data)
+checked data "input/default_keyboard.conf" = 0
+read config for default_keyboard for amiga (from data)
+key_ralt (307) => action "1" (68)
+key_down (274) => action "down" (63)
+key_right (275) => action "right" (61)
+did not find action for "default_keyboard"
+key_up (273) => action "up" (62)
+key_left (276) => action "left" (60)
+key_rctrl (305) => action "1" (68)
+[INPUT] Config name "keyboard_0_0_0_0_linux"
+get system config for device: keyboard_0_0_0_0_linux
+checked data "input/keyboard_0_0_0_0_linux.conf" = 3
+config file for keyboard_0_0_0_0_linux was not found
+[INPUT] Did not find generic gamepad config for device "keyboard_0_0_0_0_linux"
+config name "keyboard"
+get system config for device: keyboard
+checked data "input/keyboard.conf" = 0
+read config for keyboard for universal (from data)
+checked data "input/default_keyboard.conf" = 0
+read config for default_keyboard for universal (from data)
+no config for platform universal
+[INPUT] Did not find generic gamepad config for device"keyboard"
+configuring joystick port 2
+* nothing in port
+* FIXME
+configuring joystick port 3
+* nothing in port
+* FIXME
+configuring joystick port 4
+* nothing in port
+* FIXME
+configuring joystick port 5
+* nothing in port
+* FIXME
+configuring joystick port 6
+* nothing in port
+* FIXME
+configuring joystick port 7
+* nothing in port
+* FIXME
+map_custom_keyboard_actions
+map_custom_joystick_actions
+[INPUT] Map custom joystick actions for keyboard
+[INPUT] Config name "keyboard_0_0_0_0_linux"
+get system config for device: keyboard_0_0_0_0_linux
+checked data "input/keyboard_0_0_0_0_linux.conf" = 3
+config file for keyboard_0_0_0_0_linux was not found
+[INPUT] Did not find generic gamepad config for device "keyboard_0_0_0_0_linux"
+config name "keyboard"
+get system config for device: keyboard
+checked data "input/keyboard.conf" = 0
+read config for keyboard for universal (from data)
+checked data "input/default_keyboard.conf" = 0
+read config for default_keyboard for universal (from data)
+no config for platform universal
+[INPUT] Did not find generic gamepad config for device"keyboard"
+[INPUT] Map custom joystick actions for mouse
+[INPUT] Config name "mouse_0_0_0_0_linux"
+get system config for device: mouse_0_0_0_0_linux
+checked data "input/mouse_0_0_0_0_linux.conf" = 3
+config file for mouse_0_0_0_0_linux was not found
+[INPUT] Did not find generic gamepad config for device "mouse_0_0_0_0_linux"
+config name "mouse"
+get system config for device: mouse
+checked data "input/mouse.conf" = 0
+read config for mouse for universal (from data)
+no config for platform universal
+[INPUT] Did not find generic gamepad config for device"mouse"
+Display Size: 640x480 Offset: 74x36
+First: 26 Last: 0 MinV: 0 MaxV: 0 Min: 26
+[VIDEO] fs_emu_set_video_frame_rate: 50.00 (50)
+[DISPLAY] Sync: g_fs_emu_video_sync_to_vblank = 0
+[AUDIO] Buffer underrun in stream 0
+[AUDIO] Buffer underrun in stream 0
+Illegal instruction: 4e7b at 00FC0564 -> 00FC0582
+SERIAL: period=372, baud=9600, hsyncs=14, bits=8, PC=fc21f8
+Card 1: Z2 0x00e90000   64K IO  Filesystem autoconfig
+Memory map after autoconfig:
+00000000    2048K/4 =     512K Chip memory
+00200000    8192K/0 =    8192K <none>
+00A00000    2048K/0 =    2048K CIA
+00C00000    1536K/0 =    1536K Custom chipset
+00D80000     256K/0 =     256K <none>
+00DC0000      64K/0 =      64K Battery backed up clock (MSM6242B)
+00DD0000      64K/0 =      64K <none>
+00DE0000     128K/0 =     128K Custom chipset
+00E00000     512K/2 =     256K Kickstart ROM (A6CE1636)
+=KS ROM v1.2 (A500,A1000,A2000) rev 33.180 (256k) [315093-01]
+00E80000      64K/0 =      64K <none>
+00E90000      64K/0 =      64K Filesystem autoconfig
+00EA0000     384K/0 =     384K <none>
+00F00000      64K/1 =      64K UAE Boot ROM
+00F10000     448K/0 =     448K <none>
+00F80000     512K/2 =     256K Kickstart ROM (A6CE1636)
+=KS ROM v1.2 (A500,A1000,A2000) rev 33.180 (256k) [315093-01]
+PAL mode V=50.0000Hz H=15625.0881Hz (227x312+1) IDX=10 (PAL) D=0 RTG=0/0
+target_graphics_buffer_update - clearing buffer
+Display Size: 640x400 Offset: 74x36
+First: 44 Last: 244 MinV: 26 MaxV: 313 Min: 26
+filesystem: diagentry 00005b60 configdev 00000000
+Pre-KS 1.3 automount hack: DF0: boot block faked.
+Pre-KS 1.3 automount hack: init drives.
+Mounting uaehf.device 0 (0):
+FS: mounted virtual unit DH0 (/tmp/amiguard-m21-run/work)
+FS: AGTest (flags=00000002,E=0,ED=1,EF=0,native='/tmp/amiguard-m21-run/work') starting..
+Pre-KS 1.3 automount hack: patch boot handler process. DP=0000af10 Proc 0000abf0 pr_FileSystemTask=0000deb4.
+Display Size: 640x548 Offset: 74x0
+First: 26 Last: 320 MinV: 26 MaxV: 300 Min: 26
+Display Size: 640x512 Offset: 74x36
+First: 26 Last: 320 MinV: 44 MaxV: 300 Min: 26
+need_metadata_file 2 WF_ALWAYS
+- writing mode ----rwed
+need_metadata_file 6 WF_ALWAYS WF_EXISTS
+- writing mode ----rwed
+need_metadata_file 2 WF_ALWAYS
+- writing mode ----rwed
+need_metadata_file 6 WF_ALWAYS WF_EXISTS
+- writing mode ----rwed
+need_metadata_file 2 WF_ALWAYS
+- writing mode ----rwed
+need_metadata_file 6 WF_ALWAYS WF_EXISTS
+- writing mode ----rwed
+writing screenshot to /tmp/amiguard-m21-run/screenshots/fs-uae-full-2609070750-01.png
+saved screenshot
+writing screenshot to /tmp/amiguard-m21-run/screenshots/fs-uae-crop-2609070750-01.png
+saved screenshot
+writing screenshot to /tmp/amiguard-m21-run/screenshots/fs-uae-real-2609070750-01.png
+reading opengl frame buffer (960 x 720)
+saved screenshot
+Saved screenshot 1
+[AUDIO] fs_emu_audio_resume_stream 0
+need_metadata_file 2 WF_ALWAYS
+- writing mode ----rwed
+need_metadata_file 6 WF_ALWAYS WF_EXISTS
+- writing mode ----rwed
+WARNING: my_open could not open (/tmp/amiguard-m21-run/work/fixtures/valid.hunk, 2)
+  O_RDWR
+need_metadata_file 2 WF_ALWAYS
+- writing mode ----rwed
+need_metadata_file 6 WF_ALWAYS WF_EXISTS
+- writing mode ----rwed
+need_metadata_file 2 WF_ALWAYS
+- writing mode ----rwed
+need_metadata_file 6 WF_ALWAYS WF_EXISTS
+- writing mode ----rwed
+writing screenshot to /tmp/amiguard-m21-run/screenshots/fs-uae-full-2609070750-02.png
+saved screenshot
+writing screenshot to /tmp/amiguard-m21-run/scr

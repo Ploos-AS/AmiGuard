@@ -1,0 +1,7 @@
+/tmp/amiguard-m21-final/work/AmiGuard: AmigaOS loadseg()ble executable/binary
+
+/tmp/amiguard-m21-final/work/AmiGuard:     file format amiga
+architecture: m68k:68000, flags 0x00000011:
+HAS_RELOC, HAS_SYMS
+start address 0x00000000
+
