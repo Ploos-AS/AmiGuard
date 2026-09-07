@@ -18,7 +18,7 @@ This milestone can be qualified entirely with synthetic benign fixtures. No real
 
 ## Qualification
 
-M2.2m is complete when repository CI passes with tests covering neutral report generation, matching and mismatching M2.2l intake linkage, wrong intake kind, symlink and oversize rejection, and JSON output-file generation. The report contract must continue to assert no malware claim, no native activation, no cleaner, and no promotion.
+M2.2m is complete when repository CI passes with tests covering neutral report generation, matching and mismatching M2.2l intake linkage, wrong intake kind, symlink and oversize rejection, JSON output-file generation, and short-input neutrality. The report contract must continue to assert no malware claim, no native activation, no cleaner, and no promotion.
 
 ## Example
 
