@@ -1,0 +1,5 @@
+FailAt 21
+AmiGuard >AGTest:nearmiss.log FILE AGFiles:eicar-nearmiss.bin
+Probe >AGTest:nearmiss-probe.log
+Type AGTest:nearmiss.log
+Echo >AGTest:nearmiss.done "RETURNED"

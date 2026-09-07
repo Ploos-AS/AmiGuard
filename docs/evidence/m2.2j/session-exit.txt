@@ -1,0 +1,2 @@
+All runtime stages completed. Driver exit code: 0. FS-UAE quit via F12+q.
+Two Xlib BadWindow messages occurred during key release after the FS-UAE window closed (major opcode 25 / SendEvent). This did not fail the driver or any runtime gate.

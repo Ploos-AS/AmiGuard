@@ -1,0 +1,5 @@
+FailAt 21
+AmiGuard >AGTest:customone.log DF0:
+Probe >AGTest:customone-probe.log
+Type AGTest:customone.log
+Echo >AGTest:customone.done "RETURNED"

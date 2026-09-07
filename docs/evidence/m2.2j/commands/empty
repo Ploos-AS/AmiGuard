@@ -1,0 +1,6 @@
+FailAt 21
+AmiGuard >AGTest:empty.log DF0:
+Probe >AGTest:empty-probe.log
+Type AGTest:empty.log
+Echo >AGTest:empty.done "RETURNED"
+Echo "EMPTY RETURNED"

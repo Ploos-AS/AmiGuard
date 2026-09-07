@@ -1,0 +1,5 @@
+FailAt 21
+AmiGuard >AGTest:filevalid.log FILE AGFiles:valid.hunk
+Probe >AGTest:filevalid-probe.log
+Type AGTest:filevalid.log
+Echo >AGTest:filevalid.done "RETURNED"

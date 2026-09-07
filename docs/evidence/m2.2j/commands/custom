@@ -1,0 +1,6 @@
+FailAt 21
+AmiGuard >AGTest:custom.log DF0:
+Probe >AGTest:custom-probe.log
+Type AGTest:custom.log
+Echo >AGTest:custom.done "RETURNED"
+Echo "CUSTOM RETURNED"

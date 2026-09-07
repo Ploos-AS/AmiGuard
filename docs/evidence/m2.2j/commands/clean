@@ -1,0 +1,6 @@
+FailAt 21
+AmiGuard >AGTest:clean.log DF0:
+Probe >AGTest:clean-probe.log
+Type AGTest:clean.log
+Echo >AGTest:clean.done "RETURNED"
+Echo "CLEAN RETURNED"

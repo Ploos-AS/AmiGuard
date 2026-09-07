@@ -1,0 +1,33 @@
+FailAt 21
+Probe >AGTest:nearmissseries-before.log
+AmiGuard >AGTest:nearmissseries-01.log FILE AGFiles:eicar-nearmiss.bin
+Probe >AGTest:nearmissseries-memory-01.log
+Echo "SCAN 1 RETURNED"
+AmiGuard >AGTest:nearmissseries-02.log FILE AGFiles:eicar-nearmiss.bin
+Probe >AGTest:nearmissseries-memory-02.log
+Echo "SCAN 2 RETURNED"
+AmiGuard >AGTest:nearmissseries-03.log FILE AGFiles:eicar-nearmiss.bin
+Probe >AGTest:nearmissseries-memory-03.log
+Echo "SCAN 3 RETURNED"
+AmiGuard >AGTest:nearmissseries-04.log FILE AGFiles:eicar-nearmiss.bin
+Probe >AGTest:nearmissseries-memory-04.log
+Echo "SCAN 4 RETURNED"
+AmiGuard >AGTest:nearmissseries-05.log FILE AGFiles:eicar-nearmiss.bin
+Probe >AGTest:nearmissseries-memory-05.log
+Echo "SCAN 5 RETURNED"
+AmiGuard >AGTest:nearmissseries-06.log FILE AGFiles:eicar-nearmiss.bin
+Probe >AGTest:nearmissseries-memory-06.log
+Echo "SCAN 6 RETURNED"
+AmiGuard >AGTest:nearmissseries-07.log FILE AGFiles:eicar-nearmiss.bin
+Probe >AGTest:nearmissseries-memory-07.log
+Echo "SCAN 7 RETURNED"
+AmiGuard >AGTest:nearmissseries-08.log FILE AGFiles:eicar-nearmiss.bin
+Probe >AGTest:nearmissseries-memory-08.log
+Echo "SCAN 8 RETURNED"
+AmiGuard >AGTest:nearmissseries-09.log FILE AGFiles:eicar-nearmiss.bin
+Probe >AGTest:nearmissseries-memory-09.log
+Echo "SCAN 9 RETURNED"
+AmiGuard >AGTest:nearmissseries-10.log FILE AGFiles:eicar-nearmiss.bin
+Probe >AGTest:nearmissseries-memory-10.log
+Echo "SCAN 10 RETURNED"
+Echo >AGTest:nearmissseries.done "RETURNED"

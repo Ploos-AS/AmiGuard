@@ -1,0 +1,16 @@
+Original driver interpreter: /usr/bin/python3, Python 3.14.4.
+GUI subprocess uses sys.executable in runtime-driver.py.
+Initial blocker: ModuleNotFoundError: No module named 'Xlib'.
+Neither system interpreter nor /home/pgo/.venvs/amiga/bin/python imported Xlib.
+Runtime-only fix (no repository/system dependency changes):
+/usr/bin/python3 -m pip install --no-cache-dir --target /tmp/amiguard-m22j-python python-xlib==0.33
+Installed python-xlib 0.33 and six 1.17.0.
+Verification with the same interpreter:
+PYTHONPATH=/tmp/amiguard-m22j-python /usr/bin/python3 -c 'import Xlib; print(Xlib.__file__)'
+Output: /tmp/amiguard-m22j-python/Xlib/__init__.py
+Launch:
+PYTHONPATH=/tmp/amiguard-m22j-python /usr/bin/python3 /tmp/amiguard-m22j-run/evidence/runtime-driver.py
+First GUI action: capture startup.png from exactly one visible and active FS-UAE window.
+Startup screenshot capture succeeded; Xlib blocker resolved.
+Prior work/*.done and work/*.log moved to initial-blocked/work before launch.
+Prior evidence archived to initial-blocked/evidence. No stale completion markers reused.

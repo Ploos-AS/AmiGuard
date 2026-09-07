@@ -1,0 +1,33 @@
+FailAt 21
+Probe >AGTest:validseries-before.log
+AmiGuard >AGTest:validseries-01.log FILE AGFiles:valid.hunk
+Probe >AGTest:validseries-memory-01.log
+Echo "SCAN 1 RETURNED"
+AmiGuard >AGTest:validseries-02.log FILE AGFiles:valid.hunk
+Probe >AGTest:validseries-memory-02.log
+Echo "SCAN 2 RETURNED"
+AmiGuard >AGTest:validseries-03.log FILE AGFiles:valid.hunk
+Probe >AGTest:validseries-memory-03.log
+Echo "SCAN 3 RETURNED"
+AmiGuard >AGTest:validseries-04.log FILE AGFiles:valid.hunk
+Probe >AGTest:validseries-memory-04.log
+Echo "SCAN 4 RETURNED"
+AmiGuard >AGTest:validseries-05.log FILE AGFiles:valid.hunk
+Probe >AGTest:validseries-memory-05.log
+Echo "SCAN 5 RETURNED"
+AmiGuard >AGTest:validseries-06.log FILE AGFiles:valid.hunk
+Probe >AGTest:validseries-memory-06.log
+Echo "SCAN 6 RETURNED"
+AmiGuard >AGTest:validseries-07.log FILE AGFiles:valid.hunk
+Probe >AGTest:validseries-memory-07.log
+Echo "SCAN 7 RETURNED"
+AmiGuard >AGTest:validseries-08.log FILE AGFiles:valid.hunk
+Probe >AGTest:validseries-memory-08.log
+Echo "SCAN 8 RETURNED"
+AmiGuard >AGTest:validseries-09.log FILE AGFiles:valid.hunk
+Probe >AGTest:validseries-memory-09.log
+Echo "SCAN 9 RETURNED"
+AmiGuard >AGTest:validseries-10.log FILE AGFiles:valid.hunk
+Probe >AGTest:validseries-memory-10.log
+Echo "SCAN 10 RETURNED"
+Echo >AGTest:validseries.done "RETURNED"

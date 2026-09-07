@@ -1,0 +1,33 @@
+FailAt 21
+Probe >AGTest:malformedseries-before.log
+AmiGuard >AGTest:malformedseries-01.log FILE AGFiles:malformed.hunk
+Probe >AGTest:malformedseries-memory-01.log
+Echo "SCAN 1 RETURNED"
+AmiGuard >AGTest:malformedseries-02.log FILE AGFiles:malformed.hunk
+Probe >AGTest:malformedseries-memory-02.log
+Echo "SCAN 2 RETURNED"
+AmiGuard >AGTest:malformedseries-03.log FILE AGFiles:malformed.hunk
+Probe >AGTest:malformedseries-memory-03.log
+Echo "SCAN 3 RETURNED"
+AmiGuard >AGTest:malformedseries-04.log FILE AGFiles:malformed.hunk
+Probe >AGTest:malformedseries-memory-04.log
+Echo "SCAN 4 RETURNED"
+AmiGuard >AGTest:malformedseries-05.log FILE AGFiles:malformed.hunk
+Probe >AGTest:malformedseries-memory-05.log
+Echo "SCAN 5 RETURNED"
+AmiGuard >AGTest:malformedseries-06.log FILE AGFiles:malformed.hunk
+Probe >AGTest:malformedseries-memory-06.log
+Echo "SCAN 6 RETURNED"
+AmiGuard >AGTest:malformedseries-07.log FILE AGFiles:malformed.hunk
+Probe >AGTest:malformedseries-memory-07.log
+Echo "SCAN 7 RETURNED"
+AmiGuard >AGTest:malformedseries-08.log FILE AGFiles:malformed.hunk
+Probe >AGTest:malformedseries-memory-08.log
+Echo "SCAN 8 RETURNED"
+AmiGuard >AGTest:malformedseries-09.log FILE AGFiles:malformed.hunk
+Probe >AGTest:malformedseries-memory-09.log
+Echo "SCAN 9 RETURNED"
+AmiGuard >AGTest:malformedseries-10.log FILE AGFiles:malformed.hunk
+Probe >AGTest:malformedseries-memory-10.log
+Echo "SCAN 10 RETURNED"
+Echo >AGTest:malformedseries.done "RETURNED"

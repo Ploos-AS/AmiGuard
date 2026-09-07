@@ -1,0 +1,12 @@
+FailAt 21
+AmiGuard >AGTest:dh0.log DH0:
+Probe >AGTest:dh0-probe.log
+Type AGTest:dh0.log
+AmiGuard >AGTest:df4.log DF4:
+Probe >AGTest:df4-probe.log
+Type AGTest:df4.log
+AmiGuard >AGTest:nonsense.log nonsense
+Probe >AGTest:nonsense-probe.log
+Type AGTest:nonsense.log
+Echo >AGTest:invalid.done "RETURNED"
+Echo "INVALID RETURNED"

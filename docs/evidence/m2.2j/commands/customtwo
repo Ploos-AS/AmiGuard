@@ -1,0 +1,5 @@
+FailAt 21
+AmiGuard >AGTest:customtwo.log DF0:
+Probe >AGTest:customtwo-probe.log
+Type AGTest:customtwo.log
+Echo >AGTest:customtwo.done "RETURNED"

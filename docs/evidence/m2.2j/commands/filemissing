@@ -1,0 +1,5 @@
+FailAt 21
+AmiGuard >AGTest:filemissing.log FILE AGFiles:does-not-exist
+Probe >AGTest:filemissing-probe.log
+Type AGTest:filemissing.log
+Echo >AGTest:filemissing.done "RETURNED"

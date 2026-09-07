@@ -1,0 +1,5 @@
+FailAt 21
+AmiGuard >AGTest:fileplain.log FILE AGFiles:plain.txt
+Probe >AGTest:fileplain-probe.log
+Type AGTest:fileplain.log
+Echo >AGTest:fileplain.done "RETURNED"

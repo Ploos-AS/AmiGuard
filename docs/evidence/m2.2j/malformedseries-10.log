@@ -1,0 +1,4 @@
+AmiGuard 0.0.2 M0.2
+Target: Kickstart 1.2+ / Motorola 68000
+Reading file read-only: AGFiles:malformed.hunk
+MALFORMED-HUNK: HUNK structure is malformed or unsupported (4 bytes)

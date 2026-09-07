@@ -1,0 +1,6 @@
+FailAt 21
+Dir >AGTest:df0-after.log DF0:
+Probe >AGTest:post-probe.log
+Type AGTest:df0-after.log
+Echo >AGTest:post.done "RETURNED"
+Echo "POST RETURNED"

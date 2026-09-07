@@ -1,0 +1,34 @@
+FailAt 21
+Probe >AGTest:repeat-before.log
+AmiGuard >AGTest:repeat-01.log DF0:
+Probe >AGTest:memory-01.log
+Echo "SCAN 01 RETURNED"
+AmiGuard >AGTest:repeat-02.log DF0:
+Probe >AGTest:memory-02.log
+Echo "SCAN 02 RETURNED"
+AmiGuard >AGTest:repeat-03.log DF0:
+Probe >AGTest:memory-03.log
+Echo "SCAN 03 RETURNED"
+AmiGuard >AGTest:repeat-04.log DF0:
+Probe >AGTest:memory-04.log
+Echo "SCAN 04 RETURNED"
+AmiGuard >AGTest:repeat-05.log DF0:
+Probe >AGTest:memory-05.log
+Echo "SCAN 05 RETURNED"
+AmiGuard >AGTest:repeat-06.log DF0:
+Probe >AGTest:memory-06.log
+Echo "SCAN 06 RETURNED"
+AmiGuard >AGTest:repeat-07.log DF0:
+Probe >AGTest:memory-07.log
+Echo "SCAN 07 RETURNED"
+AmiGuard >AGTest:repeat-08.log DF0:
+Probe >AGTest:memory-08.log
+Echo "SCAN 08 RETURNED"
+AmiGuard >AGTest:repeat-09.log DF0:
+Probe >AGTest:memory-09.log
+Echo "SCAN 09 RETURNED"
+AmiGuard >AGTest:repeat-10.log DF0:
+Probe >AGTest:memory-10.log
+Echo "SCAN 10 RETURNED"
+Echo >AGTest:repeat.done "RETURNED"
+Echo "REPEAT RETURNED"

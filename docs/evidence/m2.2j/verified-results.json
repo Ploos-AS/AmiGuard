@@ -1,0 +1,102 @@
+{
+  "required_gates": "PASS",
+  "memory": {
+    "positiveseries": {
+      "before": 351608,
+      "after_each": [
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608
+      ],
+      "passes": 10
+    },
+    "nearmissseries": {
+      "before": 351608,
+      "after_each": [
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608
+      ],
+      "passes": 10
+    },
+    "validseries": {
+      "before": 351608,
+      "after_each": [
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608
+      ],
+      "passes": 10
+    },
+    "plainseries": {
+      "before": 351608,
+      "after_each": [
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608
+      ],
+      "passes": 10
+    },
+    "malformedseries": {
+      "before": 351608,
+      "after_each": [
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608,
+        351608
+      ],
+      "passes": 10
+    }
+  },
+  "read_only": "all fixture, media and original hashes unchanged",
+  "binary_sha256": "72f123101cc54d5b96ee5f7b665c2848ce53a0fdd7c5d8bf2b01621be2b67fde",
+  "screenshots_reviewed": [
+    "startup",
+    "positive",
+    "nearmiss",
+    "filevalid",
+    "fileplain",
+    "filemalformed",
+    "fileoversize",
+    "filemissing",
+    "positiveseries",
+    "clean",
+    "customone",
+    "custom",
+    "post"
+  ]
+}

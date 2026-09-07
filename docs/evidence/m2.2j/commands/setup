@@ -1,0 +1,11 @@
+FailAt 21
+Assign C: AGTest:c
+Assign S: AGTest:s
+Assign T: RAM:
+CD AGTest:
+Version
+AmiGuard >AGTest:start.log
+Probe >AGTest:start-probe.log
+Type AGTest:start.log
+Echo >AGTest:setup.done "RETURNED"
+Echo "SETUP RETURNED"

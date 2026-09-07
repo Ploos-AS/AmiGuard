@@ -1,0 +1,5 @@
+FailAt 21
+AmiGuard >AGTest:fileoversize.log FILE AGFiles:oversize.bin
+Probe >AGTest:fileoversize-probe.log
+Type AGTest:fileoversize.log
+Echo >AGTest:fileoversize.done "RETURNED"

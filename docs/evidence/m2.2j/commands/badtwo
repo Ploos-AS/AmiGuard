@@ -1,0 +1,5 @@
+FailAt 21
+AmiGuard >AGTest:badtwo.log DF0:
+Probe >AGTest:badtwo-probe.log
+Type AGTest:badtwo.log
+Echo >AGTest:badtwo.done "RETURNED"

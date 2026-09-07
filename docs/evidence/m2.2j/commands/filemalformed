@@ -1,0 +1,5 @@
+FailAt 21
+AmiGuard >AGTest:filemalformed.log FILE AGFiles:malformed.hunk
+Probe >AGTest:filemalformed-probe.log
+Type AGTest:filemalformed.log
+Echo >AGTest:filemalformed.done "RETURNED"

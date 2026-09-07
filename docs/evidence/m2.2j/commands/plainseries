@@ -1,0 +1,33 @@
+FailAt 21
+Probe >AGTest:plainseries-before.log
+AmiGuard >AGTest:plainseries-01.log FILE AGFiles:plain.txt
+Probe >AGTest:plainseries-memory-01.log
+Echo "SCAN 1 RETURNED"
+AmiGuard >AGTest:plainseries-02.log FILE AGFiles:plain.txt
+Probe >AGTest:plainseries-memory-02.log
+Echo "SCAN 2 RETURNED"
+AmiGuard >AGTest:plainseries-03.log FILE AGFiles:plain.txt
+Probe >AGTest:plainseries-memory-03.log
+Echo "SCAN 3 RETURNED"
+AmiGuard >AGTest:plainseries-04.log FILE AGFiles:plain.txt
+Probe >AGTest:plainseries-memory-04.log
+Echo "SCAN 4 RETURNED"
+AmiGuard >AGTest:plainseries-05.log FILE AGFiles:plain.txt
+Probe >AGTest:plainseries-memory-05.log
+Echo "SCAN 5 RETURNED"
+AmiGuard >AGTest:plainseries-06.log FILE AGFiles:plain.txt
+Probe >AGTest:plainseries-memory-06.log
+Echo "SCAN 6 RETURNED"
+AmiGuard >AGTest:plainseries-07.log FILE AGFiles:plain.txt
+Probe >AGTest:plainseries-memory-07.log
+Echo "SCAN 7 RETURNED"
+AmiGuard >AGTest:plainseries-08.log FILE AGFiles:plain.txt
+Probe >AGTest:plainseries-memory-08.log
+Echo "SCAN 8 RETURNED"
+AmiGuard >AGTest:plainseries-09.log FILE AGFiles:plain.txt
+Probe >AGTest:plainseries-memory-09.log
+Echo "SCAN 9 RETURNED"
+AmiGuard >AGTest:plainseries-10.log FILE AGFiles:plain.txt
+Probe >AGTest:plainseries-memory-10.log
+Echo "SCAN 10 RETURNED"
+Echo >AGTest:plainseries.done "RETURNED"

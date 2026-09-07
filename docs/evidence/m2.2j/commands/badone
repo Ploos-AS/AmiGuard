@@ -1,0 +1,5 @@
+FailAt 21
+AmiGuard >AGTest:badone.log DF0:
+Probe >AGTest:badone-probe.log
+Type AGTest:badone.log
+Echo >AGTest:badone.done "RETURNED"

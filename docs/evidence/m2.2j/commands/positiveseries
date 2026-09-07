@@ -1,0 +1,33 @@
+FailAt 21
+Probe >AGTest:positiveseries-before.log
+AmiGuard >AGTest:positiveseries-01.log FILE AGFiles:eicar.com.txt
+Probe >AGTest:positiveseries-memory-01.log
+Echo "SCAN 1 RETURNED"
+AmiGuard >AGTest:positiveseries-02.log FILE AGFiles:eicar.com.txt
+Probe >AGTest:positiveseries-memory-02.log
+Echo "SCAN 2 RETURNED"
+AmiGuard >AGTest:positiveseries-03.log FILE AGFiles:eicar.com.txt
+Probe >AGTest:positiveseries-memory-03.log
+Echo "SCAN 3 RETURNED"
+AmiGuard >AGTest:positiveseries-04.log FILE AGFiles:eicar.com.txt
+Probe >AGTest:positiveseries-memory-04.log
+Echo "SCAN 4 RETURNED"
+AmiGuard >AGTest:positiveseries-05.log FILE AGFiles:eicar.com.txt
+Probe >AGTest:positiveseries-memory-05.log
+Echo "SCAN 5 RETURNED"
+AmiGuard >AGTest:positiveseries-06.log FILE AGFiles:eicar.com.txt
+Probe >AGTest:positiveseries-memory-06.log
+Echo "SCAN 6 RETURNED"
+AmiGuard >AGTest:positiveseries-07.log FILE AGFiles:eicar.com.txt
+Probe >AGTest:positiveseries-memory-07.log
+Echo "SCAN 7 RETURNED"
+AmiGuard >AGTest:positiveseries-08.log FILE AGFiles:eicar.com.txt
+Probe >AGTest:positiveseries-memory-08.log
+Echo "SCAN 8 RETURNED"
+AmiGuard >AGTest:positiveseries-09.log FILE AGFiles:eicar.com.txt
+Probe >AGTest:positiveseries-memory-09.log
+Echo "SCAN 9 RETURNED"
+AmiGuard >AGTest:positiveseries-10.log FILE AGFiles:eicar.com.txt
+Probe >AGTest:positiveseries-memory-10.log
+Echo "SCAN 10 RETURNED"
+Echo >AGTest:positiveseries.done "RETURNED"

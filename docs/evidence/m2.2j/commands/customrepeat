@@ -1,0 +1,18 @@
+FailAt 21
+Probe >AGTest:custom-before.log
+AmiGuard >AGTest:custom-repeat-01.log DF0:
+Probe >AGTest:custom-memory-01.log
+Echo "CUSTOM SCAN 1 RETURNED"
+AmiGuard >AGTest:custom-repeat-02.log DF0:
+Probe >AGTest:custom-memory-02.log
+Echo "CUSTOM SCAN 2 RETURNED"
+AmiGuard >AGTest:custom-repeat-03.log DF0:
+Probe >AGTest:custom-memory-03.log
+Echo "CUSTOM SCAN 3 RETURNED"
+AmiGuard >AGTest:custom-repeat-04.log DF0:
+Probe >AGTest:custom-memory-04.log
+Echo "CUSTOM SCAN 4 RETURNED"
+AmiGuard >AGTest:custom-repeat-05.log DF0:
+Probe >AGTest:custom-memory-05.log
+Echo "CUSTOM SCAN 5 RETURNED"
+Echo >AGTest:customrepeat.done "RETURNED"

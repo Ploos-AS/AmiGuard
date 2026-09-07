@@ -1,0 +1,5 @@
+FailAt 21
+AmiGuard >AGTest:positive.log FILE AGFiles:eicar.com.txt
+Probe >AGTest:positive-probe.log
+Type AGTest:positive.log
+Echo >AGTest:positive.done "RETURNED"
