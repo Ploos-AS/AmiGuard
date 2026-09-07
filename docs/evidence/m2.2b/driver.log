@@ -1,0 +1,59 @@
+Captured FS-UAE frame /tmp/amiguard-m22b-run/screenshots/fs-uae-crop-2609070821-01.png to /tmp/amiguard-m22b-run/evidence/startup.png
+type: ['Execute AGTest:positive\n']
+Captured FS-UAE frame /tmp/amiguard-m22b-run/screenshots/fs-uae-crop-2609070821-02.png to /tmp/amiguard-m22b-run/evidence/positive.png
+type: ['Execute AGTest:nearmiss\n']
+Captured FS-UAE frame /tmp/amiguard-m22b-run/screenshots/fs-uae-crop-2609070821-03.png to /tmp/amiguard-m22b-run/evidence/nearmiss.png
+type: ['Execute AGTest:filevalid\n']
+Captured FS-UAE frame /tmp/amiguard-m22b-run/screenshots/fs-uae-crop-2609070821-04.png to /tmp/amiguard-m22b-run/evidence/filevalid.png
+type: ['Execute AGTest:fileplain\n']
+Captured FS-UAE frame /tmp/amiguard-m22b-run/screenshots/fs-uae-crop-2609070821-05.png to /tmp/amiguard-m22b-run/evidence/fileplain.png
+type: ['Execute AGTest:filemalformed\n']
+Captured FS-UAE frame /tmp/amiguard-m22b-run/screenshots/fs-uae-crop-2609070822-01.png to /tmp/amiguard-m22b-run/evidence/filemalformed.png
+type: ['Execute AGTest:fileoversize\n']
+Captured FS-UAE frame /tmp/amiguard-m22b-run/screenshots/fs-uae-crop-2609070822-02.png to /tmp/amiguard-m22b-run/evidence/fileoversize.png
+type: ['Execute AGTest:filemissing\n']
+Captured FS-UAE frame /tmp/amiguard-m22b-run/screenshots/fs-uae-crop-2609070822-03.png to /tmp/amiguard-m22b-run/evidence/filemissing.png
+type: ['Execute AGTest:positiveseries\n']
+Captured FS-UAE frame /tmp/amiguard-m22b-run/screenshots/fs-uae-crop-2609070822-04.png to /tmp/amiguard-m22b-run/evidence/positiveseries.png
+type: ['Execute AGTest:nearmissseries\n']
+Captured FS-UAE frame /tmp/amiguard-m22b-run/screenshots/fs-uae-crop-2609070822-05.png to /tmp/amiguard-m22b-run/evidence/nearmissseries.png
+type: ['Execute AGTest:validseries\n']
+Captured FS-UAE frame /tmp/amiguard-m22b-run/screenshots/fs-uae-crop-2609070823-01.png to /tmp/amiguard-m22b-run/evidence/validseries.png
+type: ['Execute AGTest:plainseries\n']
+Captured FS-UAE frame /tmp/amiguard-m22b-run/screenshots/fs-uae-crop-2609070823-02.png to /tmp/amiguard-m22b-run/evidence/plainseries.png
+type: ['Execute AGTest:malformedseries\n']
+Captured FS-UAE frame /tmp/amiguard-m22b-run/screenshots/fs-uae-crop-2609070823-03.png to /tmp/amiguard-m22b-run/evidence/malformedseries.png
+type: ['Execute AGTest:invalid\n']
+Captured FS-UAE frame /tmp/amiguard-m22b-run/screenshots/fs-uae-crop-2609070823-04.png to /tmp/amiguard-m22b-run/evidence/invalid.png
+key: ['F6']
+type: ['Execute AGTest:empty\n']
+Captured FS-UAE frame /tmp/amiguard-m22b-run/screenshots/fs-uae-crop-2609070823-05.png to /tmp/amiguard-m22b-run/evidence/empty.png
+key: ['F7']
+type: ['Execute AGTest:clean\n']
+Captured FS-UAE frame /tmp/amiguard-m22b-run/screenshots/fs-uae-crop-2609070824-01.png to /tmp/amiguard-m22b-run/evidence/clean.png
+type: ['Execute AGTest:repeat\n']
+Captured FS-UAE frame /tmp/amiguard-m22b-run/screenshots/fs-uae-crop-2609070824-02.png to /tmp/amiguard-m22b-run/evidence/repeat.png
+key: ['F10']
+type: ['Execute AGTest:customone\n']
+Captured FS-UAE frame /tmp/amiguard-m22b-run/screenshots/fs-uae-crop-2609070824-03.png to /tmp/amiguard-m22b-run/evidence/customone.png
+type: ['Execute AGTest:customtwo\n']
+Captured FS-UAE frame /tmp/amiguard-m22b-run/screenshots/fs-uae-crop-2609070824-04.png to /tmp/amiguard-m22b-run/evidence/customtwo.png
+type: ['Execute AGTest:customrepeat\n']
+Captured FS-UAE frame /tmp/amiguard-m22b-run/screenshots/fs-uae-crop-2609070824-05.png to /tmp/amiguard-m22b-run/evidence/customrepeat.png
+key: ['F9']
+type: ['Execute AGTest:badone\n']
+Captured FS-UAE frame /tmp/amiguard-m22b-run/screenshots/fs-uae-crop-2609070824-06.png to /tmp/amiguard-m22b-run/evidence/badone.png
+type: ['Execute AGTest:badtwo\n']
+Captured FS-UAE frame /tmp/amiguard-m22b-run/screenshots/fs-uae-crop-2609070825-01.png to /tmp/amiguard-m22b-run/evidence/badtwo.png
+key: ['F8']
+type: ['Execute AGTest:custom\n']
+Captured FS-UAE frame /tmp/amiguard-m22b-run/screenshots/fs-uae-crop-2609070825-02.png to /tmp/amiguard-m22b-run/evidence/custom.png
+key: ['F7']
+type: ['Execute AGTest:post\n']
+Captured FS-UAE frame /tmp/amiguard-m22b-run/screenshots/fs-uae-crop-2609070825-03.png to /tmp/amiguard-m22b-run/evidence/post.png
+X protocol error:
+<class 'Xlib.error.BadWindow'>: code = 3, resource_id = <Resource 0x00a00008>, sequence_number = 67, major_opcode = 25, minor_opcode = 0
+X protocol error:
+<class 'Xlib.error.BadWindow'>: code = 3, resource_id = <Resource 0x00a00008>, sequence_number = 70, major_opcode = 25, minor_opcode = 0
+chord: ['F12', 'q']
+Log checks complete. Review screenshots and emulator configuration in /tmp/amiguard-m22b-run/evidence; no automatic M0.3 PASS.

@@ -1,0 +1,57 @@
+{
+  "date_utc": "2026-09-07T06:20:31Z",
+  "head": "809b41d10742a1015c30b0bd2d00f033a15fb16d",
+  "status": "",
+  "inputs": {
+    "reference": "/home/pgo/Projects/Amiga/FS-UAE_Config/fs-uae-amiga-reference-configs/a500/stock/a500-stock-accurate.fs-uae",
+    "rom": "/home/pgo/Documents/FS-UAE/Kickstarts/amiga-os-120.rom",
+    "workbench": "/home/pgo/Documents/FS-UAE/Floppies/amiga-os-120-workbench.adf"
+  },
+  "original_sha256": {
+    "/home/pgo/Projects/Amiga/FS-UAE_Config/fs-uae-amiga-reference-configs/a500/stock/a500-stock-accurate.fs-uae": "c280801f4129654f7dcd2dd4abf237a1d9c350dec5320b67d134154dcc43d3d4",
+    "/home/pgo/Documents/FS-UAE/Kickstarts/amiga-os-120.rom": "781a36914b49642ab14b5a6f1e7263c7fc2dcbaba3c1fc141a163fd5299b976d",
+    "/home/pgo/Documents/FS-UAE/Floppies/amiga-os-120-workbench.adf": "1035a9a317fbbf0056848a25397f245967d7a8f1bc5079b02a018f410899bdf0"
+  },
+  "source_sha256": {
+    "src/file_intake.c": "8bc44afe1765d53e51e7453544907c3b762bc732176c5b4ba95d5c54db252a3f",
+    "src/file_intake.h": "31fd8b27003f3ffbf3dab765327b739f34c80f07db20847a666bf93b1bbb21d3",
+    "src/file_signatures.c": "2793e18e395bad2271e1b424ab2233ba9d9fd03b397f217f5233fee4e6981dc8",
+    "src/file_signatures.h": "e0d9404bb8a811a9e4f89e408d6688cb6de82329d71356ab7a4acf13b35728f4",
+    "src/hunk.c": "025992c4d99c682f8f84c5b712124a85cf94dcbc7c6c52076b42aaa68d0ec476",
+    "src/hunk.h": "dc6539e01bafb09831240a4ffc5f1e013c1ff4e38ca0c3110eb5adef2075018a",
+    "src/main.c": "df24f015518367c16ed0152a72a72a8d8a2bcca8f3f4c82c45a0e8d7ed95a90c",
+    "src/scanner.c": "4dd6631ecc72899be546408bfc3329735b784e09b87b4de7c54d7ef9156686c7",
+    "src/scanner.h": "3c6e788b8b89d8d5dc143cb5853a020882f1e921b572168b995daea1419fe596",
+    "src/signatures.c": "09eb3f26b78d1f6a6fd688b84ce85b4087be3b402df162ac978d5fd260913326",
+    "src/signatures.h": "e1a7b1a33d66e63f1cd11095d16199b22b76b2d75aa3e56c6331857140e57c16",
+    "src/trackdisk.c": "92819aa7b3f7f4633926ed994792541bbc641a1823ee69ddf747a15b13911910",
+    "src/trackdisk.h": "22156687ccaa390ea04da8523733bc39ea2df2215370d7abe6d06ab43d69aef6",
+    "Makefile": "565a75a6d47d27208bd4fb1ed09b5f1aca7db19aa17d6fc0adc0fca62bfc431d"
+  },
+  "media_before": {
+    "workbench12.adf": "1035a9a317fbbf0056848a25397f245967d7a8f1bc5079b02a018f410899bdf0",
+    "unknown.adf": "9acd344236c1d414a85b56d23b322db62023feb48df642720aaa08697e873fbd",
+    "invalid.adf": "2717ef98ca83cc1238ffa673f73d19660f76eed8925d1ccffb441e1eea35eeec",
+    "valid-custom.adf": "b4dac9336ac52879830f1a7b14f5bcd8cb4ace32e5dcd9c207019467017382d0"
+  },
+  "binary_sha256": "46bf3e259433faf88ace1ebea1d8d9748771ebc656ea8bc7cb6a25a011c0e850",
+  "binary_bytes": 19464,
+  "compiler": "/opt/amiga/bin/m68k-amigaos-gcc",
+  "compiler_version": "m68k-amigaos-gcc (GCC) 6.5.0b 20260807212032",
+  "file_before": {
+    "nearmiss.bin": "ee08e8ac56d04ace7685acaa41478ffd9f58395c9076867eec26f7de3092d398",
+    "positive.bin": "1783b2888c51931f421dd887b3fe199a55f9f282e589c9ae805471a082cda5d3",
+    "oversize.bin": "d281209cc72d47b090175b22621840d9eb8267d09cc05dc122bfaa759a82830f",
+    "malformed.hunk": "8b3c48d1f5286a750e2db8c0c583b90888ff7b0f8f75833fa941f237f26482e0",
+    "plain.txt": "6d8269cd7779441f30c1e1a05c78b70dce1a9c10859cdfa08d2fa3afe0057b9c",
+    "valid.hunk": "97889068b21076a9ac32673bf8237e1fdaac4efe05127ec5ae1c9e98167ae6c5"
+  },
+  "file_sizes": {
+    "nearmiss.bin": 22,
+    "positive.bin": 22,
+    "oversize.bin": 131073,
+    "malformed.hunk": 4,
+    "plain.txt": 24,
+    "valid.hunk": 40
+  }
+}

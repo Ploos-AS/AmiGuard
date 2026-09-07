@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "id": "amiguard-file-test-marker",
+  "name": "AmiGuard synthetic file test marker",
+  "family": "amiguard-test",
+  "kind": "file",
+  "status": "test-only",
+  "synthetic": true,
+  "source": {
+    "type": "project-test-fixture",
+    "reference": "M2.2 synthetic file signature"
+  },
+  "provenance": {
+    "created_by": "AmiGuard",
+    "purpose": "file signature compiler qualification"
+  },
+  "sample_sha256": null,
+  "signature": {
+    "offset": 4,
+    "bytes": "414d4947554152442d46494c452d54455354",
+    "mask": "ffffffffffffffffffffffffffffffffffff"
+  },
+  "verifier": "synthetic-test-marker",
+  "cleaner": "none"
+}

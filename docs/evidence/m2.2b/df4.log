@@ -1,0 +1,4 @@
+AmiGuard 0.0.2 M0.2
+Target: Kickstart 1.2+ / Motorola 68000
+Usage: AmiGuard DF0:|DF1:|DF2:|DF3:
+       AmiGuard FILE <path>
