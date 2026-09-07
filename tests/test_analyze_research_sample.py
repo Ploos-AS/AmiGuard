@@ -76,6 +76,18 @@ class AnalyzeResearchSampleTests(unittest.TestCase):
             p.write_bytes(b"A" * (128 * 1024 + 1))
             self.assertNotEqual(self.run_tool(p).returncode, 0)
 
+    def test_writes_output_file(self):
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td) / "sample.bin"
+            out = Path(td) / "analysis.json"
+            p.write_bytes(b"benign output fixture")
+            r = self.run_tool(p, "-o", out)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            self.assertEqual(r.stdout, "")
+            d = json.loads(out.read_text())
+            self.assertEqual(d["kind"], "amiguard-research-sample-analysis")
+            self.assertFalse(d["malware_claim"])
+
 
 if __name__ == "__main__":
     unittest.main()
