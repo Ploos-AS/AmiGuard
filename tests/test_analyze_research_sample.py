@@ -25,6 +25,9 @@ class AnalyzeResearchSampleTests(unittest.TestCase):
             self.assertFalse(d["native_activation"])
             self.assertEqual(d["interpretation"]["classification"], "UNDETERMINED")
             self.assertTrue(d["interpretation"]["requires_human_review"])
+            self.assertFalse(d["interpretation"]["candidate_windows_are_signatures"])
+            self.assertIsNone(d["promotion"])
+            self.assertIsNone(d["cleaner"])
             self.assertIn("HUNK_HEADER", [x["record"] for x in d["observations"]["hunk_record_candidates"]])
             self.assertIn("HELLO-AMIGA", [x["text"] for x in d["observations"]["printable_strings"]])
 
