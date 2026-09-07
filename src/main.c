@@ -49,6 +49,14 @@ static int scan_file_mode(const char *path)
     printf("Reading file read-only: %s\n", path);
     result = amiguard_scan_file_readonly(path);
 
+    if (result.status == AMIGUARD_FILE_TEST_SIGNATURE) {
+        printf("TEST-SIGNATURE: %s (%lu bytes)\n", result.message, result.size);
+        return RETURN_OK;
+    }
+    if (result.status == AMIGUARD_FILE_INFECTED) {
+        printf("INFECTED: %s (%lu bytes)\n", result.message, result.size);
+        return RETURN_OK;
+    }
     if (result.status == AMIGUARD_FILE_VALID_HUNK) {
         printf("VALID-HUNK: %s (%lu bytes)\n", result.message, result.size);
         return RETURN_OK;
