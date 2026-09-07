@@ -1,9 +1,7 @@
 import importlib.util
-import json
 import pathlib
 import subprocess
 import sys
-import tempfile
 import unittest
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -64,7 +62,7 @@ class FileSignatureCompilerTests(unittest.TestCase):
         rendered = module.render([record])
         self.assertNotIn("Example", rendered)
 
-    def test_verified_is_compiled(self):
+    def test_verified_is_compiled_as_malware_verdict(self):
         record = self.base_record()
         record.update({
             "status": "verified",
@@ -74,6 +72,42 @@ class FileSignatureCompilerTests(unittest.TestCase):
         module.validate("record", record)
         rendered = module.render([record])
         self.assertIn("Example", rendered)
+        self.assertIn("file_mask_example, 0 }", rendered)
+
+    def test_safe_test_is_compiled_as_test_verdict(self):
+        record = self.base_record()
+        record.update({
+            "status": "safe-test",
+            "synthetic": False,
+            "sample_sha256": "c" * 64,
+        })
+        module.validate("record", record)
+        rendered = module.render([record])
+        self.assertIn("Example", rendered)
+        self.assertIn("file_mask_example, 1 }", rendered)
+
+    def test_safe_test_requires_hash(self):
+        record = self.base_record()
+        record.update({"status": "safe-test", "synthetic": False})
+        with self.assertRaises(ValueError):
+            module.validate("record", record)
+
+    def test_safe_test_must_be_non_synthetic(self):
+        record = self.base_record()
+        record.update({"status": "safe-test", "sample_sha256": "d" * 64})
+        with self.assertRaises(ValueError):
+            module.validate("record", record)
+
+    def test_safe_test_cannot_define_cleaner(self):
+        record = self.base_record()
+        record.update({
+            "status": "safe-test",
+            "synthetic": False,
+            "sample_sha256": "e" * 64,
+            "cleaner": "example-cleaner",
+        })
+        with self.assertRaises(ValueError):
+            module.validate("record", record)
 
     def test_signature_cannot_extend_past_file_limit(self):
         record = self.base_record()
@@ -86,7 +120,7 @@ class FileSignatureCompilerTests(unittest.TestCase):
         record.update({
             "status": "research",
             "synthetic": False,
-            "sample_sha256": "c" * 64,
+            "sample_sha256": "f" * 64,
             "signature": None,
         })
         with self.assertRaises(ValueError):
