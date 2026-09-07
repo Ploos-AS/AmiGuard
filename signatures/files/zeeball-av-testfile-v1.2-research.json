@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "id": "zeeball-av-testfile-v1.2",
+  "name": "Zeeball AV-Testfile v1.2",
+  "family": "Zeeball AV-Testfile",
+  "kind": "file",
+  "status": "research",
+  "synthetic": false,
+  "source": {
+    "type": "public-reference",
+    "publisher": "Virus Help Team / historical Amiga antivirus ecosystem",
+    "note": "Public historical references describe Zeeball AV-Testfile as a harmless antivirus test file and document that xvs.library added special recognition for it."
+  },
+  "provenance": {
+    "derivation": "Research metadata only. No Zeeball archive, file bytes, hashes, signature bytes, or proprietary scanner data are committed.",
+    "verification_required": "Obtain the test archive independently from an authoritative source, record exact archive/file SHA-256 values and license/redistribution terms, then derive any AmiGuard test signature from the obtained bytes before promotion.",
+    "redistribution_status": "unverified"
+  },
+  "sample_sha256": null,
+  "signature": null,
+  "verifier": "pending-authoritative-testfile-acquisition",
+  "cleaner": "none",
+  "research": {
+    "intended_role": "harmless positive AV interoperability/research test",
+    "malware_claim": false,
+    "native_activation": false,
+    "runtime_compatibility_note": "Public VHT material associates the test package with AmigaOS 2.0+; this does not establish that the test file itself cannot be scanned as read-only bytes on AmiGuard's Kickstart 1.2 target.",
+    "promotion_gate": "Do not promote beyond research until authoritative bytes, hashes, usage terms, and independent AmiGuard qualification are recorded."
+  }
+}
