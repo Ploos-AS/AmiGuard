@@ -1,0 +1,56 @@
+name: FS-UAE AROS provisional qualification
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  aros-runtime-gates:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install FS-UAE runtime tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fs-uae xvfb curl lhasa p7zip-full file
+
+      - name: Gate 1 - host regression suite
+        run: make check
+
+      - name: Gate 2 - internal AROS Kickstart boot smoke
+        run: ci/fs-uae/run-aros-smoke.sh
+
+      - name: Gate 3 - native Bebbo AmiGuard build
+        run: ci/fs-uae/build-native.sh
+
+      - name: Gate 4 - execute AmiGuard detector inside AROS guest
+        run: ci/fs-uae/run-aros-guest-smoke.sh
+
+      - name: Upload provisional qualification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: amiguard-fs-uae-aros-provisional
+          path: |
+            build/fs-uae/boot/result.txt
+            build/fs-uae/boot/fs-uae.log
+            build/fs-uae/boot/fs-uae-version.txt
+            build/fs-uae/native/AmiGuard
+            build/fs-uae/native/AmiGuard.sha256
+            build/fs-uae/native/file.txt
+            build/fs-uae/native/result.txt
+            build/fs-uae/native/toolchain-image.txt
+            build/fs-uae/aros-system/source.txt
+            build/fs-uae/aros-system/archive.sha256
+            build/fs-uae/aros-guest/result.txt
+            build/fs-uae/aros-guest/fs-uae.log
+            build/fs-uae/aros-guest/fs-uae-version.txt
+            build/fs-uae/aros-guest/aros-guest.fs-uae
+          if-no-files-found: warn
