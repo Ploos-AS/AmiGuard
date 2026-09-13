@@ -24,7 +24,8 @@ cat > "$STAGE/RELEASE.txt" <<EOF
 AmiGuard v${VERSION}
 
 Copyright: Ploos AS
-Uploader: Per Gustav Ousdal <amiguard@ousdal.org>
+Uploader: Per Gustav Ousdal
+Contact: amiguard@ousdal.org
 License: MIT
 Target: AmigaOS / Kickstart 1.2+ / Motorola 68000
 
@@ -48,7 +49,8 @@ EOF
 
 cat > "$STAGE/AmiGuard.readme" <<EOF
 Short:        Open-source antivirus for classic Amiga systems
-Uploader:     Per Gustav Ousdal <amiguard@ousdal.org>
+Uploader:     Per Gustav Ousdal
+Contact:      amiguard@ousdal.org
 Author:       Ploos AS
 Type:         util/virus
 Version:      ${VERSION}
@@ -79,22 +81,43 @@ EOF
     docs/V0_1_0_NATIVE_QUALIFICATION.md > SHA256SUMS
 )
 
-rm -f "${DIST}/${ROOT}.zip" "${DIST}/${ROOT}.lha"
+rm -f "${DIST}/${ROOT}.zip" "${DIST}/${ROOT}.lha" \
+  "${DIST}/${ROOT}.zip.sha256" "${DIST}/${ROOT}.lha.sha256"
 (
   cd "$DIST"
   zip -qr "${ROOT}.zip" "$ROOT"
 )
 
+# Ubuntu's /usr/bin/lha is commonly Lhasa, which can extract but cannot create
+# LHA archives. Treat that as an unavailable creator rather than a packaging
+# failure. A real LHA-capable implementation will still be used when present.
+LHA_CAN_CREATE=0
 if command -v lha >/dev/null 2>&1; then
-  (
+  if lha --version 2>&1 | grep -qi 'lhasa'; then
+    printf 'NOTE: lha is Lhasa (extract-only); skipping .lha creation\n' >&2
+  else
+    LHA_CAN_CREATE=1
+  fi
+fi
+
+if [[ "$LHA_CAN_CREATE" -eq 1 ]]; then
+  if (
     cd "$DIST"
     lha -aq "${ROOT}.lha" "$ROOT"
-  )
+  ); then
+    sha256sum "${DIST}/${ROOT}.lha" > "${DIST}/${ROOT}.lha.sha256"
+  else
+    rm -f "${DIST}/${ROOT}.lha" "${DIST}/${ROOT}.lha.sha256"
+    printf 'WARNING: installed lha could not create an archive; continuing with ZIP\n' >&2
+  fi
 fi
 
 sha256sum "${DIST}/${ROOT}.zip" > "${DIST}/${ROOT}.zip.sha256"
-if [[ -f "${DIST}/${ROOT}.lha" ]]; then
-  sha256sum "${DIST}/${ROOT}.lha" > "${DIST}/${ROOT}.lha.sha256"
-fi
 
 printf 'Release package created in %s\n' "$DIST"
+printf '  %s\n' "${DIST}/${ROOT}.zip"
+printf '  %s\n' "${DIST}/${ROOT}.zip.sha256"
+if [[ -f "${DIST}/${ROOT}.lha" ]]; then
+  printf '  %s\n' "${DIST}/${ROOT}.lha"
+  printf '  %s\n' "${DIST}/${ROOT}.lha.sha256"
+fi
