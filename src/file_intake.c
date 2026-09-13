@@ -3,6 +3,9 @@
 
 #include "file_intake.h"
 #include "file_signatures.h"
+#ifdef AMIGUARD_NATIVE_XVS
+#include "xvs_bridge.h"
+#endif
 
 #define AMIGUARD_FILE_READ_CHUNK 4096UL
 
@@ -45,6 +48,9 @@ struct amiguard_file_result amiguard_scan_file_readonly(const char *path)
     unsigned long capacity = AMIGUARD_FILE_READ_CHUNK;
     enum amiguard_file_status status;
     struct amiguard_file_signature_match signature_match;
+#ifdef AMIGUARD_NATIVE_XVS
+    struct amiguard_xvs_result xvs_result;
+#endif
 
     if (path == 0 || path[0] == '\0')
         return make_result(AMIGUARD_FILE_ERROR, "invalid file path", 0UL);
@@ -119,6 +125,15 @@ struct amiguard_file_result amiguard_scan_file_readonly(const char *path)
         free(buffer);
         return make_result(match_status, match_name, size);
     }
+
+#ifdef AMIGUARD_NATIVE_XVS
+    xvs_result = amiguard_xvs_scan_file_buffer(buffer, size);
+    if (xvs_result.status == AMIGUARD_XVS_DETECTED) {
+        const char *xvs_name = xvs_result.name;
+        free(buffer);
+        return make_result(AMIGUARD_FILE_XVS_DETECTED, xvs_name, size);
+    }
+#endif
 
     status = amiguard_classify_file_buffer(buffer, size);
     free(buffer);
