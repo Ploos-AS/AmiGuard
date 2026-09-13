@@ -6,10 +6,11 @@ HOSTCC ?= cc
 CFLAGS ?= -O2 -Wall -Wextra -Werror
 # Keep the CPU and pre-2.0 runtime selection on compile AND link commands.
 AMIGAFLAGS := -m68000 -mcrt=nix13
+AMIGACPPFLAGS := -DAMIGUARD_NATIVE_XVS=1
 CPPFLAGS ?= -Isrc
 
 TARGET := AmiGuard
-SRC := src/main.c src/scanner.c src/signatures.c src/trackdisk.c src/hunk.c src/file_intake.c src/file_signatures.c
+SRC := src/main.c src/scanner.c src/signatures.c src/trackdisk.c src/hunk.c src/file_intake.c src/file_signatures.c src/xvs_bridge.c
 OBJ := $(SRC:.c=.o)
 
 .PHONY: all clean check host-test signatures signature-check file-signatures file-signature-check
@@ -19,7 +20,7 @@ $(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) $(AMIGAFLAGS) $(LDFLAGS) -o $@ $(OBJ)
 
 src/%.o: src/%.c
-	$(CC) $(CPPFLAGS) $(CFLAGS) $(AMIGAFLAGS) -c -o $@ $<
+	$(CC) $(CPPFLAGS) $(AMIGACPPFLAGS) $(CFLAGS) $(AMIGAFLAGS) -c -o $@ $<
 
 src/signatures.o: src/signatures_generated.inc
 src/file_signatures.o: src/file_signatures_generated.inc
