@@ -16,6 +16,8 @@ struct amiguard_file_signature_match {
     const char *name;
 };
 
+unsigned long amiguard_file_signature_count(void);
+
 struct amiguard_file_signature_match amiguard_match_file_signature(
     const unsigned char *data,
     unsigned long size
