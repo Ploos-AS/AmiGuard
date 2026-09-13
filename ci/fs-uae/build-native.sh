@@ -8,9 +8,8 @@ mkdir -p "$OUT"
 docker pull "$IMAGE"
 docker image inspect "$IMAGE" --format '{{join .RepoDigests "\n"}}' | tee "$OUT/toolchain-image.txt"
 
-# The pinned Bebbo image intentionally contains the cross compiler but not
-# make. Build the same source set and flags as the repository Makefile
-# directly so this gate depends only on the toolchain we actually qualify.
+# The pinned Bebbo image contains the cross compiler but not make.
+# Keep this source set and flags aligned with the repository Makefile.
 rm -f AmiGuard
 docker run --rm \
   -v "$PWD:/work" \
@@ -18,6 +17,7 @@ docker run --rm \
   "$IMAGE" \
   m68k-amigaos-gcc \
     -Isrc \
+    -DAMIGUARD_NATIVE_XVS=1 \
     -O2 -Wall -Wextra -Werror \
     -m68000 -mcrt=nix13 \
     -o AmiGuard \
@@ -27,7 +27,8 @@ docker run --rm \
     src/trackdisk.c \
     src/hunk.c \
     src/file_intake.c \
-    src/file_signatures.c
+    src/file_signatures.c \
+    src/xvs_bridge.c
 
 cp AmiGuard "$OUT/AmiGuard"
 file "$OUT/AmiGuard" | tee "$OUT/file.txt"
