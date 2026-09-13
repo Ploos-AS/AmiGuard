@@ -1,0 +1,125 @@
+name: Release packages
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Release version (without v)
+        required: false
+        default: '0.1.0'
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-24.04
+    env:
+      LHA_UPSTREAM_SHA: 16619b066b189ef289bb8b07b37d1c38d550da99
+    steps:
+      - name: Checkout AmiGuard
+        uses: actions/checkout@v4
+
+      - name: Resolve version
+        id: version
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${GITHUB_REF_TYPE:-}" == "tag" ]]; then
+            VERSION="${GITHUB_REF_NAME#v}"
+          elif [[ -n "${{ inputs.version || '' }}" ]]; then
+            VERSION="${{ inputs.version }}"
+          else
+            VERSION="0.1.0"
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          printf 'VERSION=%s\n' "$VERSION"
+
+      - name: Install host packaging dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y autoconf automake libtool make gcc git lhasa zip
+
+      - name: Build pinned LHa archive writer
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone https://github.com/jca02266/lha.git "$RUNNER_TEMP/lha-src"
+          git -C "$RUNNER_TEMP/lha-src" checkout --detach "$LHA_UPSTREAM_SHA"
+          test "$(git -C "$RUNNER_TEMP/lha-src" rev-parse HEAD)" = "$LHA_UPSTREAM_SHA"
+          cd "$RUNNER_TEMP/lha-src"
+          autoreconf -is
+          ./configure --prefix="$RUNNER_TEMP/lha-install" --disable-multibyte-filename
+          make -j2
+          make check
+          make install
+          "$RUNNER_TEMP/lha-install/bin/lha" | head -n 20
+          echo "LHA_CMD=$RUNNER_TEMP/lha-install/bin/lha" >> "$GITHUB_ENV"
+
+      - name: Host regression suite
+        run: make check
+
+      - name: Build native AmiGuard
+        run: ci/fs-uae/build-native.sh build/release/native
+
+      - name: Create ZIP and Aminet packages
+        shell: bash
+        run: |
+          set -euo pipefail
+          tools/package_release.sh "${{ steps.version.outputs.version }}"
+
+      - name: Verify Aminet LHA with independent Lhasa reader
+        shell: bash
+        run: |
+          set -euo pipefail
+          lha t dist/AmiGuard.lha
+          lha l dist/AmiGuard.lha | tee dist/AmiGuard.lha.contents.txt
+          test -s dist/AmiGuard.readme
+          grep -F 'Uploader:     Per Gustav Ousdal' dist/AmiGuard.readme
+          grep -F 'Contact:      amiguard@ousdal.org' dist/AmiGuard.readme
+          grep -F 'Copyright (c) 2026 Ploos AS' dist/AmiGuard.readme
+          sha256sum -c dist/AmiGuard.lha.sha256
+          sha256sum -c "dist/AmiGuard-v${{ steps.version.outputs.version }}.zip.sha256"
+
+      - name: Upload release-package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: AmiGuard-${{ steps.version.outputs.version }}-release-packages
+          if-no-files-found: error
+          path: |
+            dist/AmiGuard.lha
+            dist/AmiGuard.readme
+            dist/AmiGuard.lha.sha256
+            dist/AmiGuard.lha.contents.txt
+            dist/AmiGuard-v${{ steps.version.outputs.version }}.zip
+            dist/AmiGuard-v${{ steps.version.outputs.version }}.zip.sha256
+
+      - name: Publish GitHub Release assets
+        if: github.ref_type == 'tag'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          TAG="$GITHUB_REF_NAME"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" --clobber \
+              dist/AmiGuard.lha \
+              dist/AmiGuard.readme \
+              dist/AmiGuard.lha.sha256 \
+              "dist/AmiGuard-v${VERSION}.zip" \
+              "dist/AmiGuard-v${VERSION}.zip.sha256"
+          else
+            gh release create "$TAG" \
+              --title "AmiGuard ${TAG}" \
+              --notes-file docs/RELEASE_NOTES_v0.1.0.md \
+              dist/AmiGuard.lha \
+              dist/AmiGuard.readme \
+              dist/AmiGuard.lha.sha256 \
+              "dist/AmiGuard-v${VERSION}.zip" \
+              "dist/AmiGuard-v${VERSION}.zip.sha256"
+          fi

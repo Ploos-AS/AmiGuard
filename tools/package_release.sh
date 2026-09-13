@@ -101,25 +101,38 @@ cp "$STAGE/docs/SAMPLE_SUBMISSION.md" "$STAGE/docs/M2_3_XVS_BRIDGE.md" \
   "$STAGE/docs/V0_1_0_NATIVE_QUALIFICATION.md" "$AMINET_STAGE/docs/"
 cp "$STAGE/AmiGuard.readme" "${DIST}/AmiGuard.readme"
 
-LHA_CREATOR=""
-for candidate in lha lharc; do
-  if ! command -v "$candidate" >/dev/null 2>&1; then
-    continue
+# CI can point at a known archive writer without conflicting with Ubuntu's
+# extract-only Lhasa /usr/bin/lha. Local builds still auto-discover lha/lharc.
+LHA_CREATOR="${LHA_CMD:-}"
+if [[ -n "$LHA_CREATOR" ]]; then
+  if [[ ! -x "$LHA_CREATOR" ]] && ! command -v "$LHA_CREATOR" >/dev/null 2>&1; then
+    echo "ERROR: LHA_CMD does not name an executable archive creator: $LHA_CREATOR" >&2
+    exit 2
   fi
-  if "$candidate" --version 2>&1 | grep -qi 'lhasa'; then
-    continue
+  if "$LHA_CREATOR" --version 2>&1 | grep -qi 'lhasa'; then
+    echo "ERROR: LHA_CMD points to Lhasa, which cannot create archives" >&2
+    exit 2
   fi
-  LHA_CREATOR="$candidate"
-  break
-done
+else
+  for candidate in lha lharc; do
+    if ! command -v "$candidate" >/dev/null 2>&1; then
+      continue
+    fi
+    if "$candidate" --version 2>&1 | grep -qi 'lhasa'; then
+      continue
+    fi
+    LHA_CREATOR="$candidate"
+    break
+  done
+fi
 
 if [[ -z "$LHA_CREATOR" ]]; then
   cat >&2 <<'EOF'
 ERROR: Aminet release requires an LHA archive creator.
-The installed /usr/bin/lha is Lhasa, which is extract-only and cannot create
-AmiGuard.lha. Install a real LHA/LHArc-compatible archiver, then rerun:
-  tools/package_release.sh 0.1.0
-ZIP output has been created, but packaging is intentionally FAIL until the
+The installed /usr/bin/lha is commonly Lhasa, which is extract-only and cannot
+create AmiGuard.lha. Set LHA_CMD to a real LHA/LHArc-compatible archive writer
+or let the GitHub release workflow build its pinned writer.
+ZIP output has been created, but packaging intentionally FAILS until the
 Aminet AmiGuard.lha + AmiGuard.readme pair can be produced.
 EOF
   exit 2
