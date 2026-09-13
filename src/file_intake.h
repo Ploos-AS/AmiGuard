@@ -11,7 +11,8 @@ enum amiguard_file_status {
     AMIGUARD_FILE_VALID_HUNK = 1,
     AMIGUARD_FILE_MALFORMED_HUNK = 2,
     AMIGUARD_FILE_TEST_SIGNATURE = 3,
-    AMIGUARD_FILE_INFECTED = 4
+    AMIGUARD_FILE_INFECTED = 4,
+    AMIGUARD_FILE_XVS_DETECTED = 5
 };
 
 struct amiguard_file_result {
