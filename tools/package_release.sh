@@ -5,13 +5,15 @@ VERSION="${1:-0.1.0}"
 ROOT="AmiGuard-v${VERSION}"
 DIST="dist"
 STAGE="${DIST}/${ROOT}"
+AMINET_ROOT="AmiGuard"
+AMINET_STAGE="${DIST}/${AMINET_ROOT}"
 
 if [[ ! -f AmiGuard ]]; then
   echo "ERROR: native AmiGuard binary not found; build it first" >&2
   exit 1
 fi
 
-rm -rf "$STAGE"
+rm -rf "$STAGE" "$AMINET_STAGE"
 mkdir -p "$STAGE/docs"
 
 cp AmiGuard "$STAGE/AmiGuard"
@@ -81,43 +83,58 @@ EOF
     docs/V0_1_0_NATIVE_QUALIFICATION.md > SHA256SUMS
 )
 
-rm -f "${DIST}/${ROOT}.zip" "${DIST}/${ROOT}.lha" \
-  "${DIST}/${ROOT}.zip.sha256" "${DIST}/${ROOT}.lha.sha256"
+rm -f "${DIST}/${ROOT}.zip" "${DIST}/${ROOT}.zip.sha256" \
+  "${DIST}/AmiGuard.lha" "${DIST}/AmiGuard.lha.sha256" \
+  "${DIST}/AmiGuard.readme"
 (
   cd "$DIST"
   zip -qr "${ROOT}.zip" "$ROOT"
 )
-
-# Ubuntu's /usr/bin/lha is commonly Lhasa, which can extract but cannot create
-# LHA archives. Treat that as an unavailable creator rather than a packaging
-# failure. A real LHA-capable implementation will still be used when present.
-LHA_CAN_CREATE=0
-if command -v lha >/dev/null 2>&1; then
-  if lha --version 2>&1 | grep -qi 'lhasa'; then
-    printf 'NOTE: lha is Lhasa (extract-only); skipping .lha creation\n' >&2
-  else
-    LHA_CAN_CREATE=1
-  fi
-fi
-
-if [[ "$LHA_CAN_CREATE" -eq 1 ]]; then
-  if (
-    cd "$DIST"
-    lha -aq "${ROOT}.lha" "$ROOT"
-  ); then
-    sha256sum "${DIST}/${ROOT}.lha" > "${DIST}/${ROOT}.lha.sha256"
-  else
-    rm -f "${DIST}/${ROOT}.lha" "${DIST}/${ROOT}.lha.sha256"
-    printf 'WARNING: installed lha could not create an archive; continuing with ZIP\n' >&2
-  fi
-fi
-
 sha256sum "${DIST}/${ROOT}.zip" > "${DIST}/${ROOT}.zip.sha256"
 
-printf 'Release package created in %s\n' "$DIST"
+# Aminet package layout: AmiGuard.lha + sibling AmiGuard.readme.
+# Copy only redistributable release payload; do not include proprietary xvs.library.
+mkdir -p "$AMINET_STAGE/docs"
+cp "$STAGE/AmiGuard" "$AMINET_STAGE/AmiGuard"
+cp "$STAGE/README.md" "$STAGE/LICENSE" "$STAGE/RELEASE.txt" "$AMINET_STAGE/"
+cp "$STAGE/docs/SAMPLE_SUBMISSION.md" "$STAGE/docs/M2_3_XVS_BRIDGE.md" \
+  "$STAGE/docs/V0_1_0_NATIVE_QUALIFICATION.md" "$AMINET_STAGE/docs/"
+cp "$STAGE/AmiGuard.readme" "${DIST}/AmiGuard.readme"
+
+LHA_CREATOR=""
+for candidate in lha lharc; do
+  if ! command -v "$candidate" >/dev/null 2>&1; then
+    continue
+  fi
+  if "$candidate" --version 2>&1 | grep -qi 'lhasa'; then
+    continue
+  fi
+  LHA_CREATOR="$candidate"
+  break
+done
+
+if [[ -z "$LHA_CREATOR" ]]; then
+  cat >&2 <<'EOF'
+ERROR: Aminet release requires an LHA archive creator.
+The installed /usr/bin/lha is Lhasa, which is extract-only and cannot create
+AmiGuard.lha. Install a real LHA/LHArc-compatible archiver, then rerun:
+  tools/package_release.sh 0.1.0
+ZIP output has been created, but packaging is intentionally FAIL until the
+Aminet AmiGuard.lha + AmiGuard.readme pair can be produced.
+EOF
+  exit 2
+fi
+
+(
+  cd "$DIST"
+  "$LHA_CREATOR" -aq "AmiGuard.lha" "$AMINET_ROOT"
+)
+sha256sum "${DIST}/AmiGuard.lha" > "${DIST}/AmiGuard.lha.sha256"
+rm -rf "$AMINET_STAGE"
+
+printf 'Release packages created in %s\n' "$DIST"
 printf '  %s\n' "${DIST}/${ROOT}.zip"
 printf '  %s\n' "${DIST}/${ROOT}.zip.sha256"
-if [[ -f "${DIST}/${ROOT}.lha" ]]; then
-  printf '  %s\n' "${DIST}/${ROOT}.lha"
-  printf '  %s\n' "${DIST}/${ROOT}.lha.sha256"
-fi
+printf '  %s\n' "${DIST}/AmiGuard.lha"
+printf '  %s\n' "${DIST}/AmiGuard.lha.sha256"
+printf '  %s\n' "${DIST}/AmiGuard.readme"
