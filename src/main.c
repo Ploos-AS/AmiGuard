@@ -6,6 +6,9 @@
 #include "file_intake.h"
 #include "scanner.h"
 #include "trackdisk.h"
+#ifdef AMIGUARD_NATIVE_XVS
+#include "xvs_bridge.h"
+#endif
 
 static int parse_unit(const char *arg, UBYTE *unit)
 {
@@ -25,6 +28,13 @@ static int parse_unit(const char *arg, UBYTE *unit)
 static int is_file_mode(const char *arg)
 {
     return arg != 0 && strcmp(arg, "FILE") == 0;
+}
+
+static void print_submission_request(const char *kind)
+{
+    printf("This is an optional xvs.library result, not an AmiGuard INFECTED verdict.\n");
+    printf("Please submit the original %s to https://amiguard.ploos.no/\n", kind);
+    printf("so AmiGuard can independently analyse and qualify its own signature.\n");
 }
 
 static void print_result(const struct amiguard_detection *d)
@@ -57,6 +67,11 @@ static int scan_file_mode(const char *path)
         printf("INFECTED: %s (%lu bytes)\n", result.message, result.size);
         return RETURN_OK;
     }
+    if (result.status == AMIGUARD_FILE_XVS_DETECTED) {
+        printf("XVS-DETECTED: %s (%lu bytes)\n", result.message, result.size);
+        print_submission_request("suspicious file");
+        return RETURN_OK;
+    }
     if (result.status == AMIGUARD_FILE_VALID_HUNK) {
         printf("VALID-HUNK: %s (%lu bytes)\n", result.message, result.size);
         return RETURN_OK;
@@ -83,8 +98,11 @@ int main(int argc, char **argv)
     struct amiguard_detection detection;
     UBYTE unit;
     LONG io_error;
+#ifdef AMIGUARD_NATIVE_XVS
+    struct amiguard_xvs_result xvs_result;
+#endif
 
-    printf("AmiGuard 0.0.2 M0.2\n");
+    printf("AmiGuard 0.0.2 M2.3\n");
     printf("Target: Kickstart 1.2+ / Motorola 68000\n");
 
     if (argc == 3 && is_file_mode(argv[1]))
@@ -110,6 +128,17 @@ int main(int argc, char **argv)
     printf("trackdisk.device: read 1024 bytes at offset 0\n");
     detection = amiguard_scan_bootblock(block, AMIGUARD_BOOTBLOCK_SIZE);
     print_result(&detection);
+
+#ifdef AMIGUARD_NATIVE_XVS
+    if (detection.result != AMIGUARD_RESULT_INFECTED &&
+        detection.result != AMIGUARD_RESULT_ERROR) {
+        xvs_result = amiguard_xvs_scan_bootblock(block, AMIGUARD_BOOTBLOCK_SIZE);
+        if (xvs_result.status == AMIGUARD_XVS_DETECTED) {
+            printf("XVS-DETECTED: %s\n", xvs_result.name);
+            print_submission_request("disk image or bootblock sample");
+        }
+    }
+#endif
 
     return detection.result == AMIGUARD_RESULT_ERROR ? RETURN_FAIL : RETURN_OK;
 }
