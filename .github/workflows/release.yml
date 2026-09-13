@@ -131,9 +131,14 @@ jobs:
               "dist/AmiGuard-v${VERSION}.zip" \
               "dist/AmiGuard-v${VERSION}.zip.sha256"
           else
+            NOTES="docs/RELEASE_NOTES_v${VERSION}.md"
+            NOTES_ARGS=(--generate-notes)
+            if [[ -f "$NOTES" ]]; then
+              NOTES_ARGS=(--notes-file "$NOTES")
+            fi
             gh release create "$TAG" \
               --title "AmiGuard ${TAG}" \
-              --notes-file docs/RELEASE_NOTES_v0.1.0.md \
+              "${NOTES_ARGS[@]}" \
               dist/AmiGuard.lha \
               dist/AmiGuard.readme \
               dist/AmiGuard.lha.sha256 \
