@@ -87,7 +87,7 @@ static const char *copy_name(const char *name)
 
 static int open_xvs(void)
 {
-    xvsBase = OpenLibrary("xvs.library", AMIGUARD_XVS_MIN_VERSION);
+    xvsBase = OpenLibrary((STRPTR)"xvs.library", AMIGUARD_XVS_MIN_VERSION);
     if (xvsBase == 0)
         return 0;
     if (!xvsSelfTest()) {
@@ -138,7 +138,7 @@ struct amiguard_xvs_result amiguard_xvs_scan_file_buffer(
     if (type == AMIGUARD_XVSFT_DATAVIRUS ||
         type == AMIGUARD_XVSFT_FILEVIRUS ||
         type == AMIGUARD_XVSFT_LINKVIRUS) {
-        name = copy_name(info->xvsfi_Name);
+        name = copy_name((const char *)info->xvsfi_Name);
         xvsFreeObject(info);
         close_xvs();
         return make_result(AMIGUARD_XVS_DETECTED, name);
@@ -179,7 +179,7 @@ struct amiguard_xvs_result amiguard_xvs_scan_bootblock(
 
     if (type == AMIGUARD_XVSBT_VIRUS ||
         info->xvsbi_BootType == (UBYTE)AMIGUARD_XVSBT_VIRUS) {
-        name = copy_name(info->xvsbi_Name);
+        name = copy_name((const char *)info->xvsbi_Name);
         xvsFreeObject(info);
         close_xvs();
         return make_result(AMIGUARD_XVS_DETECTED, name);
