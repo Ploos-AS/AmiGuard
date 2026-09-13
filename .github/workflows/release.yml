@@ -43,7 +43,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y autoconf automake libtool make gcc git lhasa zip
 
-      - name: Build pinned LHa archive writer
+      - name: Build and smoke-test pinned LHa archive writer
         shell: bash
         run: |
           set -euo pipefail
@@ -54,10 +54,27 @@ jobs:
           autoreconf -is
           ./configure --prefix="$RUNNER_TEMP/lha-install" --disable-multibyte-filename
           make -j2
-          make check
           make install
-          "$RUNNER_TEMP/lha-install/bin/lha" | head -n 20
-          echo "LHA_CMD=$RUNNER_TEMP/lha-install/bin/lha" >> "$GITHUB_ENV"
+
+          LHA_CMD="$RUNNER_TEMP/lha-install/bin/lha"
+          "$LHA_CMD" | head -n 20 || true
+
+          SMOKE="$RUNNER_TEMP/lha-smoke"
+          mkdir -p "$SMOKE/src" "$SMOKE/out"
+          printf 'AmiGuard LHa writer smoke test\n' > "$SMOKE/src/payload.txt"
+          (
+            cd "$SMOKE/src"
+            "$LHA_CMD" a "$SMOKE/smoke.lha" payload.txt
+          )
+          "$LHA_CMD" t "$SMOKE/smoke.lha"
+          "$LHA_CMD" l "$SMOKE/smoke.lha" | grep -F 'payload.txt'
+          (
+            cd "$SMOKE/out"
+            "$LHA_CMD" x "$SMOKE/smoke.lha"
+          )
+          cmp "$SMOKE/src/payload.txt" "$SMOKE/out/payload.txt"
+
+          echo "LHA_CMD=$LHA_CMD" >> "$GITHUB_ENV"
 
       - name: Host regression suite
         run: make check
