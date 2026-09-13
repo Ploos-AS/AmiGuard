@@ -1,0 +1,6 @@
+FailAt 21
+AmiGuard >AGTest:banner.log
+Probe >AGTest:banner-probe.log
+Type AGTest:banner.log
+Echo >AGTest:banner.done "RETURNED"
+Echo "BANNER RETURNED"

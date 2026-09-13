@@ -1,0 +1,6 @@
+FailAt 21
+XVSCheck >AGTest:xvsopen.log
+Probe >AGTest:xvsopen-probe.log
+Type AGTest:xvsopen.log
+Echo >AGTest:xvsopen.done "RETURNED"
+Echo "XVSOPEN RETURNED"

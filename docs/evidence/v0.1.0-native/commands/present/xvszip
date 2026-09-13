@@ -1,0 +1,6 @@
+FailAt 21
+AmiGuard >AGTest:xvszip.log FILE AGFiles:eicar_com.zip
+Probe >AGTest:xvszip-probe.log
+Type AGTest:xvszip.log
+Echo >AGTest:xvszip.done "RETURNED"
+Echo "XVSZIP RETURNED"

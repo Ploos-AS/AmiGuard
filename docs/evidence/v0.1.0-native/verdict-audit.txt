@@ -1,0 +1,46 @@
+HEAD=95ea9491f0d7d79367cf28142a0fb4229712b6cd
+STATUS_BEGIN
+STATUS_END
+4a411c257dfb63e0160bcf8524f7640c3445a88f5a970793d10ac8b91d2cea4c  AmiGuard
+AmiGuard: AmigaOS loadseg()ble executable/binary
+
+AmiGuard:     file format amiga
+architecture: m68k:68000, flags 0x00000011:
+HAS_RELOC, HAS_SYMS
+start address 0x00000000
+
+00001646 T _amiguard_xvs_scan_bootblock
+00001528 T _amiguard_xvs_scan_file_buffer
+TEST-SIGNATURE: %s (%lu bytes)
+INFECTED: %s (%lu bytes)
+XVS-DETECTED: %s (%lu bytes)
+This is an optional xvs.library result, not an AmiGuard INFECTED verdict.
+INFECTED: %s
+XVS-DETECTED: %s
+35:    printf("This is an optional xvs.library result, not an AmiGuard INFECTED verdict.\n");
+42:    if (d->result == AMIGUARD_RESULT_INFECTED) {
+70:    if (result.status == AMIGUARD_FILE_XVS_DETECTED) {
+71:        printf("XVS-DETECTED: %s (%lu bytes)\n", result.message, result.size);
+133:    if (detection.result != AMIGUARD_RESULT_INFECTED &&
+137:            printf("XVS-DETECTED: %s\n", xvs_result.name);
+42:#define xvsSelfTest() \
+43:    LP0(0x1e, BOOL, xvsSelfTest, \
+46:#define xvsAllocObject(objecttype) \
+47:    LP1(0x30, APTR, xvsAllocObject, ULONG, objecttype, d0, \
+50:#define xvsFreeObject(object) \
+51:    LP1NR(0x36, xvsFreeObject, APTR, object, a1, \
+54:#define xvsCheckBootblock(bootinfo) \
+55:    LP1(0x42, ULONG, xvsCheckBootblock, struct xvsBootInfo *, bootinfo, a0, \
+58:#define xvsCheckFile(fileinfo) \
+59:    LP1(0x60, ULONG, xvsCheckFile, struct xvsFileInfo *, fileinfo, a0, \
+93:    if (!xvsSelfTest()) {
+128:    info = (struct xvsFileInfo *)xvsAllocObject(AMIGUARD_XVSOBJ_FILEINFO);
+136:    type = xvsCheckFile(info);
+142:        xvsFreeObject(info);
+147:    xvsFreeObject(info);
+171:    info = (struct xvsBootInfo *)xvsAllocObject(AMIGUARD_XVSOBJ_BOOTINFO);
+178:    type = xvsCheckBootblock(info);
+183:        xvsFreeObject(info);
+188:    xvsFreeObject(info);
+PASS: two native XVS result branches print XVS-DETECTED
+PASS: no xvs repair/install/delete/remove call exists in bridge

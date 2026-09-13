@@ -1,0 +1,6 @@
+FailAt 21
+AmiGuard >AGTest:eicar.log FILE AGFiles:eicar.com.txt
+Probe >AGTest:eicar-probe.log
+Type AGTest:eicar.log
+Echo >AGTest:eicar.done "RETURNED"
+Echo "EICAR RETURNED"

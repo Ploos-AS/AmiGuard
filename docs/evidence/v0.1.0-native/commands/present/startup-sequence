@@ -1,0 +1,9 @@
+DF0:c/Assign SYS: DF0:
+DF0:c/Assign C: DF0:c
+Assign LIBS: DF0:libs
+Assign DEVS: DF0:devs
+Assign L: DF0:l
+Assign FONTS: DF0:fonts
+LoadWB
+NewCLI CON:0/12/640/190/AmiGuard FROM AGTest:setup
+EndCLI

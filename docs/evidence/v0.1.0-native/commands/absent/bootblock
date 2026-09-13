@@ -1,0 +1,6 @@
+FailAt 21
+AmiGuard >AGTest:bootblock.log DF0:
+Probe >AGTest:bootblock-probe.log
+Type AGTest:bootblock.log
+Echo >AGTest:bootblock.done "RETURNED"
+Echo "BOOTBLOCK RETURNED"

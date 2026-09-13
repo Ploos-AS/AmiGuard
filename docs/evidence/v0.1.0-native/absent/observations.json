@@ -1,0 +1,35 @@
+{
+  "mode": "absent",
+  "completed_log_checks": true,
+  "checks": {
+    "startup_banner_cli": "PASS",
+    "kickstart_workbench_1_2": "PASS",
+    "zero_fast_ram": "PASS",
+    "banner_cli_repeat": "PASS",
+    "df0_read_only_standard_not_infected": "PASS",
+    "file_path_read_only": "PASS",
+    "harmless_test_signature_never_infected": "PASS",
+    "xvs_absent_normal_scan": "PASS",
+    "xvs_absent_startup_independent": "PASS",
+    "session_responsive_after_scans": "PASS",
+    "no_repair_delete": "PASS (no such operation invoked)"
+  },
+  "binary_after": "4a411c257dfb63e0160bcf8524f7640c3445a88f5a970793d10ac8b91d2cea4c",
+  "file_after": {
+    "eicar.com.txt": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+    "plain.txt": "23e0ab9ff0bbc2926d9f3748277a3b1e4b8bea16bdf80bb50eb14aee7ba4247d",
+    "xvs-eicar-wrapped.bin": "24da83f7d02944d2ce218a5d0d37b1f1f85cd21e2300cd0ed6bb16dc0e30d28b"
+  },
+  "media_after": {
+    "workbench12.adf": "1035a9a317fbbf0056848a25397f245967d7a8f1bc5079b02a018f410899bdf0",
+    "unknown.adf": "9acd344236c1d414a85b56d23b322db62023feb48df642720aaa08697e873fbd"
+  },
+  "original_after": {
+    "/home/pgo/Projects/Amiga/FS-UAE_Config/fs-uae-amiga-reference-configs/a500/stock/a500-stock-accurate.fs-uae": "c280801f4129654f7dcd2dd4abf237a1d9c350dec5320b67d134154dcc43d3d4",
+    "/home/pgo/Documents/FS-UAE/Kickstarts/amiga-os-120.rom": "781a36914b49642ab14b5a6f1e7263c7fc2dcbaba3c1fc141a163fd5299b976d",
+    "/home/pgo/Documents/FS-UAE/Floppies/amiga-os-120-workbench.adf": "1035a9a317fbbf0056848a25397f245967d7a8f1bc5079b02a018f410899bdf0",
+    "/home/pgo/Downloads/eicar.com.txt": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+    "/home/pgo/Documents/FS-UAE/Hard Drives/Work/Install/xvs/libs/xvs.library": "d178b7770199cd2abac2bb66ee95a86880a649c98b8bb681e8255de117eee21c"
+  },
+  "screenshots_require_human_review": true
+}

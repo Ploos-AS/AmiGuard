@@ -1,0 +1,55 @@
+{
+  "qualification": "AmiGuard v0.1.0 native release candidate",
+  "status": "PASS",
+  "qualified_head": "95ea9491f0d7d79367cf28142a0fb4229712b6cd",
+  "binary_sha256": "4a411c257dfb63e0160bcf8524f7640c3445a88f5a970793d10ac8b91d2cea4c",
+  "fs_uae_version": "3.2.35",
+  "profile": "A500 / 68000 / cycle-exact / no JIT",
+  "kickstart": "1.2 / 33.180",
+  "workbench": "1.2 / 33.56",
+  "ram": "512 KiB Chip; 0 Slow/Fast/motherboard",
+  "visible_non_headless_sessions": 2,
+  "xvs": {
+    "absent_session": "PASS",
+    "present_version": "33.49",
+    "present_self_test": "PASS",
+    "sha256": "d178b7770199cd2abac2bb66ee95a86880a649c98b8bb681e8255de117eee21c",
+    "runtime_detection_observed_with_harmless_probes": false,
+    "verdict_separation_binary_source_audit": "PASS",
+    "repair_delete_calls": 0
+  },
+  "normal_logs_byte_identical_absent_present": [
+    "start.log",
+    "banner.log",
+    "bootblock.log",
+    "fileplain.log",
+    "eicar.log",
+    "xvswrapped.log"
+  ],
+  "screenshots_reviewed": {
+    "absent": [
+      "startup.png",
+      "banner.png",
+      "bootblock.png",
+      "fileplain.png",
+      "eicar.png",
+      "xvswrapped.png",
+      "xvsopen.png",
+      "post.png"
+    ],
+    "present": [
+      "startup.png",
+      "banner.png",
+      "bootblock.png",
+      "fileplain.png",
+      "eicar.png",
+      "xvsopen.png",
+      "xvswrapped.png",
+      "xvszip.png",
+      "xvszip2.png",
+      "post.png"
+    ]
+  },
+  "integrity": "All checked original, media, fixture and binary hashes unchanged",
+  "host_tests": "PASS: five C suites and 107 Python tests"
+}

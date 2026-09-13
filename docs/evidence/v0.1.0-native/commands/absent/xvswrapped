@@ -1,0 +1,6 @@
+FailAt 21
+AmiGuard >AGTest:xvswrapped.log FILE AGFiles:xvs-eicar-wrapped.bin
+Probe >AGTest:xvswrapped-probe.log
+Type AGTest:xvswrapped.log
+Echo >AGTest:xvswrapped.done "RETURNED"
+Echo "XVSWRAPPED RETURNED"

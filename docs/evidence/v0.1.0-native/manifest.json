@@ -1,0 +1,61 @@
+{
+  "date_utc": "2026-09-13T07:28:00Z",
+  "head": "95ea9491f0d7d79367cf28142a0fb4229712b6cd",
+  "status": "",
+  "inputs": {
+    "reference": "/home/pgo/Projects/Amiga/FS-UAE_Config/fs-uae-amiga-reference-configs/a500/stock/a500-stock-accurate.fs-uae",
+    "rom": "/home/pgo/Documents/FS-UAE/Kickstarts/amiga-os-120.rom",
+    "workbench": "/home/pgo/Documents/FS-UAE/Floppies/amiga-os-120-workbench.adf"
+  },
+  "original_sha256": {
+    "/home/pgo/Projects/Amiga/FS-UAE_Config/fs-uae-amiga-reference-configs/a500/stock/a500-stock-accurate.fs-uae": "c280801f4129654f7dcd2dd4abf237a1d9c350dec5320b67d134154dcc43d3d4",
+    "/home/pgo/Documents/FS-UAE/Kickstarts/amiga-os-120.rom": "781a36914b49642ab14b5a6f1e7263c7fc2dcbaba3c1fc141a163fd5299b976d",
+    "/home/pgo/Documents/FS-UAE/Floppies/amiga-os-120-workbench.adf": "1035a9a317fbbf0056848a25397f245967d7a8f1bc5079b02a018f410899bdf0",
+    "/home/pgo/Downloads/eicar.com.txt": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+    "/home/pgo/Downloads/eicar_com.zip": "2546dcffc5ad854d4ddc64fbf056871cd5a00f2471cb7a5bfd4ac23b6e9eedad",
+    "/home/pgo/Downloads/eicar_com2.zip": "e1105070ba828007508566e28a2b8d4c65d192e9eaf3b7868382b7cae747b397",
+    "/home/pgo/Documents/FS-UAE/Hard Drives/Work/Install/xvs/libs/xvs.library": "d178b7770199cd2abac2bb66ee95a86880a649c98b8bb681e8255de117eee21c"
+  },
+  "source_sha256": {
+    "src/file_intake.c": "89af5d7ca6fc3afb81d580fdf6fb760ce5bccebc5e15de373a0521b4a153af8f",
+    "src/file_intake.h": "82e3081ea86bc7b7debb360b885eaabf89b1457965f788d08e028503b241bb61",
+    "src/file_signatures.c": "2793e18e395bad2271e1b424ab2233ba9d9fd03b397f217f5233fee4e6981dc8",
+    "src/file_signatures.h": "e0d9404bb8a811a9e4f89e408d6688cb6de82329d71356ab7a4acf13b35728f4",
+    "src/hunk.c": "025992c4d99c682f8f84c5b712124a85cf94dcbc7c6c52076b42aaa68d0ec476",
+    "src/hunk.h": "dc6539e01bafb09831240a4ffc5f1e013c1ff4e38ca0c3110eb5adef2075018a",
+    "src/main.c": "a8973c2e2305d1793789bdc7613692e48fa878767196c7584f8576df10fb9924",
+    "src/scanner.c": "4dd6631ecc72899be546408bfc3329735b784e09b87b4de7c54d7ef9156686c7",
+    "src/scanner.h": "3c6e788b8b89d8d5dc143cb5853a020882f1e921b572168b995daea1419fe596",
+    "src/signatures.c": "09eb3f26b78d1f6a6fd688b84ce85b4087be3b402df162ac978d5fd260913326",
+    "src/signatures.h": "e1a7b1a33d66e63f1cd11095d16199b22b76b2d75aa3e56c6331857140e57c16",
+    "src/trackdisk.c": "92819aa7b3f7f4633926ed994792541bbc641a1823ee69ddf747a15b13911910",
+    "src/trackdisk.h": "22156687ccaa390ea04da8523733bc39ea2df2215370d7abe6d06ab43d69aef6",
+    "src/xvs_bridge.c": "4303cf437edbf187882889ad6cac91355a810c5cd0be35800d9032c98fd0b6e8",
+    "src/xvs_bridge.h": "c2dd552c91467350a97eb017c4c6d9510688b3c333ecf6d661bdd413688c7519",
+    "Makefile": "97a2fe35f6847edf63d479944365e058978d2f9276ca86c607df1634332673f8"
+  },
+  "media_before": {
+    "workbench12.adf": "1035a9a317fbbf0056848a25397f245967d7a8f1bc5079b02a018f410899bdf0",
+    "unknown.adf": "9acd344236c1d414a85b56d23b322db62023feb48df642720aaa08697e873fbd"
+  },
+  "binary_sha256": "4a411c257dfb63e0160bcf8524f7640c3445a88f5a970793d10ac8b91d2cea4c",
+  "binary_bytes": 21276,
+  "compiler": "/opt/amiga/bin/m68k-amigaos-gcc",
+  "compiler_version": "m68k-amigaos-gcc (GCC) 6.5.0b 20260807212032",
+  "qualification": "AmiGuard v0.1.0 native release candidate",
+  "build_command": "make CC=/opt/amiga/bin/m68k-amigaos-gcc",
+  "native_flags": "-DAMIGUARD_NATIVE_XVS=1 -m68000 -mcrt=nix13",
+  "fs_uae_version": "3.2.35",
+  "file_before": {
+    "eicar.com.txt": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+    "eicar_com.zip": "2546dcffc5ad854d4ddc64fbf056871cd5a00f2471cb7a5bfd4ac23b6e9eedad",
+    "eicar_com2.zip": "e1105070ba828007508566e28a2b8d4c65d192e9eaf3b7868382b7cae747b397",
+    "plain.txt": "23e0ab9ff0bbc2926d9f3748277a3b1e4b8bea16bdf80bb50eb14aee7ba4247d",
+    "xvs-eicar-wrapped.bin": "24da83f7d02944d2ce218a5d0d37b1f1f85cd21e2300cd0ed6bb16dc0e30d28b"
+  },
+  "xvs_local_source": "/home/pgo/Documents/FS-UAE/Hard Drives/Work/Install/xvs/libs/xvs.library",
+  "xvs_sha256": "d178b7770199cd2abac2bb66ee95a86880a649c98b8bb681e8255de117eee21c",
+  "xvs_bytes": 68092,
+  "xvs_staged_sha256": "d178b7770199cd2abac2bb66ee95a86880a649c98b8bb681e8255de117eee21c",
+  "xvs_absent_verified": true
+}
