@@ -102,7 +102,8 @@ int main(int argc, char **argv)
     struct amiguard_xvs_result xvs_result;
 #endif
 
-    printf("AmiGuard 0.0.2 M2.3\n");
+    printf("AmiGuard 0.1.0\n");
+    printf("Copyright (c) 2026 Ploos AS\n");
     printf("Target: Kickstart 1.2+ / Motorola 68000\n");
 
     if (argc == 3 && is_file_mode(argv[1]))
