@@ -18,9 +18,18 @@ static int masked_match(
     return 1;
 }
 
+const struct amiguard_file_signature *amiguard_file_signatures(unsigned long *count)
+{
+    if (count != 0)
+        *count = (unsigned long)(sizeof(file_signatures) / sizeof(file_signatures[0]));
+    return file_signatures;
+}
+
 unsigned long amiguard_file_signature_count(void)
 {
-    return (unsigned long)(sizeof(file_signatures) / sizeof(file_signatures[0]));
+    unsigned long count = 0UL;
+    (void)amiguard_file_signatures(&count);
+    return count;
 }
 
 struct amiguard_file_signature_match amiguard_match_file_signature(
