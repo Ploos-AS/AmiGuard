@@ -14,14 +14,17 @@
 #define AMIGUARD_RUNTIME_SOURCE_MAX 256U
 
 struct runtime_signature_slot {
-    struct amiguard_file_signature signature;
     char name[AMIGUARD_RUNTIME_MAX_NAME];
     unsigned char pattern[AMIGUARD_RUNTIME_MAX_PATTERN];
     unsigned char mask[AMIGUARD_RUNTIME_MAX_PATTERN];
+    unsigned long offset;
+    unsigned int length;
+    int test_only;
 };
 
-static struct runtime_signature_slot runtime_slots[AMIGUARD_RUNTIME_MAX_SIGNATURES];
-static struct runtime_signature_slot staging_slots[AMIGUARD_RUNTIME_MAX_SIGNATURES];
+static struct runtime_signature_slot runtime_storage[AMIGUARD_RUNTIME_MAX_SIGNATURES];
+static struct runtime_signature_slot staging_storage[AMIGUARD_RUNTIME_MAX_SIGNATURES];
+static struct amiguard_file_signature runtime_table[AMIGUARD_RUNTIME_MAX_SIGNATURES];
 static unsigned long runtime_count = 0UL;
 static int runtime_active = 0;
 static char runtime_source[AMIGUARD_RUNTIME_SOURCE_MAX] = "builtin";
@@ -79,11 +82,14 @@ static int decode_hex(
     return 1;
 }
 
-static void bind_slot(struct runtime_signature_slot *slot)
+static void bind_runtime_entry(unsigned long index)
 {
-    slot->signature.name = slot->name;
-    slot->signature.pattern = slot->pattern;
-    slot->signature.mask = slot->mask;
+    runtime_table[index].name = runtime_storage[index].name;
+    runtime_table[index].offset = runtime_storage[index].offset;
+    runtime_table[index].length = runtime_storage[index].length;
+    runtime_table[index].pattern = runtime_storage[index].pattern;
+    runtime_table[index].mask = runtime_storage[index].mask;
+    runtime_table[index].test_only = runtime_storage[index].test_only;
 }
 
 static int parse_record(
@@ -154,10 +160,9 @@ static int parse_record(
     }
 
     strcpy(slot->name, name);
-    slot->signature.offset = offset;
-    slot->signature.length = pattern_length;
-    slot->signature.test_only = (int)test_only;
-    bind_slot(slot);
+    slot->offset = offset;
+    slot->length = pattern_length;
+    slot->test_only = (int)test_only;
     return 1;
 }
 
@@ -182,7 +187,7 @@ const struct amiguard_file_signature *amiguard_file_signatures(unsigned long *co
             *count = runtime_count;
         if (runtime_count == 0UL)
             return 0;
-        return &runtime_slots[0].signature;
+        return runtime_table;
     }
 
     if (count != 0)
@@ -255,8 +260,8 @@ int amiguard_file_signature_load_database(
             return 0;
         }
 
-        memset(&staging_slots[count], 0, sizeof(staging_slots[count]));
-        if (!parse_record(start, &staging_slots[count], detail, detail_size)) {
+        memset(&staging_storage[count], 0, sizeof(staging_storage[count]));
+        if (!parse_record(start, &staging_storage[count], detail, detail_size)) {
             fclose(fp);
             return 0;
         }
@@ -280,8 +285,8 @@ int amiguard_file_signature_load_database(
     }
 
     for (i = 0UL; i < count; ++i) {
-        runtime_slots[i] = staging_slots[i];
-        bind_slot(&runtime_slots[i]);
+        runtime_storage[i] = staging_storage[i];
+        bind_runtime_entry(i);
     }
     runtime_count = count;
     runtime_active = 1;
