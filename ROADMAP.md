@@ -32,6 +32,24 @@ Database/version metadata, reproducible signature-set manifest, deterministic da
 
 Machine-readable ASW/AmiSandbox handoff contract with sample hash binding, candidate validation and an explicit trust boundary. Host CI and FS-UAE/AROS provisional qualification passed on M2.7.
 
+### M3.0 — disk scanner architecture — DONE
+
+Read-only disk/volume scanner core and provider boundary. Mounted volumes, raw `trackdisk.device` media and disk images share bounded orchestration while reusing the existing file and bootblock detector authorities. The provider API intentionally exposes no write operation.
+
+### M3.1 — recursive volume/file scan — DONE
+
+Bounded recursive scanning of files throughout a selected mounted volume/directory tree through the established file engine.
+
+### M3.2 — raw floppy/media inspection — DONE
+
+Bounded, sector-aligned, read-only raw `trackdisk.device` access with bootblock support and no write/repair path. Host and FS-UAE/AROS provisional qualification passed.
+
+### M3.3 — ADF/full-disk image scan — DONE
+
+Bounded full-image traversal, bootblock integration through the established detector, raw-region accounting, image-provider/file-engine separation and clean/safe-test qualification paths. Final M3.3 head `34bfea6bc8240affc3eccd5cbec7cedd97350ae7` passed FS-UAE/AROS provisional qualification run #65 and release packaging run #48.
+
+See `docs/M3_3_ADF_IMAGE_SCAN.md`.
+
 ## Parallel sample-dependent milestone
 
 ### M2.5 — first production malware signature — WAITING FOR AUTHENTIC SAMPLE
@@ -40,29 +58,11 @@ Use an authentic, lawfully obtained research sample to exercise the complete pip
 
 ## Current engineering milestone
 
-### M3.0 — disk scanner architecture — ACTIVE
+### M3.4 — disk runtime qualification — ACTIVE
 
-Define and qualify the read-only disk/volume scanner core and provider boundary. Mounted volumes, raw `trackdisk.device` media and disk images share bounded orchestration while reusing the existing file and bootblock detector authorities. The provider API intentionally exposes no write operation.
+Consolidate and qualify all three disk paths — recursive mounted-volume scanning, raw floppy/media inspection and ADF/full-image scanning — on native m68k builds and visible classic-Amiga runtime evidence. Qualification must include low-memory operation, malformed/unreadable-media behavior, bounded-resource enforcement and confirmation that scanning remains read-only.
 
-See `docs/M3_0_DISK_SCANNER_ARCHITECTURE.md` and `src/disk_scanner.h`.
-
-## M3 — full-disk scanning
-
-### M3.1 — recursive volume/file scan
-
-Scan files throughout a selected mounted volume or directory tree using the existing file engine, with bounded buffers, deterministic traversal and clear per-object verdicts.
-
-### M3.2 — raw floppy/media inspection
-
-Add read-only raw disk inspection through trackdisk-compatible interfaces. Inspect the bootblock plus relevant raw sectors/blocks that filesystem-only traversal cannot cover. Never write, repair or disinfect media in the scanning path.
-
-### M3.3 — ADF/full-disk image scan
-
-Scan complete disk images using the same disk engine where practical, including bootblock, filesystem-visible files and raw regions. Add clean and safe-test disk-image qualification corpora.
-
-### M3.4 — disk runtime qualification
-
-Qualify volume, floppy and disk-image scanning on native m68k builds and visible Amiga runtime evidence, including low-memory operation and malformed-media handling.
+M3.4 is the final qualification gate for the **Disk** engine. Completion advances active engineering to M4 live-memory scanning.
 
 ## M4 — live-memory scanning
 
