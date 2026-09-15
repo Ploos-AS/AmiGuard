@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://amiguard.ploos.no/schemas/asw-handoff-v1.schema.json",
+  "title": "AmiGuard ASW handoff v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "handoff_id", "created_at", "producer", "sample", "analysis", "candidate"],
+  "properties": {
+    "schema": {"const": "amiguard-asw-handoff-v1"},
+    "handoff_id": {"type": "string", "pattern": "^[a-zA-Z0-9._-]{1,128}$"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": {"enum": ["ASW", "AmiSandbox"]},
+        "version": {"type": "string", "minLength": 1, "maxLength": 64}
+      }
+    },
+    "sample": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256", "size", "kind", "redistributable"],
+      "properties": {
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "size": {"type": "integer", "minimum": 1},
+        "kind": {"enum": ["file", "bootblock", "disk-image", "memory-artifact"]},
+        "filename": {"type": "string", "maxLength": 255},
+        "redistributable": {"type": "boolean"}
+      }
+    },
+    "analysis": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["result", "evidence"],
+      "properties": {
+        "result": {"enum": ["candidate", "inconclusive", "clean"]},
+        "family_hint": {"type": "string", "maxLength": 128},
+        "evidence": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "candidate": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "offset", "bytes", "mask"],
+          "properties": {
+            "kind": {"enum": ["file", "bootblock"]},
+            "offset": {"type": "integer", "minimum": 0},
+            "bytes": {"type": "string", "pattern": "^[0-9a-fA-F]+$", "minLength": 2},
+            "mask": {"type": "string", "pattern": "^[0-9a-fA-F]+$", "minLength": 2}
+          }
+        }
+      ]
+    }
+  }
+}
