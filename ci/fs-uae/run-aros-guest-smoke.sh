@@ -24,14 +24,45 @@ cat >"$startup" <<'EOF'
 SYS:C/Echo "AMIGUARD_CI_GUEST_STARTED=1" >SYS:amiguard-ci-started.txt
 SYS:AmiGuard FILE SYS:amiguard-ci-fixture.bin >SYS:amiguard-ci-output.txt
 SYS:C/Echo $RC >SYS:amiguard-ci-rc.txt
+SYS:C/Echo "AMIGUARD_CI_GUEST_DONE=1" >SYS:amiguard-ci-done.txt
 SYS:C/Execute SYS:S/Startup-Sequence.amiguard-original
 EOF
 
 config="$OUT/aros-guest.fs-uae"
 sed "s|@AROS_ROOT@|$PWD/$aros_root|" ci/fs-uae/aros-guest.fs-uae >"$config"
 fs-uae --version >"$OUT/fs-uae-version.txt" 2>&1 || true
+
+# FS-UAE is an interactive emulator and normally keeps running after the
+# detector has finished. Run it in the background, observe the host-mounted
+# evidence files, and terminate the emulator as soon as the guest gate is done.
+# This avoids making every successful qualification wait for the hard timeout.
 set +e
-timeout 45s xvfb-run -a fs-uae "$config" >"$OUT/fs-uae.log" 2>&1
+xvfb-run -a fs-uae "$config" >"$OUT/fs-uae.log" 2>&1 &
+emu_pid=$!
+set -e
+
+finished=0
+for _ in $(seq 1 45); do
+  if [[ -f "$aros_root/amiguard-ci-done.txt" ]]; then
+    finished=1
+    break
+  fi
+  if ! kill -0 "$emu_pid" 2>/dev/null; then
+    break
+  fi
+  sleep 1
+done
+
+if kill -0 "$emu_pid" 2>/dev/null; then
+  kill "$emu_pid" 2>/dev/null || true
+  for _ in $(seq 1 5); do
+    kill -0 "$emu_pid" 2>/dev/null || break
+    sleep 1
+  done
+  kill -KILL "$emu_pid" 2>/dev/null || true
+fi
+set +e
+wait "$emu_pid"
 rc=$?
 set -e
 
@@ -39,7 +70,7 @@ status=FAIL
 observation=guest_result_missing
 out="$aros_root/amiguard-ci-output.txt"
 guest_rc="$aros_root/amiguard-ci-rc.txt"
-if [[ -f "$out" ]] && grep -q 'TEST-SIGNATURE: AmiGuard synthetic file test marker' "$out"; then
+if [[ "$finished" == 1 ]] && [[ -f "$out" ]] && grep -q 'TEST-SIGNATURE: AmiGuard synthetic file test marker' "$out"; then
   status=PASS
   observation=guest_executed_amiguard_and_detected_synthetic_fixture
 elif [[ -f "$out" ]]; then
@@ -53,6 +84,7 @@ fi
   echo "KICKSTART=internal"
   echo "QUALIFICATION=provisional-ci-only"
   echo "FS_UAE_EXIT=$rc"
+  echo "GUEST_DONE=$finished"
   echo "OBSERVATION=$observation"
   [[ -f "$guest_rc" ]] && tr -d '\r' <"$guest_rc" | sed 's/^/GUEST_RC=/'
   [[ -f "$out" ]] && tr -d '\r' <"$out" | sed 's/^/GUEST_OUTPUT=/'
