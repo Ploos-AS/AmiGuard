@@ -20,27 +20,27 @@ The long-term scanner architecture has four explicit engines: **File**, **Bootbl
 
 Schema, research gate, qualification, clean-corpus controls, promotion tooling, provenance/review lifecycle, triage and known-clean lifecycle.
 
-### M2.0–M2.3 — file scanning and research pipeline — DONE
+### M2.0–M2.4 — file scanning, research and finalization pipeline — DONE
 
-HUNK parsing, bounded file intake, file-signature framework, safe-test lifecycle, ADF clean corpus, research sample intake/analysis, candidate review and differential qualification, qualified candidate proposals, and the optional xvs bridge.
-
-## Current milestone
-
-### M2.4 — verified file-signature finalization — DONE
-
-Bind a qualified file-signature proposal to exact visible native runtime evidence before it can become `verified`. The finalization tool is deliberately side-effect-free; activation remains a separately reviewed repository change followed by generated-table, host and native qualification.
+HUNK parsing, bounded file intake, file-signature framework, safe-test lifecycle, ADF clean corpus, research sample intake/analysis, candidate review and differential qualification, qualified candidate proposals, optional xvs bridge, and verified file-signature finalization bound to exact native runtime evidence.
 
 See `docs/M2_4_VERIFIED_FILE_SIGNATURE_FINALIZATION.md`.
 
-## Next milestones
+## Parallel sample-dependent milestone
 
-### M2.5 — first production malware signature
+### M2.5 — first production malware signature — WAITING FOR AUTHENTIC SAMPLE
 
-Use an authentic, lawfully obtained research sample to exercise the complete pipeline: intake → analysis → candidate → review → differential clean-corpus qualification → qualified proposal → native runtime PASS → verified signature → activation. No malware sample bytes are committed to the public repository.
+Use an authentic, lawfully obtained research sample to exercise the complete pipeline: intake → analysis → candidate → review → differential clean-corpus qualification → qualified proposal → native runtime PASS → verified signature → activation. No malware sample bytes are committed to the public repository. M2.5 does not block engineering milestones while AmiGuard waits for a suitable submitted sample.
 
-### M2.6 — production signature database operations
+## Current engineering milestone
 
-Introduce database/version metadata, reproducible signature-set manifests, release-time production-signature inventory, deterministic database identity and update-policy documentation.
+### M2.6 — production signature database operations — ACTIVE
+
+Introduce database/version metadata, reproducible signature-set manifests, release-time production-signature inventory, deterministic database identity and update-policy documentation. The manifest generator and CI consistency gate are implemented; completion requires green qualification.
+
+See `docs/M2_6_SIGNATURE_DATABASE_OPERATIONS.md`.
+
+## Next milestone
 
 ### M2.7 — ASW handoff contract
 
