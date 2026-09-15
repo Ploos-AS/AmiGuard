@@ -1,0 +1,15 @@
+{
+  "database_identity": "sha256:37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "database_version": 1,
+  "inventory": {
+    "bootblock:research": 1,
+    "bootblock:test-only": 2,
+    "file:research": 1,
+    "file:safe-test": 1,
+    "file:test-only": 1
+  },
+  "production_signature_count": 0,
+  "production_signatures": [],
+  "record_count": 6,
+  "schema": 1
+}
