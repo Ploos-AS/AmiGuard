@@ -2,7 +2,7 @@
 
 AmiGuard develops a standalone antivirus engine for classic Amiga systems while keeping the AmigaOS/Kickstart 1.2+, Motorola 68000 and low-memory runtime targets.
 
-The long-term scanner architecture has four explicit engines: **File**, **Bootblock**, **Disk** and **Memory**. File and bootblock scanning are already established; full-disk and live-memory scanning are planned below and are required before AmiGuard is considered feature-complete as a classic Amiga antivirus.
+The long-term scanner architecture has four explicit engines: **File**, **Bootblock**, **Disk** and **Memory**. File, bootblock and disk scanning are established; live-memory scanning is the current engineering track and is required before AmiGuard is considered feature-complete as a classic Amiga antivirus.
 
 ## Released baseline
 
@@ -32,23 +32,15 @@ Database/version metadata, reproducible signature-set manifest, deterministic da
 
 Machine-readable ASW/AmiSandbox handoff contract with sample hash binding, candidate validation and an explicit trust boundary. Host CI and FS-UAE/AROS provisional qualification passed on M2.7.
 
-### M3.0 — disk scanner architecture — DONE
+### M3.0–M3.3 — disk engine implementation — DONE
 
-Read-only disk/volume scanner core and provider boundary. Mounted volumes, raw `trackdisk.device` media and disk images share bounded orchestration while reusing the existing file and bootblock detector authorities. The provider API intentionally exposes no write operation.
+Read-only disk/volume architecture, recursive mounted-volume scanning, bounded raw `trackdisk.device` access and ADF/full-image scanning. The disk engine reuses established file and bootblock detector authorities and exposes no write/repair path.
 
-### M3.1 — recursive volume/file scan — DONE
+### M3.4 — disk runtime qualification — DONE / PASS
 
-Bounded recursive scanning of files throughout a selected mounted volume/directory tree through the established file engine.
+The consolidated disk qualification gate passed for recursive volume, raw floppy/media and ADF image paths. FS-UAE/AROS provisional qualification run #69 / ID `35008535211` completed successfully, including host regressions, native Bebbo/68000 build, guest detector execution, M3.4 consolidated disk qualification and evidence upload.
 
-### M3.2 — raw floppy/media inspection — DONE
-
-Bounded, sector-aligned, read-only raw `trackdisk.device` access with bootblock support and no write/repair path. Host and FS-UAE/AROS provisional qualification passed.
-
-### M3.3 — ADF/full-disk image scan — DONE
-
-Bounded full-image traversal, bootblock integration through the established detector, raw-region accounting, image-provider/file-engine separation and clean/safe-test qualification paths. Final M3.3 head `34bfea6bc8240affc3eccd5cbec7cedd97350ae7` passed FS-UAE/AROS provisional qualification run #65 and release packaging run #48.
-
-See `docs/M3_3_ADF_IMAGE_SCAN.md`.
+The **Disk** engine is therefore closed as qualified engineering scope. Visible classic-Amiga evidence remains part of release/historical compatibility discipline where required.
 
 ## Parallel sample-dependent milestone
 
@@ -58,17 +50,13 @@ Use an authentic, lawfully obtained research sample to exercise the complete pip
 
 ## Current engineering milestone
 
-### M3.4 — disk runtime qualification — ACTIVE
+### M4.0 — memory scanner architecture — ACTIVE
 
-Consolidate and qualify all three disk paths — recursive mounted-volume scanning, raw floppy/media inspection and ADF/full-image scanning — on native m68k builds and visible classic-Amiga runtime evidence. Qualification must include low-memory operation, malformed/unreadable-media behavior, bounded-resource enforcement and confirmation that scanning remains read-only.
+Define and qualify the read-only, bounded memory-inspection core for classic AmigaOS. The initial API distinguishes resident, task, library, device, vector/hook and raw-region objects; enforces object/byte/per-region limits; uses a small streaming-buffer model; and intentionally exposes no memory write callback.
 
-M3.4 is the final qualification gate for the **Disk** engine. Completion advances active engineering to M4 live-memory scanning.
+See `docs/M4_0_MEMORY_SCANNER_ARCHITECTURE.md`.
 
 ## M4 — live-memory scanning
-
-### M4.0 — memory scanner architecture
-
-Define a read-only, bounded memory-inspection engine suitable for classic AmigaOS. Document which memory regions and OS structures may be inspected safely on supported Kickstart versions.
 
 ### M4.1 — resident/task/library/device inspection
 
