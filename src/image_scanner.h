@@ -9,6 +9,15 @@
 struct amiguard_image_ops {
     void *context;
     int (*read_at)(void *context, unsigned long offset, unsigned char *buffer, unsigned long length);
+    /*
+     * Optional filesystem-visible file provider. It must be read-only and
+     * bounded by the supplied disk limits. The returned result is merged into
+     * the image verdict; omitting it leaves filesystem traversal unavailable.
+     */
+    struct amiguard_disk_result (*scan_filesystem)(
+        void *context,
+        const struct amiguard_disk_limits *limits
+    );
 };
 
 struct amiguard_disk_result amiguard_scan_adf_readonly(
