@@ -59,7 +59,7 @@ host-test: signature-check file-signature-check signature-manifest-check
 	./build/test_disk_scanner
 	$(HOSTCC) -std=c89 -pedantic -Wall -Wextra -Werror -Isrc tests/test_volume_scanner.c src/volume_scanner.c src/disk_scanner.c -o build/test_volume_scanner
 	./build/test_volume_scanner
-	$(HOSTCC) -std=c89 -pedantic -Wall -Wextra -Werror -Isrc tests/test_image_scanner.c src/image_scanner.c src/disk_scanner.c -o build/test_image_scanner
+	$(HOSTCC) -std=c89 -pedantic -Wall -Wextra -Werror -Isrc tests/test_image_scanner.c src/image_scanner.c src/disk_scanner.c src/scanner.c src/signatures.c -o build/test_image_scanner
 	./build/test_image_scanner
 	python3 -m unittest tests/test_analyze_bootblock.py tests/test_triage_corpus.py tests/test_build_review_queue.py tests/test_qualify_signature.py tests/test_build_clean_manifest.py tests/test_promote_signature.py tests/test_preflight_signature.py tests/test_finalize_signature.py tests/test_identify_known_bootblock.py tests/test_import_known_clean.py tests/test_preflight_known_clean.py tests/test_compile_file_signatures.py tests/test_qualify_eicar_acquisition.py tests/test_promote_safe_test.py tests/test_preflight_safe_test.py tests/test_extract_clean_adf_corpus.py tests/test_intake_research_sample.py tests/test_analyze_research_sample.py tests/test_review_file_signature_candidate.py tests/test_qualify_file_signature_candidate.py tests/test_promote_qualified_file_signature.py tests/test_finalize_file_signature.py tests/test_build_signature_manifest.py tests/test_validate_asw_handoff.py
 
