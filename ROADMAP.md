@@ -28,6 +28,10 @@ HUNK parsing, bounded file intake, file-signature framework, safe-test lifecycle
 
 Database/version metadata, reproducible signature-set manifest, deterministic database identity, production inventory and CI consistency gating. M2.6 completed with green host CI and FS-UAE/AROS provisional qualification.
 
+### M2.7 — ASW handoff contract — DONE
+
+Machine-readable ASW/AmiSandbox handoff contract with sample hash binding, candidate validation and an explicit trust boundary. Host CI and FS-UAE/AROS provisional qualification passed on M2.7.
+
 ## Parallel sample-dependent milestone
 
 ### M2.5 — first production malware signature — WAITING FOR AUTHENTIC SAMPLE
@@ -36,17 +40,13 @@ Use an authentic, lawfully obtained research sample to exercise the complete pip
 
 ## Current engineering milestone
 
-### M2.7 — ASW handoff contract — ACTIVE
+### M3.0 — disk scanner architecture — ACTIVE
 
-Define and qualify the machine-readable exchange contract between AmiGuard and AmiGuard Signature Workstation/AmiSandbox for sample-bound candidate evidence and analysis artifacts. ASW and AmiSandbox are evidence producers only: they cannot bypass AmiGuard review, clean-corpus qualification, native finalization or activation gates.
+Define and qualify the read-only disk/volume scanner core and provider boundary. Mounted volumes, raw `trackdisk.device` media and disk images share bounded orchestration while reusing the existing file and bootblock detector authorities. The provider API intentionally exposes no write operation.
 
-See `docs/M2_7_ASW_HANDOFF_CONTRACT.md` and `schemas/asw-handoff-v1.schema.json`.
+See `docs/M3_0_DISK_SCANNER_ARCHITECTURE.md` and `src/disk_scanner.h`.
 
 ## M3 — full-disk scanning
-
-### M3.0 — disk scanner architecture
-
-Define a read-only disk/volume scanning API that remains compatible with Kickstart 1.2+, 68000 and low-memory systems. Separate filesystem traversal from raw-media inspection so the same detector core can be reused safely.
 
 ### M3.1 — recursive volume/file scan
 
