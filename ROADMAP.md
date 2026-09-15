@@ -24,7 +24,9 @@ Schema, research gate, qualification, clean-corpus controls, promotion tooling, 
 
 HUNK parsing, bounded file intake, file-signature framework, safe-test lifecycle, ADF clean corpus, research sample intake/analysis, candidate review and differential qualification, qualified candidate proposals, optional xvs bridge, and verified file-signature finalization bound to exact native runtime evidence.
 
-See `docs/M2_4_VERIFIED_FILE_SIGNATURE_FINALIZATION.md`.
+### M2.6 — production signature database operations — DONE
+
+Database/version metadata, reproducible signature-set manifest, deterministic database identity, production inventory and CI consistency gating. M2.6 completed with green host CI and FS-UAE/AROS provisional qualification.
 
 ## Parallel sample-dependent milestone
 
@@ -34,17 +36,11 @@ Use an authentic, lawfully obtained research sample to exercise the complete pip
 
 ## Current engineering milestone
 
-### M2.6 — production signature database operations — ACTIVE
+### M2.7 — ASW handoff contract — ACTIVE
 
-Introduce database/version metadata, reproducible signature-set manifests, release-time production-signature inventory, deterministic database identity and update-policy documentation. The manifest generator and CI consistency gate are implemented; completion requires green qualification.
+Define and qualify the machine-readable exchange contract between AmiGuard and AmiGuard Signature Workstation/AmiSandbox for sample-bound candidate evidence and analysis artifacts. ASW and AmiSandbox are evidence producers only: they cannot bypass AmiGuard review, clean-corpus qualification, native finalization or activation gates.
 
-See `docs/M2_6_SIGNATURE_DATABASE_OPERATIONS.md`.
-
-## Next milestone
-
-### M2.7 — ASW handoff contract
-
-Define the machine-readable exchange contract between AmiGuard and AmiGuard Signature Workstation/AmiSandbox for candidate evidence and analysis artifacts. ASW may propose evidence and candidates but cannot bypass AmiGuard review, clean-corpus qualification or native finalization gates.
+See `docs/M2_7_ASW_HANDOFF_CONTRACT.md` and `schemas/asw-handoff-v1.schema.json`.
 
 ## M3 — full-disk scanning
 
