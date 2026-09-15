@@ -13,7 +13,7 @@ TARGET := AmiGuard
 SRC := src/main.c src/scanner.c src/signatures.c src/trackdisk.c src/hunk.c src/file_intake.c src/file_signatures.c src/xvs_bridge.c
 OBJ := $(SRC:.c=.o)
 
-.PHONY: all clean check host-test signatures signature-check file-signatures file-signature-check
+.PHONY: all clean check host-test signatures signature-check file-signatures file-signature-check signature-manifest signature-manifest-check
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
@@ -37,7 +37,13 @@ file-signatures:
 file-signature-check:
 	python3 tools/compile_file_signatures.py --check
 
-host-test: signature-check file-signature-check
+signature-manifest:
+	python3 tools/build_signature_manifest.py --write
+
+signature-manifest-check:
+	python3 tools/build_signature_manifest.py --check
+
+host-test: signature-check file-signature-check signature-manifest-check
 	mkdir -p build
 	$(HOSTCC) -std=c89 -pedantic -Wall -Wextra -Werror -Isrc tests/test_scanner.c src/scanner.c src/signatures.c -o build/test_scanner
 	./build/test_scanner
@@ -49,7 +55,7 @@ host-test: signature-check file-signature-check
 	./build/test_file_signatures
 	$(HOSTCC) -std=c89 -pedantic -Wall -Wextra -Werror -Isrc tests/test_file_intake.c src/file_intake.c src/file_signatures.c src/hunk.c -o build/test_file_intake
 	./build/test_file_intake
-	python3 -m unittest tests/test_analyze_bootblock.py tests/test_triage_corpus.py tests/test_build_review_queue.py tests/test_qualify_signature.py tests/test_build_clean_manifest.py tests/test_promote_signature.py tests/test_preflight_signature.py tests/test_finalize_signature.py tests/test_identify_known_bootblock.py tests/test_import_known_clean.py tests/test_preflight_known_clean.py tests/test_compile_file_signatures.py tests/test_qualify_eicar_acquisition.py tests/test_promote_safe_test.py tests/test_preflight_safe_test.py tests/test_extract_clean_adf_corpus.py tests/test_intake_research_sample.py tests/test_analyze_research_sample.py tests/test_review_file_signature_candidate.py tests/test_qualify_file_signature_candidate.py tests/test_promote_qualified_file_signature.py tests/test_finalize_file_signature.py
+	python3 -m unittest tests/test_analyze_bootblock.py tests/test_triage_corpus.py tests/test_build_review_queue.py tests/test_qualify_signature.py tests/test_build_clean_manifest.py tests/test_promote_signature.py tests/test_preflight_signature.py tests/test_finalize_signature.py tests/test_identify_known_bootblock.py tests/test_import_known_clean.py tests/test_preflight_known_clean.py tests/test_compile_file_signatures.py tests/test_qualify_eicar_acquisition.py tests/test_promote_safe_test.py tests/test_preflight_safe_test.py tests/test_extract_clean_adf_corpus.py tests/test_intake_research_sample.py tests/test_analyze_research_sample.py tests/test_review_file_signature_candidate.py tests/test_qualify_file_signature_candidate.py tests/test_promote_qualified_file_signature.py tests/test_finalize_file_signature.py tests/test_build_signature_manifest.py
 
 check: host-test
 
