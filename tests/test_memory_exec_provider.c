@@ -16,7 +16,8 @@ int main(void)
 {
     static const unsigned char task_bytes[] = { 1U, 2U, 3U, 4U };
     static const unsigned char library_bytes[] = { 5U, 6U, 7U };
-    struct amiguard_exec_snapshot snapshots[2];
+    static const unsigned char resident_bytes[] = { 8U, 9U };
+    struct amiguard_exec_snapshot snapshots[3];
     struct amiguard_exec_provider provider;
     struct amiguard_memory_object object;
     unsigned char buffer[4];
@@ -31,8 +32,12 @@ int main(void)
     snapshots[1].address = library_bytes;
     snapshots[1].size = sizeof(library_bytes);
     strcpy(snapshots[1].name, "safe.library");
+    snapshots[2].kind = AMIGUARD_MEMORY_OBJECT_RESIDENT;
+    snapshots[2].address = resident_bytes;
+    snapshots[2].size = sizeof(resident_bytes);
+    strcpy(snapshots[2].name, "safe-resident");
 
-    amiguard_exec_provider_init(&provider, snapshots, 2UL);
+    amiguard_exec_provider_init(&provider, snapshots, 3UL);
     if (!expect(amiguard_exec_provider_next(&provider, &object) == 1,
                 "first object enumerated"))
         return 1;
@@ -60,11 +65,22 @@ int main(void)
     if (!expect(object.kind == AMIGUARD_MEMORY_OBJECT_LIBRARY,
                 "library class retained"))
         return 1;
+
+    if (!expect(amiguard_exec_provider_next(&provider, &object) == 1,
+                "resident object enumerated"))
+        return 1;
+    if (!expect(object.kind == AMIGUARD_MEMORY_OBJECT_RESIDENT,
+                "resident class retained"))
+        return 1;
+    if (!expect(strcmp(object.name, "safe-resident") == 0,
+                "resident name retained"))
+        return 1;
+
     if (!expect(amiguard_exec_provider_next(&provider, &object) == 0,
                 "provider end reported"))
         return 1;
 
-    count = amiguard_exec_snapshot_system(snapshots, 2UL);
+    count = amiguard_exec_snapshot_system(snapshots, 3UL);
 #ifndef __AMIGA__
     if (!expect(count == 0L, "host snapshot is inert"))
         return 1;
@@ -73,6 +89,6 @@ int main(void)
         return 1;
 #endif
 
-    printf("PASS: Exec memory provider enumeration and bounded reads\n");
+    printf("PASS: Exec memory provider task/library/resident coverage and bounded reads\n");
     return 0;
 }
