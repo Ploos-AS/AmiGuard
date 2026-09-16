@@ -21,6 +21,7 @@ int main(void)
     struct amiguard_vector_baseline baseline[1];
     struct amiguard_vector_provenance provenance;
     long count;
+    long server_count;
 
     memset(&item, 0, sizeof(item));
     item.kind = AMIGUARD_VECTOR_KIND_INTERRUPT;
@@ -81,8 +82,11 @@ int main(void)
         return 1;
 
     count = amiguard_exec_snapshot_vectors(native_items, 4UL);
+    server_count = amiguard_exec_snapshot_interrupt_servers(native_items, 4UL, 8UL);
 #ifndef __AMIGA__
     if (!expect(count == 0L, "host native snapshot inert"))
+        return 1;
+    if (!expect(server_count == 0L, "host server snapshot inert"))
         return 1;
     if (!expect(amiguard_exec_vector_provenance(&provenance) == 0,
                 "host native provenance inert"))
@@ -90,11 +94,14 @@ int main(void)
 #else
     if (!expect(count >= 0L, "native vector snapshot completed"))
         return 1;
+    if (!expect(server_count >= 0L && server_count <= 4L,
+                "native bounded server snapshot completed"))
+        return 1;
     if (!expect(amiguard_exec_vector_provenance(&provenance),
                 "native Exec provenance captured"))
         return 1;
 #endif
 
-    printf("PASS: version/source-aware vector baseline provenance separation\n");
+    printf("PASS: version/source-aware vector and bounded server snapshots\n");
     return 0;
 }
