@@ -48,6 +48,10 @@ The read-only bounded memory-inspection contract is established for resident, ta
 
 See `docs/M4_0_MEMORY_SCANNER_ARCHITECTURE.md`.
 
+### M4.1 — resident/task/library/device inspection — DONE / PASS
+
+The bounded read-only Exec provider now covers the current task, ready and waiting task lists, libraries, devices and resident modules (including nested resident tables). Metadata capture is kept inside a short `Forbid()`/`Permit()` window; scanning does not run while multitasking is suppressed and no system structures are modified. Host tests, native Bebbo/68000 build and FS-UAE/AROS provisional qualification passed on run #83 / ID `35066520556`.
+
 ## Parallel sample-dependent milestone
 
 ### M2.5 — first production malware signature — WAITING FOR AUTHENTIC SAMPLE
@@ -56,15 +60,11 @@ Use an authentic, lawfully obtained research sample to exercise the complete pip
 
 ## Current engineering milestone
 
-### M4.1 — resident/task/library/device inspection — ACTIVE
+### M4.2 — vectors and hooks integrity — ACTIVE
 
-Enumerate relevant resident modules, tasks/processes, libraries and devices through a bounded read-only Exec provider and report inspectable objects without modifying system state. The initial provider, host tests and native integration are green; M4.1 remains active until the supported object classes and runtime evidence are complete.
+Inspect selected Exec/OS vectors, interrupt/server structures and other historically relevant hooks through bounded read-only snapshots. Establish version-aware baseline/provenance data before introducing any malicious or suspicious verdict so legitimate patches and supported Kickstart differences are not misclassified.
 
 ## M4 — live-memory scanning
-
-### M4.2 — vectors and hooks integrity
-
-Inspect selected Exec/OS vectors, interrupt/server structures and other historically relevant hooks for known malicious modifications or qualified heuristics while controlling false positives across supported Kickstart versions.
 
 ### M4.3 — RAM signature scanning
 
