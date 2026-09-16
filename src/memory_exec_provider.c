@@ -72,6 +72,7 @@ void amiguard_exec_provider_close(void *context,
 #include <exec/lists.h>
 #include <exec/nodes.h>
 #include <exec/resident.h>
+#include <exec/tasks.h>
 #include <proto/exec.h>
 
 extern struct ExecBase *SysBase;
@@ -114,6 +115,74 @@ static unsigned long snapshot_list(struct List *list,
     return used;
 }
 
+static unsigned long snapshot_task(struct Task *task,
+                                   struct amiguard_exec_snapshot *objects,
+                                   unsigned long capacity,
+                                   unsigned long used)
+{
+    if (task == 0 || objects == 0 || used >= capacity)
+        return used;
+
+    objects[used].kind = AMIGUARD_MEMORY_OBJECT_TASK;
+    objects[used].address = (const void *)task;
+    objects[used].size = (unsigned long)sizeof(struct Task);
+    copy_name(objects[used].name, task->tc_Node.ln_Name);
+    return used + 1UL;
+}
+
+static unsigned long snapshot_resident(struct Resident *resident,
+                                       struct amiguard_exec_snapshot *objects,
+                                       unsigned long capacity,
+                                       unsigned long used)
+{
+    unsigned long size;
+
+    if (resident == 0 || objects == 0 || used >= capacity)
+        return used;
+    if (resident->rt_MatchWord != RTC_MATCHWORD ||
+        resident->rt_MatchTag != resident)
+        return used;
+
+    size = (unsigned long)sizeof(struct Resident);
+    if (resident->rt_EndSkip != 0 &&
+        (const unsigned char *)resident->rt_EndSkip >
+        (const unsigned char *)resident) {
+        size = (unsigned long)((const unsigned char *)resident->rt_EndSkip -
+                               (const unsigned char *)resident);
+    }
+
+    objects[used].kind = AMIGUARD_MEMORY_OBJECT_RESIDENT;
+    objects[used].address = (const void *)resident;
+    objects[used].size = size;
+    copy_name(objects[used].name, resident->rt_Name);
+    return used + 1UL;
+}
+
+static unsigned long snapshot_resident_table(APTR *table,
+                                             struct amiguard_exec_snapshot *objects,
+                                             unsigned long capacity,
+                                             unsigned long used,
+                                             unsigned int depth)
+{
+    APTR entry;
+
+    if (table == 0 || objects == 0 || depth > 4U)
+        return used;
+
+    while ((entry = *table++) != 0 && used < capacity) {
+        if (((unsigned long)entry & 0x80000000UL) != 0UL) {
+            APTR *nested;
+            nested = (APTR *)((unsigned long)entry & 0x7fffffffUL);
+            used = snapshot_resident_table(nested, objects, capacity,
+                                           used, depth + 1U);
+        } else {
+            used = snapshot_resident((struct Resident *)entry,
+                                     objects, capacity, used);
+        }
+    }
+    return used;
+}
+
 long amiguard_exec_snapshot_system(struct amiguard_exec_snapshot *objects,
                                    unsigned long capacity)
 {
@@ -125,17 +194,22 @@ long amiguard_exec_snapshot_system(struct amiguard_exec_snapshot *objects,
     used = 0UL;
 
     /*
-     * Forbid() gives us a short, bounded snapshot window.  Only node metadata
-     * is retained; scanning occurs after Permit(), never while multitasking is
-     * suppressed.  No list or object is modified.
+     * Keep Forbid() strictly to metadata capture.  No signature scanning and
+     * no writes occur while multitasking is suppressed.  The running task is
+     * included explicitly because it is not necessarily on TaskReady/Wait.
      */
     Forbid();
+    used = snapshot_task(SysBase->ThisTask, objects, capacity, used);
     used = snapshot_list(&SysBase->TaskReady, AMIGUARD_MEMORY_OBJECT_TASK,
+                         objects, capacity, used);
+    used = snapshot_list(&SysBase->TaskWait, AMIGUARD_MEMORY_OBJECT_TASK,
                          objects, capacity, used);
     used = snapshot_list(&SysBase->LibList, AMIGUARD_MEMORY_OBJECT_LIBRARY,
                          objects, capacity, used);
     used = snapshot_list(&SysBase->DeviceList, AMIGUARD_MEMORY_OBJECT_DEVICE,
                          objects, capacity, used);
+    used = snapshot_resident_table((APTR *)SysBase->ResModules,
+                                   objects, capacity, used, 0U);
     Permit();
 
     return (long)used;
