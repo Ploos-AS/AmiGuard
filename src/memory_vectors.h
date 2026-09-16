@@ -47,9 +47,12 @@ int amiguard_vector_compare(const struct amiguard_vector_snapshot *item,
                             const struct amiguard_vector_baseline *baseline,
                             unsigned long baseline_count);
 
-/* Native Exec snapshot. Host builds return zero. Read-only only. */
+/* Native Exec snapshots. Host builds return zero. Observation only. */
 long amiguard_exec_snapshot_vectors(struct amiguard_vector_snapshot *items,
                                    unsigned long capacity);
+long amiguard_exec_snapshot_interrupt_servers(struct amiguard_vector_snapshot *items,
+                                              unsigned long capacity,
+                                              unsigned long max_per_vector);
 int amiguard_exec_vector_provenance(struct amiguard_vector_provenance *provenance);
 
 #endif
