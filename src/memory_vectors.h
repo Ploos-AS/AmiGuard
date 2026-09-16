@@ -34,6 +34,7 @@ struct amiguard_vector_baseline {
     const char *name;
     unsigned short exec_version;
     unsigned short exec_revision;
+    const char *source;
 };
 
 int amiguard_vector_snapshot_valid(const struct amiguard_vector_snapshot *item);
