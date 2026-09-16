@@ -1,20 +1,5 @@
 #include "memory_vectors.h"
 
-static void copy_name(char *destination, unsigned int capacity, const char *source)
-{
-    unsigned int i;
-
-    if (destination == 0 || capacity == 0U)
-        return;
-    if (source == 0) {
-        destination[0] = '\0';
-        return;
-    }
-    for (i = 0U; i + 1U < capacity && source[i] != '\0'; ++i)
-        destination[i] = source[i];
-    destination[i] = '\0';
-}
-
 int amiguard_vector_snapshot_valid(const struct amiguard_vector_snapshot *item)
 {
     if (item == 0)
@@ -88,6 +73,21 @@ int amiguard_vector_compare(const struct amiguard_vector_snapshot *item,
 #include <proto/exec.h>
 
 extern struct ExecBase *SysBase;
+
+static void copy_name(char *destination, unsigned int capacity, const char *source)
+{
+    unsigned int i;
+
+    if (destination == 0 || capacity == 0U)
+        return;
+    if (source == 0) {
+        destination[0] = '\0';
+        return;
+    }
+    for (i = 0U; i + 1U < capacity && source[i] != '\0'; ++i)
+        destination[i] = source[i];
+    destination[i] = '\0';
+}
 
 long amiguard_exec_snapshot_vectors(struct amiguard_vector_snapshot *items,
                                    unsigned long capacity)
