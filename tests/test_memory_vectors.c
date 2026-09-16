@@ -34,6 +34,7 @@ int main(void)
     baseline[0].name = "baseline";
     baseline[0].exec_version = 37U;
     baseline[0].exec_revision = 175U;
+    baseline[0].source = "safe-test";
 
     memset(&provenance, 0, sizeof(provenance));
     provenance.exec_version = 37U;
@@ -46,14 +47,22 @@ int main(void)
                 "valid provenance accepted"))
         return 1;
     if (!expect(amiguard_vector_compare_versioned(&item, baseline, 1UL, &provenance) ==
-                AMIGUARD_VECTOR_STATE_BASELINE, "matching version baseline accepted"))
+                AMIGUARD_VECTOR_STATE_BASELINE, "matching version/source baseline accepted"))
         return 1;
 
     item.target = &target_b;
     if (!expect(amiguard_vector_compare_versioned(&item, baseline, 1UL, &provenance) ==
-                AMIGUARD_VECTOR_STATE_CHANGED, "same-version changed target reported"))
+                AMIGUARD_VECTOR_STATE_CHANGED, "same provenance changed target reported"))
         return 1;
 
+    item.target = &target_a;
+    strcpy(provenance.source, "other-source");
+    if (!expect(amiguard_vector_compare_versioned(&item, baseline, 1UL, &provenance) ==
+                AMIGUARD_VECTOR_STATE_UNKNOWN,
+                "different provenance source stays neutral"))
+        return 1;
+
+    strcpy(provenance.source, "safe-test");
     provenance.exec_version = 36U;
     if (!expect(amiguard_vector_compare_versioned(&item, baseline, 1UL, &provenance) ==
                 AMIGUARD_VECTOR_STATE_UNKNOWN,
@@ -86,6 +95,6 @@ int main(void)
         return 1;
 #endif
 
-    printf("PASS: version-aware vector baseline provenance separation\n");
+    printf("PASS: version/source-aware vector baseline provenance separation\n");
     return 0;
 }
