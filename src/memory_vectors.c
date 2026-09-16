@@ -74,6 +74,7 @@ int amiguard_vector_compare(const struct amiguard_vector_snapshot *item,
 #ifdef __AMIGA__
 #include <exec/execbase.h>
 #include <exec/interrupts.h>
+#include <exec/nodes.h>
 #include <proto/exec.h>
 
 extern struct ExecBase *SysBase;
@@ -104,11 +105,7 @@ long amiguard_exec_snapshot_vectors(struct amiguard_vector_snapshot *items,
 
     used = 0UL;
 
-    /*
-     * Capture interrupt vector targets only. This is deliberately an
-     * observation API: it never calls SetFunction(), SetIntVector() or writes
-     * to ExecBase. Baseline classification is performed after the snapshot.
-     */
+    /* Observation only: capture vector targets without installing or changing them. */
     Disable();
     for (i = 0U; i < 16U && used < capacity; ++i) {
         struct IntVector *vector;
@@ -120,6 +117,53 @@ long amiguard_exec_snapshot_vectors(struct amiguard_vector_snapshot *items,
             copy_name(items[used].name, AMIGUARD_VECTOR_NAME_BYTES,
                       "exec.interrupt");
             ++used;
+        }
+    }
+    Enable();
+
+    return (long)used;
+}
+
+long amiguard_exec_snapshot_interrupt_servers(struct amiguard_vector_snapshot *items,
+                                              unsigned long capacity,
+                                              unsigned long max_per_vector)
+{
+    unsigned long used;
+    unsigned int i;
+
+    if (items == 0 || capacity == 0UL || max_per_vector == 0UL || SysBase == 0)
+        return -1;
+
+    used = 0UL;
+
+    /*
+     * iv_Node may point at the first Interrupt server for a chained vector.
+     * Copy only stable scalar metadata while interrupts are disabled; retain
+     * no server-node pointer for later dereference. The per-vector bound also
+     * prevents a damaged/cyclic chain from making inspection unbounded.
+     */
+    Disable();
+    for (i = 0U; i < 16U && used < capacity; ++i) {
+        struct Node *node;
+        unsigned long ordinal;
+
+        node = SysBase->IntVects[i].iv_Node;
+        ordinal = 0UL;
+        while (node != 0 && node->ln_Succ != 0 &&
+               ordinal < max_per_vector && used < capacity) {
+            struct Interrupt *server;
+            server = (struct Interrupt *)node;
+            if (server->is_Code != 0) {
+                items[used].kind = AMIGUARD_VECTOR_KIND_SERVER;
+                items[used].slot = ((long)i << 16) | (long)(ordinal & 0xffffUL);
+                items[used].target = (const void *)server->is_Code;
+                copy_name(items[used].name, AMIGUARD_VECTOR_NAME_BYTES,
+                          server->is_Node.ln_Name != 0 ? server->is_Node.ln_Name :
+                          "exec.interrupt-server");
+                ++used;
+            }
+            node = node->ln_Succ;
+            ++ordinal;
         }
     }
     Enable();
@@ -143,6 +187,16 @@ long amiguard_exec_snapshot_vectors(struct amiguard_vector_snapshot *items,
 {
     (void)items;
     (void)capacity;
+    return 0;
+}
+
+long amiguard_exec_snapshot_interrupt_servers(struct amiguard_vector_snapshot *items,
+                                              unsigned long capacity,
+                                              unsigned long max_per_vector)
+{
+    (void)items;
+    (void)capacity;
+    (void)max_per_vector;
     return 0;
 }
 
