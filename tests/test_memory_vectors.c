@@ -19,6 +19,7 @@ int main(void)
     struct amiguard_vector_snapshot item;
     struct amiguard_vector_snapshot native_items[4];
     struct amiguard_vector_baseline baseline[1];
+    struct amiguard_vector_provenance provenance;
     long count;
 
     memset(&item, 0, sizeof(item));
@@ -31,25 +32,42 @@ int main(void)
     baseline[0].slot = 3L;
     baseline[0].target = &target_a;
     baseline[0].name = "baseline";
+    baseline[0].exec_version = 37U;
+    baseline[0].exec_revision = 175U;
+
+    memset(&provenance, 0, sizeof(provenance));
+    provenance.exec_version = 37U;
+    provenance.exec_revision = 175U;
+    strcpy(provenance.source, "safe-test");
 
     if (!expect(amiguard_vector_snapshot_valid(&item), "valid vector accepted"))
         return 1;
-    if (!expect(amiguard_vector_compare(&item, baseline, 1UL) ==
-                AMIGUARD_VECTOR_STATE_BASELINE, "baseline target accepted"))
+    if (!expect(amiguard_vector_provenance_valid(&provenance),
+                "valid provenance accepted"))
+        return 1;
+    if (!expect(amiguard_vector_compare_versioned(&item, baseline, 1UL, &provenance) ==
+                AMIGUARD_VECTOR_STATE_BASELINE, "matching version baseline accepted"))
         return 1;
 
     item.target = &target_b;
-    if (!expect(amiguard_vector_compare(&item, baseline, 1UL) ==
-                AMIGUARD_VECTOR_STATE_CHANGED, "changed target reported"))
+    if (!expect(amiguard_vector_compare_versioned(&item, baseline, 1UL, &provenance) ==
+                AMIGUARD_VECTOR_STATE_CHANGED, "same-version changed target reported"))
         return 1;
 
+    provenance.exec_version = 36U;
+    if (!expect(amiguard_vector_compare_versioned(&item, baseline, 1UL, &provenance) ==
+                AMIGUARD_VECTOR_STATE_UNKNOWN,
+                "different Exec version stays neutral"))
+        return 1;
+
+    provenance.exec_version = 37U;
     item.slot = 9L;
-    if (!expect(amiguard_vector_compare(&item, baseline, 1UL) ==
+    if (!expect(amiguard_vector_compare_versioned(&item, baseline, 1UL, &provenance) ==
                 AMIGUARD_VECTOR_STATE_UNKNOWN, "unknown vector stays neutral"))
         return 1;
 
     item.target = 0;
-    if (!expect(amiguard_vector_compare(&item, baseline, 1UL) ==
+    if (!expect(amiguard_vector_compare_versioned(&item, baseline, 1UL, &provenance) ==
                 AMIGUARD_VECTOR_STATE_ERROR, "invalid vector rejected"))
         return 1;
 
@@ -57,11 +75,17 @@ int main(void)
 #ifndef __AMIGA__
     if (!expect(count == 0L, "host native snapshot inert"))
         return 1;
+    if (!expect(amiguard_exec_vector_provenance(&provenance) == 0,
+                "host native provenance inert"))
+        return 1;
 #else
     if (!expect(count >= 0L, "native vector snapshot completed"))
         return 1;
+    if (!expect(amiguard_exec_vector_provenance(&provenance),
+                "native Exec provenance captured"))
+        return 1;
 #endif
 
-    printf("PASS: vector baseline/changed/unknown separation\n");
+    printf("PASS: version-aware vector baseline provenance separation\n");
     return 0;
 }
