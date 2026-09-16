@@ -42,6 +42,12 @@ The consolidated disk qualification gate passed for recursive volume, raw floppy
 
 The **Disk** engine is therefore closed as qualified engineering scope. Visible classic-Amiga evidence remains part of release/historical compatibility discipline where required.
 
+### M4.0 — memory scanner architecture — DONE / PASS
+
+The read-only bounded memory-inspection contract is established for resident, task, library, device, vector/hook and raw-region objects. Object, aggregate-byte and per-region limits are explicit; the provider contract has no write callback. The native 68000 build and existing runtime gates remained green when the first Exec provider was integrated (FS-UAE/AROS provisional qualification run #80 / ID `35024520694`).
+
+See `docs/M4_0_MEMORY_SCANNER_ARCHITECTURE.md`.
+
 ## Parallel sample-dependent milestone
 
 ### M2.5 — first production malware signature — WAITING FOR AUTHENTIC SAMPLE
@@ -50,17 +56,11 @@ Use an authentic, lawfully obtained research sample to exercise the complete pip
 
 ## Current engineering milestone
 
-### M4.0 — memory scanner architecture — ACTIVE
+### M4.1 — resident/task/library/device inspection — ACTIVE
 
-Define and qualify the read-only, bounded memory-inspection core for classic AmigaOS. The initial API distinguishes resident, task, library, device, vector/hook and raw-region objects; enforces object/byte/per-region limits; uses a small streaming-buffer model; and intentionally exposes no memory write callback.
-
-See `docs/M4_0_MEMORY_SCANNER_ARCHITECTURE.md`.
+Enumerate relevant resident modules, tasks/processes, libraries and devices through a bounded read-only Exec provider and report inspectable objects without modifying system state. The initial provider, host tests and native integration are green; M4.1 remains active until the supported object classes and runtime evidence are complete.
 
 ## M4 — live-memory scanning
-
-### M4.1 — resident/task/library/device inspection
-
-Enumerate relevant resident modules, tasks/processes, libraries and devices and report suspicious or signature-matching objects without modifying system state.
 
 ### M4.2 — vectors and hooks integrity
 
