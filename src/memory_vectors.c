@@ -1,3 +1,5 @@
+#include <string.h>
+
 #include "memory_vectors.h"
 
 int amiguard_vector_snapshot_valid(const struct amiguard_vector_snapshot *item)
@@ -37,14 +39,16 @@ int amiguard_vector_compare_versioned(const struct amiguard_vector_snapshot *ite
     for (i = 0UL; i < baseline_count; ++i) {
         if (baseline[i].kind == item->kind && baseline[i].slot == item->slot &&
             baseline[i].exec_version == provenance->exec_version &&
-            baseline[i].exec_revision == provenance->exec_revision) {
+            baseline[i].exec_revision == provenance->exec_revision &&
+            baseline[i].source != 0 &&
+            strcmp(baseline[i].source, provenance->source) == 0) {
             if (baseline[i].target == item->target)
                 return AMIGUARD_VECTOR_STATE_BASELINE;
             return AMIGUARD_VECTOR_STATE_CHANGED;
         }
     }
 
-    /* A different or unrecorded Exec version is not evidence of tampering. */
+    /* Different version/source or an unrecorded slot is not evidence of tampering. */
     return AMIGUARD_VECTOR_STATE_UNKNOWN;
 }
 
