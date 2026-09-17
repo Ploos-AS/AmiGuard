@@ -138,9 +138,10 @@ long amiguard_exec_snapshot_interrupt_servers(struct amiguard_vector_snapshot *i
 
     /*
      * iv_Node may point at the first Interrupt server for a chained vector.
-     * Copy only stable scalar metadata while interrupts are disabled; retain
-     * no server-node pointer for later dereference. The per-vector bound also
-     * prevents a damaged/cyclic chain from making inspection unbounded.
+     * Copy only scalar metadata while interrupts are disabled and retain no
+     * server-node pointer for later dereference. Stop on the Exec list tail,
+     * a self-link, or the explicit per-vector/aggregate bounds. These guards
+     * make damaged lists fail bounded rather than hanging the scanner.
      */
     Disable();
     for (i = 0U; i < 16U && used < capacity; ++i) {
@@ -152,7 +153,10 @@ long amiguard_exec_snapshot_interrupt_servers(struct amiguard_vector_snapshot *i
         while (node != 0 && node->ln_Succ != 0 &&
                ordinal < max_per_vector && used < capacity) {
             struct Interrupt *server;
+            struct Node *next;
+
             server = (struct Interrupt *)node;
+            next = node->ln_Succ;
             if (server->is_Code != 0) {
                 items[used].kind = AMIGUARD_VECTOR_KIND_SERVER;
                 items[used].slot = ((long)i << 16) | (long)(ordinal & 0xffffUL);
@@ -162,8 +166,10 @@ long amiguard_exec_snapshot_interrupt_servers(struct amiguard_vector_snapshot *i
                           "exec.interrupt-server");
                 ++used;
             }
-            node = node->ln_Succ;
             ++ordinal;
+            if (next == node)
+                break;
+            node = next;
         }
     }
     Enable();
